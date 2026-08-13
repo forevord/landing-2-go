@@ -2550,8 +2550,29 @@ Expected: an orange bar appears offering the English version; the URL does **not
 
 - [ ] **Step 6: Check the JavaScript budget**
 
-Run: `npm run build && find dist/_astro -name '*.js' -exec gzip -c {} + | wc -c`
-Expected: under 6144 bytes. If it exceeds that, the usual cause is the full dictionaries being bundled into `lang-hint.ts` — narrow the import to just the `langHint` branch by extracting those strings into a `data-` attribute set by the layout.
+Astro inlines small scripts into the HTML instead of emitting a chunk, so counting
+`dist/_astro/*.js` alone under-reports and can read as zero. Count both:
+
+```bash
+npm run build && node -e "
+const fs=require('fs'),zlib=require('zlib'),path=require('path');
+const walk=(d)=>fs.readdirSync(d,{withFileTypes:true}).flatMap((e)=>
+  e.isDirectory()?walk(path.join(d,e.name)):[path.join(d,e.name)]);
+let total=0;
+for (const f of walk('dist')) {
+  if (f.endsWith('.js')) total += zlib.gzipSync(fs.readFileSync(f)).length;
+  if (f.endsWith('.html'))
+    for (const m of fs.readFileSync(f,'utf8')
+      .matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g))
+      total += zlib.gzipSync(m[1]).length;
+}
+console.log(total);
+"
+```
+
+Expected: under 6144 bytes. If it exceeds that, the usual cause is a dictionary being
+bundled into a client script — pass the handful of needed strings from the server as a
+`data-` attribute instead, the way `LeadForm.astro` does (Task 8).
 
 - [ ] **Step 7: Commit**
 
