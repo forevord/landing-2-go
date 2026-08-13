@@ -1,0 +1,63 @@
+---
+import { getDictionary, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const ba = getDictionary(locale).gallery.beforeAfter;
+---
+
+<figure class="mt-12">
+  <figcaption class="mb-4 flex items-baseline justify-between gap-4">
+    <span class="text-lg font-semibold text-ink">{ba.title}</span>
+    <span class="text-sm text-muted">{ba.hint}</span>
+  </figcaption>
+
+  <div
+    class="relative aspect-video w-full touch-pan-y select-none overflow-hidden rounded-[--radius-card]"
+    data-before-after
+  >
+    <img
+      src="/images/placeholders/before-driveway.svg"
+      alt={ba.beforeAlt}
+      width="1600"
+      height="900"
+      loading="lazy"
+      decoding="async"
+      class="absolute inset-0 h-full w-full object-cover"
+    />
+    <img
+      src="/images/placeholders/after-driveway.svg"
+      alt={ba.afterAlt}
+      width="1600"
+      height="900"
+      loading="lazy"
+      decoding="async"
+      class="absolute inset-0 h-full w-full object-cover"
+      data-after
+      style="clip-path: inset(0 0 0 50%)"
+    />
+
+    <input
+      type="range"
+      min="0"
+      max="100"
+      value="50"
+      class="absolute inset-0 h-full w-full cursor-ew-resize opacity-0"
+      aria-label={ba.hint}
+      data-range
+    />
+
+    <span
+      class="pointer-events-none absolute inset-y-0 w-0.5 bg-white"
+      data-handle
+      style="left: 50%"
+    ></span>
+  </div>
+</figure>
+
+<script>
+  import '../scripts/before-after';
+</script>
