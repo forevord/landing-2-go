@@ -10,7 +10,9 @@
     "description": "Produkcja i montaż bram aluminiowych spawanych laserowo, ogrodzeń i automatyki. Układanie kostki brukowej, roboty ziemne, realizacje pod klucz. Bezpłatny pomiar i wycena w 24 godziny.",
     "ogTitle": "StalBruk — bramy aluminiowe i kostka brukowa na Pomorzu",
     "ogDescription": "Jedna ekipa, jeden termin: bramy spawane laserowo, brukarstwo i roboty ziemne własnym sprzętem. Gdańsk, Gdynia, Sopot i okolice.",
-    "ogImageAlt": "Aluminiowa brama przesuwna i podjazd z kostki brukowej przed domem jednorodzinnym"
+    "ogImageAlt": "Aluminiowa brama przesuwna i podjazd z kostki brukowej przed domem jednorodzinnym",
+    "addressLocality": "Gdańsk",
+    "areaServed": ["Gdańsk", "Pomorskie"]
   },
 
   "topbar": {

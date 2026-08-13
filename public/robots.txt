@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /dziekujemy
+Disallow: /en/thank-you
+
+Sitemap: https://stalbruk.pages.dev/sitemap.xml

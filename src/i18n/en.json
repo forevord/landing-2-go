@@ -10,7 +10,9 @@
     "description": "Laser-welded aluminium gates, fences and automation, manufactured and installed. Block paving, earthworks and turnkey projects with our own machinery. Free site survey and quote within 24 hours.",
     "ogTitle": "StalBruk — aluminium gates and block paving in Pomerania",
     "ogDescription": "One crew, one deadline: laser-welded gates, paving and earthworks with our own equipment. Gdańsk, Gdynia, Sopot and the surrounding region.",
-    "ogImageAlt": "Aluminium sliding gate and block-paved driveway in front of a family house"
+    "ogImageAlt": "Aluminium sliding gate and block-paved driveway in front of a family house",
+    "addressLocality": "Gdańsk",
+    "areaServed": ["Gdańsk", "Pomorskie"]
   },
 
   "topbar": {

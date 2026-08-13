@@ -17,6 +17,21 @@ interface Props {
 
 const { locale, routeKey, ...seo } = Astro.props;
 const t = getDictionary(locale);
+
+const businessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HomeAndConstructionBusiness',
+  name: t.topbar.brand,
+  description: t.seo.description,
+  areaServed: t.seo.areaServed,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: t.seo.addressLocality,
+    addressCountry: 'PL',
+  },
+  telephone: '{{TELEFON}}',
+  url: Astro.site?.origin,
+};
 ---
 
 <!doctype html>
@@ -32,6 +47,7 @@ const t = getDictionary(locale);
       crossorigin
     />
     <Seo locale={locale} routeKey={routeKey} {...seo} />
+    <script type="application/ld+json" set:html={JSON.stringify(businessSchema)} is:inline />
     <script is:inline>
       // Marks JS availability before first paint so reveal styles never hide
       // content for users without JavaScript.
