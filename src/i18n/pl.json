@@ -355,6 +355,12 @@
     "dismiss": "Zamknij"
   },
 
+  "privacy": {
+    "seoTitle": "Polityka prywatności | StalBruk",
+    "title": "Polityka prywatności",
+    "body": "{{POLITYKA_PRYWATNOSCI}}"
+  },
+
   "a11y": {
     "skipToContent": "Przejdź do treści",
     "openMenu": "Otwórz menu",

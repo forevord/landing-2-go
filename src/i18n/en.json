@@ -355,6 +355,12 @@
     "dismiss": "Dismiss"
   },
 
+  "privacy": {
+    "seoTitle": "Privacy policy | StalBruk",
+    "title": "Privacy policy",
+    "body": "{{POLITYKA_PRYWATNOSCI}}"
+  },
+
   "a11y": {
     "skipToContent": "Skip to content",
     "openMenu": "Open menu",
