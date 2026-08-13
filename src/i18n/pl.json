@@ -308,6 +308,7 @@
   },
 
   "contacts": {
+    "mapsQuery": "Gdańsk",
     "title": "Kontakt",
     "lead": "Wolisz zadzwonić? Odbieramy w godzinach pracy.",
     "phoneLabel": "Telefon",

@@ -10,11 +10,17 @@ import Process from '../components/Process.astro';
 import Gallery from '../components/Gallery.astro';
 import Testimonials from '../components/Testimonials.astro';
 import Faq from '../components/Faq.astro';
+import LeadForm from '../components/LeadForm.astro';
+import Contacts from '../components/Contacts.astro';
+import Footer from '../components/Footer.astro';
+import StickyCta from '../components/StickyCta.astro';
 import { getDictionary } from '../i18n';
 
 const locale = 'pl' as const;
 const t = getDictionary(locale);
-const phone = '+48 600 000 000'; // Replaced by {{TELEFON}} in Task 18.
+// Replaced by {{TELEFON}} / {{EMAIL}} in Task 18.
+const phone = '+48 600 000 000';
+const email = 'kontakt@example.com';
 ---
 
 <Base
@@ -27,7 +33,7 @@ const phone = '+48 600 000 000'; // Replaced by {{TELEFON}} in Task 18.
   ogImageAlt={t.seo.ogImageAlt}
 >
   <TopBar locale={locale} routeKey="home" phone={phone} />
-  <main id="main">
+  <main id="main" class="pb-24 md:pb-0">
     <Hero locale={locale} />
     <TrustBar locale={locale} />
     <Pain locale={locale} />
@@ -37,5 +43,13 @@ const phone = '+48 600 000 000'; // Replaced by {{TELEFON}} in Task 18.
     <Gallery locale={locale} />
     <Testimonials locale={locale} />
     <Faq locale={locale} />
+
+    <section id="formularz" class="mx-auto max-w-[640px] px-4 py-20">
+      <LeadForm locale={locale} variant="full" id="full-form" />
+    </section>
+
+    <Contacts locale={locale} phone={phone} email={email} />
   </main>
+  <Footer locale={locale} />
+  <StickyCta locale={locale} phone={phone} />
 </Base>

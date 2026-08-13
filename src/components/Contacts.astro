@@ -1,0 +1,93 @@
+---
+import Icon from './Icon.astro';
+import { getDictionary, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  phone: string;
+  email: string;
+}
+
+const { locale, phone, email } = Astro.props;
+const t = getDictionary(locale);
+const telHref = `tel:${phone.replace(/\s/g, '')}`;
+const mapsQuery = encodeURIComponent(t.contacts.mapsQuery);
+const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+const mapsEmbed = `https://www.google.com/maps?q=${mapsQuery}&output=embed`;
+---
+
+<section id="kontakt" class="bg-bg py-20">
+  <div class="mx-auto grid max-w-[1200px] gap-10 px-4 lg:grid-cols-2">
+    <div>
+      <h2 class="text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold tracking-[-0.01em] text-ink">
+        {t.contacts.title}
+      </h2>
+      <p class="mt-3 text-muted">{t.contacts.lead}</p>
+
+      <dl class="mt-8 grid gap-5">
+        <div>
+          <dt class="text-sm text-muted">{t.contacts.phoneLabel}</dt>
+          <dd>
+            <a href={telHref} class="flex min-h-11 items-center gap-2 text-lg font-medium text-ink">
+              <Icon name="phone" class="h-5 w-5 text-cta" />
+              {phone}
+            </a>
+          </dd>
+        </div>
+        <div>
+          <dt class="text-sm text-muted">{t.contacts.emailLabel}</dt>
+          <dd><a href={`mailto:${email}`} class="text-lg text-ink underline">{email}</a></dd>
+        </div>
+        <div>
+          <dt class="text-sm text-muted">{t.contacts.hoursLabel}</dt>
+          <dd class="text-ink">{t.contacts.hours}</dd>
+        </div>
+        <div>
+          <dt class="text-sm text-muted">{t.contacts.areaLabel}</dt>
+          <dd class="text-ink">{t.contacts.area}</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div>
+      {/* Facade pattern: the heavy embed loads only on request, so no third-party
+          cookies are set and the map never competes with LCP. */}
+      <div
+        class="relative aspect-[4/3] overflow-hidden rounded-[--radius-card] border border-border bg-ink-soft"
+        data-map
+        data-embed={mapsEmbed}
+      >
+        <img
+          src="/images/placeholders/service-earthworks.svg"
+          alt={t.contacts.mapAlt}
+          width="1200"
+          height="900"
+          loading="lazy"
+          class="h-full w-full object-cover opacity-40"
+        />
+        <button type="button" class="btn btn-primary absolute inset-0 m-auto h-12 w-48" data-map-load>
+          {t.contacts.mapLoad}
+        </button>
+      </div>
+      <p class="mt-2 text-xs text-muted">{t.contacts.mapNote}</p>
+      <a href={mapsUrl} rel="noopener" target="_blank" class="mt-2 inline-block text-sm underline">
+        {t.contacts.mapCta}
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-map-load]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const container = button.closest<HTMLElement>('[data-map]');
+      if (!container) return;
+      const iframe = document.createElement('iframe');
+      iframe.src = container.dataset.embed ?? '';
+      iframe.loading = 'lazy';
+      iframe.title = container.querySelector('img')?.alt ?? 'map';
+      iframe.className = 'absolute inset-0 h-full w-full border-0';
+      container.replaceChildren(iframe);
+    });
+  });
+</script>

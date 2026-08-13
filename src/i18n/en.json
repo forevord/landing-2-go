@@ -308,6 +308,7 @@
   },
 
   "contacts": {
+    "mapsQuery": "Gdańsk",
     "title": "Contact",
     "lead": "Prefer to call? We answer during working hours.",
     "phoneLabel": "Phone",
