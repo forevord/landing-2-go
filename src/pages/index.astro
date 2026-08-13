@@ -3,6 +3,10 @@ import Base from '../layouts/Base.astro';
 import TopBar from '../components/TopBar.astro';
 import Hero from '../components/Hero.astro';
 import TrustBar from '../components/TrustBar.astro';
+import Pain from '../components/Pain.astro';
+import Services from '../components/Services.astro';
+import WhyUs from '../components/WhyUs.astro';
+import Process from '../components/Process.astro';
 import { getDictionary } from '../i18n';
 
 const locale = 'pl' as const;
@@ -23,5 +27,9 @@ const phone = '+48 600 000 000'; // Replaced by {{TELEFON}} in Task 18.
   <main id="main">
     <Hero locale={locale} />
     <TrustBar locale={locale} />
+    <Pain locale={locale} />
+    <Services locale={locale} />
+    <WhyUs locale={locale} />
+    <Process locale={locale} />
   </main>
 </Base>
