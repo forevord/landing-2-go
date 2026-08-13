@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="Placeholder: aluminium sliding gate">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1E293B"/>
+      <stop offset="1" stop-color="#0F172A"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#1E293B" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <rect width="1600" height="900" fill="url(#grid)" opacity="0.6"/>
+
+  <!-- ground line -->
+  <path d="M0 700H1600" stroke="#334155" stroke-width="2"/>
+  <path d="M0 700 L1600 700" stroke="#C2410C" stroke-width="3" stroke-dasharray="140 1460"/>
+
+  <!-- gate post left -->
+  <rect x="240" y="250" width="34" height="450" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+  <!-- gate post right -->
+  <rect x="1326" y="250" width="34" height="450" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+
+  <!-- gate frame -->
+  <rect x="300" y="300" width="1000" height="400" fill="none" stroke="#475569" stroke-width="4"/>
+
+  <!-- horizontal slats -->
+  <g stroke="#334155" stroke-width="14" stroke-linecap="square">
+    <path d="M320 336H1280"/>
+    <path d="M320 380H1280"/>
+    <path d="M320 424H1280"/>
+    <path d="M320 468H1280"/>
+    <path d="M320 512H1280"/>
+    <path d="M320 556H1280"/>
+    <path d="M320 600H1280"/>
+    <path d="M320 644H1280"/>
+    <path d="M320 688H1280"/>
+  </g>
+
+  <!-- accent slat -->
+  <path d="M320 468H1280" stroke="#C2410C" stroke-width="14" stroke-linecap="square" opacity="0.9"/>
+
+  <!-- rail -->
+  <path d="M180 706H1420" stroke="#475569" stroke-width="6"/>
+
+  <!-- label -->
+  <g font-family="Inter, system-ui, sans-serif" text-anchor="middle">
+    <text x="800" y="806" fill="#64748B" font-size="26" font-weight="500" letter-spacing="4">PLACEHOLDER · SLIDING GATE</text>
+    <text x="800" y="844" fill="#475569" font-size="19" font-weight="400" letter-spacing="1">Replace with project photo · 1600 × 900 · AVIF + WebP</text>
+  </g>
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" aria-label="Placeholder: earthworks and site preparation">
+  <defs>
+    <pattern id="hatch" width="18" height="18" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+      <path d="M0 0v18" stroke="#1E293B" stroke-width="6"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="900" fill="#0F172A"/>
+
+  <!-- excavated ground mass -->
+  <path d="M0 520 L180 500 L340 560 L420 470 L600 500 L760 440 L960 500 L1200 470 V900 H0 Z" fill="#111C2F"/>
+  <path d="M0 520 L180 500 L340 560 L420 470 L600 500 L760 440 L960 500 L1200 470 V900 H0 Z" fill="url(#hatch)" opacity="0.7"/>
+  <path d="M0 520 L180 500 L340 560 L420 470 L600 500 L760 440 L960 500 L1200 470" fill="none" stroke="#475569" stroke-width="4"/>
+
+  <!-- trench -->
+  <path d="M300 560 L360 700 L840 700 L900 500" fill="#0B1220" stroke="#334155" stroke-width="3"/>
+  <path d="M360 700 H840" stroke="#C2410C" stroke-width="5" stroke-dasharray="24 18" opacity="0.9"/>
+
+  <!-- utility pole being relocated -->
+  <g stroke="#475569" stroke-width="8" stroke-linecap="round">
+    <path d="M1020 470 V180"/>
+    <path d="M960 230 H1080"/>
+  </g>
+  <path d="M1020 180 L1120 140" stroke="#334155" stroke-width="3" stroke-dasharray="10 8"/>
+
+  <!-- level marks -->
+  <g stroke="#334155" stroke-width="2">
+    <path d="M80 300 H240"/><path d="M80 340 H180"/>
+  </g>
+  <circle cx="80" cy="300" r="6" fill="#C2410C"/>
+
+  <g font-family="Inter, system-ui, sans-serif" text-anchor="middle">
+    <text x="600" y="832" fill="#64748B" font-size="24" font-weight="500" letter-spacing="4">PLACEHOLDER · EARTHWORKS</text>
+    <text x="600" y="866" fill="#475569" font-size="17" letter-spacing="1">Replace with on-site excavator photo · 1200 × 900</text>
+  </g>
+</svg>

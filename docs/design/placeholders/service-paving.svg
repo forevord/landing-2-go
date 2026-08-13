@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" aria-label="Placeholder: block paving driveway">
+  <defs>
+    <pattern id="herringbone" width="120" height="120" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect x="0"  y="0"  width="56" height="26" rx="2" fill="#1E293B" stroke="#334155" stroke-width="1.5"/>
+      <rect x="60" y="0"  width="26" height="56" rx="2" fill="#1E293B" stroke="#334155" stroke-width="1.5"/>
+      <rect x="0"  y="30" width="26" height="56" rx="2" fill="#1E293B" stroke="#334155" stroke-width="1.5"/>
+      <rect x="30" y="60" width="56" height="26" rx="2" fill="#1E293B" stroke="#334155" stroke-width="1.5"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="900" fill="#0F172A"/>
+  <rect x="0" y="120" width="1200" height="640" fill="url(#herringbone)"/>
+
+  <!-- kerb lines -->
+  <path d="M0 120H1200" stroke="#475569" stroke-width="5"/>
+  <path d="M0 760H1200" stroke="#475569" stroke-width="5"/>
+
+  <!-- linear drainage accent -->
+  <g>
+    <rect x="0" y="432" width="1200" height="26" fill="#0F172A" stroke="#334155" stroke-width="2"/>
+    <g stroke="#C2410C" stroke-width="4" opacity="0.85">
+      <path d="M40 438v14"/><path d="M100 438v14"/><path d="M160 438v14"/><path d="M220 438v14"/>
+      <path d="M280 438v14"/><path d="M340 438v14"/><path d="M400 438v14"/><path d="M460 438v14"/>
+      <path d="M520 438v14"/><path d="M580 438v14"/><path d="M640 438v14"/><path d="M700 438v14"/>
+      <path d="M760 438v14"/><path d="M820 438v14"/><path d="M880 438v14"/><path d="M940 438v14"/>
+      <path d="M1000 438v14"/><path d="M1060 438v14"/><path d="M1120 438v14"/><path d="M1180 438v14"/>
+    </g>
+  </g>
+
+  <g font-family="Inter, system-ui, sans-serif" text-anchor="middle">
+    <text x="600" y="832" fill="#64748B" font-size="24" font-weight="500" letter-spacing="4">PLACEHOLDER · BLOCK PAVING</text>
+    <text x="600" y="866" fill="#475569" font-size="17" letter-spacing="1">Replace with driveway photo · 1200 × 900</text>
+  </g>
+</svg>

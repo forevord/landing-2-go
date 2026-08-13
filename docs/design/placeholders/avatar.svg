@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" role="img" aria-label="Placeholder: customer photo">
+  <circle cx="80" cy="80" r="80" fill="#1E293B"/>
+  <circle cx="80" cy="80" r="78" fill="none" stroke="#334155" stroke-width="2"/>
+  <circle cx="80" cy="64" r="24" fill="#334155"/>
+  <path d="M32 136 a48 44 0 0 1 96 0 Z" fill="#334155"/>
+  <path d="M80 2 a78 78 0 0 1 55.2 22.8" fill="none" stroke="#C2410C" stroke-width="3" stroke-linecap="round"/>
+</svg>

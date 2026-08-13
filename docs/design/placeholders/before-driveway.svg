@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="Placeholder: driveway before the work">
+  <defs>
+    <pattern id="rubble" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="6"  cy="7"  r="2.5" fill="#1E293B"/>
+      <circle cx="19" cy="16" r="3.5" fill="#1B2740"/>
+      <circle cx="12" cy="22" r="1.8" fill="#1E293B"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="900" fill="#0F172A"/>
+  <rect y="300" width="1600" height="600" fill="#131E33"/>
+  <rect y="300" width="1600" height="600" fill="url(#rubble)"/>
+
+  <!-- ruts -->
+  <g fill="none" stroke="#0B1220" stroke-width="26" stroke-linecap="round">
+    <path d="M240 900 C 420 700, 520 560, 600 320"/>
+    <path d="M900 900 C 980 700, 1010 540, 1000 320"/>
+  </g>
+  <g fill="none" stroke="#1E293B" stroke-width="4">
+    <path d="M240 900 C 420 700, 520 560, 600 320"/>
+    <path d="M900 900 C 980 700, 1010 540, 1000 320"/>
+  </g>
+
+  <!-- broken old surface fragments -->
+  <g fill="#1B2740" stroke="#263349" stroke-width="2">
+    <path d="M1180 520 l90 -18 l30 60 l-96 22 z"/>
+    <path d="M1300 610 l84 -10 l18 54 l-88 16 z"/>
+    <path d="M1140 660 l70 6 l-8 52 l-72 -10 z"/>
+  </g>
+
+  <path d="M0 300H1600" stroke="#334155" stroke-width="3"/>
+
+  <g font-family="Inter, system-ui, sans-serif">
+    <rect x="60" y="60" width="150" height="46" rx="4" fill="#0F172A" stroke="#475569" stroke-width="2"/>
+    <text x="135" y="90" fill="#94A3B8" font-size="20" font-weight="600" letter-spacing="3" text-anchor="middle">BEFORE</text>
+    <text x="800" y="838" fill="#64748B" font-size="24" font-weight="500" letter-spacing="4" text-anchor="middle">PLACEHOLDER · SITE BEFORE THE WORK</text>
+  </g>
+</svg>
