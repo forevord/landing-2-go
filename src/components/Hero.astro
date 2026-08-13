@@ -10,16 +10,18 @@ const { locale } = Astro.props;
 const t = getDictionary(locale);
 ---
 
-<section class="bg-ink text-white">
+<section style="background:var(--color-canvas-gunmetal); color:var(--color-paper-white)">
   <div class="mx-auto grid max-w-[1200px] gap-10 px-4 py-16 lg:grid-cols-[1.1fr_0.9fr] lg:py-24">
     <div>
-      <p class="text-[0.8125rem] font-medium uppercase tracking-[0.12em] text-cta-hover">
+      <p class="text-[0.8125rem] font-medium uppercase tracking-[0.12em]"
+         style="color:var(--color-paper-white)">
         {t.hero.eyebrow}
       </p>
-      <h1 class="mt-4 text-[clamp(2.5rem,6vw,4.5rem)] font-bold leading-[1.05] tracking-[-0.015em]">
+      <h1 class="mt-4 text-[clamp(2.5rem,6vw,4.5rem)] font-bold leading-[1.05] tracking-[-0.015em]"
+          style="font-family:var(--font-pp-neue-montreal); color:var(--color-paper-white)">
         {t.hero.h1}
       </h1>
-      <p class="mt-6 max-w-[52ch] text-lg text-white/70">{t.hero.lead}</p>
+      <p class="mt-6 max-w-[52ch] text-lg" style="color:rgba(255,255,255,0.7)">{t.hero.lead}</p>
 
       <img
         src="/images/placeholders/hero-gate.svg"
@@ -28,7 +30,8 @@ const t = getDictionary(locale);
         height="900"
         fetchpriority="high"
         decoding="async"
-        class="mt-10 w-full rounded-[--radius-card]"
+        class="mt-10 w-full"
+        style="border-radius:var(--radius-images)"
       />
     </div>
 

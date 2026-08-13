@@ -15,9 +15,9 @@ const otherHref = route(routeKey, other);
 const telHref = `tel:${phone.replace(/\s/g, '')}`;
 ---
 
-<header class="sticky top-0 z-40 border-b border-ink-soft bg-ink text-white">
+<header class="sticky top-0 z-40" style="background:transparent; color:var(--color-paper-white); border-bottom:1px solid rgba(0,0,0,0.04)">
   <div class="mx-auto flex h-14 max-w-[1200px] items-center gap-4 px-4">
-    <span class="font-semibold tracking-tight">{t.topbar.brand}</span>
+    <span class="font-semibold tracking-tight" style="font-family:var(--font-pp-neue-montreal)">{t.topbar.brand}</span>
 
     <span class="hidden items-center gap-1.5 text-sm text-white/70 sm:flex">
       <Icon name="map-pin" class="h-4 w-4" />

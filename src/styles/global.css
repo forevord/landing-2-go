@@ -1,3 +1,4 @@
+@import '../../redesign/variables.css';
 @import 'tailwindcss';
 
 @font-face {
@@ -45,9 +46,9 @@ html {
 }
 
 body {
-  font-family: var(--font-sans);
-  background: var(--color-surface);
-  color: var(--color-primary);
+  font-family: var(--font-pp-neue-montreal), var(--font-sans);
+  background: var(--surface-paper-white, var(--color-surface));
+  color: var(--color-obsidian, var(--color-primary));
   font-size: 1rem;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -90,14 +91,29 @@ body {
 }
 
 .btn-primary {
-  background: var(--color-cta);
-  color: #fff;
+  background: transparent;
+  color: var(--color-paper-white);
+  border: 1px solid var(--color-paper-white);
+  border-radius: var(--radius-3xl);
+  padding: 0 1.75rem;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .btn-primary:hover {
-    background: var(--color-cta-hover);
+    background: var(--color-paper-white);
+    color: var(--color-obsidian);
   }
+}
+
+/* Map legacy tokens to redesign variables for compatibility */
+:root {
+  --radius-control: var(--radius-inputs, 8px);
+  --radius-card: var(--radius-cards, 8px);
+  --color-border: var(--color-aluminum-hairline, #d8d8d8);
+  --color-surface: var(--surface-paper-white, #ffffff);
+  --color-primary: var(--color-obsidian, #000000);
+  --color-muted: var(--color-brushed-steel, #8e9194);
+  --color-cta-hover: var(--color-linen-mist, #a7aaad);
 }
 
 @media (prefers-reduced-motion: reduce) {
