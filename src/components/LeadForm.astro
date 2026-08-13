@@ -12,12 +12,20 @@ const t = getDictionary(locale);
 const f = t.form;
 const isFull = variant === 'full';
 const privacyHref = route('privacy', locale);
+
+// Only the strings the island needs at runtime. Passing them as data avoids
+// shipping both dictionaries to the browser for six error messages.
+const clientMessages = {
+  errors: f.errors,
+  submitting: f.submitting,
+};
 ---
 
 <form
   id={id}
   class="lead-form grid gap-4 rounded-[--radius-card] bg-surface p-6 shadow-card"
   data-variant={variant}
+  data-messages={JSON.stringify(clientMessages)}
   novalidate
 >
   <p class="text-lg font-semibold text-ink">{isFull ? f.title : f.compactTitle}</p>
@@ -127,7 +135,6 @@ const privacyHref = route('privacy', locale);
   </div>
 
   <input type="hidden" name="source" value={isFull ? 'full' : 'hero'} />
-  <input type="hidden" name="locale" value={locale} />
   <input type="hidden" name="thanks" value={route('thanks', locale)} />
 
   <button type="submit" class="btn btn-primary w-full" data-submit>

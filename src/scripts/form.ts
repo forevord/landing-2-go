@@ -1,11 +1,11 @@
 import { validateLead, type FieldErrors, type LeadInput } from '../lib/validate';
-import pl from '../i18n/pl.json';
-import en from '../i18n/en.json';
 
-const dictionaries = { pl, en } as const;
-type Locale = keyof typeof dictionaries;
+interface ClientMessages {
+  errors: Record<string, string>;
+  submitting: string;
+}
 
-function readForm(form: HTMLFormElement): LeadInput & { locale: Locale; thanks: string } {
+function readForm(form: HTMLFormElement): LeadInput & { thanks: string } {
   const data = new FormData(form);
   const str = (key: string) => String(data.get(key) ?? '').trim();
   return {
@@ -18,13 +18,11 @@ function readForm(form: HTMLFormElement): LeadInput & { locale: Locale; thanks: 
     gdpr: data.get('gdpr') === 'on',
     hp: str('hp'),
     source: str('source') === 'full' ? 'full' : 'hero',
-    locale: (str('locale') === 'en' ? 'en' : 'pl') as Locale,
     thanks: str('thanks'),
   };
 }
 
-function paintErrors(form: HTMLFormElement, errors: FieldErrors, locale: Locale): void {
-  const messages = dictionaries[locale].form.errors as Record<string, string>;
+function paintErrors(form: HTMLFormElement, errors: FieldErrors, messages: Record<string, string>): void {
   form.querySelectorAll<HTMLElement>('[data-error-for]').forEach((node) => {
     const field = node.dataset.errorFor as keyof FieldErrors;
     const code = errors[field];
@@ -42,6 +40,7 @@ function focusFirstInvalid(form: HTMLFormElement, errors: FieldErrors): void {
 
 function initForm(form: HTMLFormElement): void {
   const variant = form.dataset.variant === 'full' ? 'full' : 'compact';
+  const messages = JSON.parse(form.dataset.messages ?? '{}') as ClientMessages;
   const button = form.querySelector<HTMLButtonElement>('[data-submit]')!;
   const label = form.querySelector<HTMLElement>('[data-submit-label]')!;
   const banner = form.querySelector<HTMLElement>('[data-form-error]')!;
@@ -51,24 +50,23 @@ function initForm(form: HTMLFormElement): void {
   form.querySelectorAll<HTMLElement>('input, select').forEach((field) => {
     field.addEventListener('blur', () => {
       const payload = readForm(form);
-      paintErrors(form, validateLead(payload, variant), payload.locale);
+      paintErrors(form, validateLead(payload, variant), messages.errors);
     });
   });
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     const payload = readForm(form);
-    const dict = dictionaries[payload.locale];
     const errors = validateLead(payload, variant);
 
-    paintErrors(form, errors, payload.locale);
+    paintErrors(form, errors, messages.errors);
     if (Object.keys(errors).length > 0) {
       focusFirstInvalid(form, errors);
       return;
     }
 
     button.disabled = true;
-    label.textContent = dict.form.submitting;
+    label.textContent = messages.submitting;
     banner.classList.add('hidden');
 
     try {
@@ -85,14 +83,14 @@ function initForm(form: HTMLFormElement): void {
 
       if (response.status === 422) {
         const body = (await response.json()) as { errors: FieldErrors };
-        paintErrors(form, body.errors, payload.locale);
+        paintErrors(form, body.errors, messages.errors);
         focusFirstInvalid(form, body.errors);
       } else {
-        banner.textContent = dict.form.errors.server;
+        banner.textContent = messages.errors.server;
         banner.classList.remove('hidden');
       }
     } catch {
-      banner.textContent = dict.form.errors.network;
+      banner.textContent = messages.errors.network;
       banner.classList.remove('hidden');
     } finally {
       button.disabled = false;
