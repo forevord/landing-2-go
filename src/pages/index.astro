@@ -1,9 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
+import TopBar from '../components/TopBar.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
 import { getDictionary } from '../i18n';
 
 const locale = 'pl' as const;
 const t = getDictionary(locale);
+const phone = '+48 600 000 000'; // Replaced by {{TELEFON}} in Task 18.
 ---
 
 <Base
@@ -15,7 +19,9 @@ const t = getDictionary(locale);
   ogDescription={t.seo.ogDescription}
   ogImageAlt={t.seo.ogImageAlt}
 >
+  <TopBar locale={locale} routeKey="home" phone={phone} />
   <main id="main">
-    <h1>{t.hero.h1}</h1>
+    <Hero locale={locale} />
+    <TrustBar locale={locale} />
   </main>
 </Base>

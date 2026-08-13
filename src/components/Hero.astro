@@ -1,0 +1,39 @@
+---
+import LeadForm from './LeadForm.astro';
+import { getDictionary, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+---
+
+<section class="bg-ink text-white">
+  <div class="mx-auto grid max-w-[1200px] gap-10 px-4 py-16 lg:grid-cols-[1.1fr_0.9fr] lg:py-24">
+    <div>
+      <p class="text-[0.8125rem] font-medium uppercase tracking-[0.12em] text-cta-hover">
+        {t.hero.eyebrow}
+      </p>
+      <h1 class="mt-4 text-[clamp(2.5rem,6vw,4.5rem)] font-bold leading-[1.05] tracking-[-0.015em]">
+        {t.hero.h1}
+      </h1>
+      <p class="mt-6 max-w-[52ch] text-lg text-white/70">{t.hero.lead}</p>
+
+      <img
+        src="/images/placeholders/hero-gate.svg"
+        alt={t.hero.imageAlt}
+        width="1600"
+        height="900"
+        fetchpriority="high"
+        decoding="async"
+        class="mt-10 w-full rounded-[--radius-card]"
+      />
+    </div>
+
+    <div class="lg:pt-16">
+      <LeadForm locale={locale} variant="compact" id="hero-form" />
+    </div>
+  </div>
+</section>

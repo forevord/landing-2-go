@@ -4,7 +4,7 @@ The SVGs in this folder are temporary. They are drawn in the brand palette (grap
 steel `#334155`, accent `#C2410C`), at the correct aspect ratios and with proper `viewBox` values,
 so the layout will not shift when real photographs replace them — keep the ratio and the swap is clean.
 
-During project initialisation (Step 1) this folder moves to `public/images/placeholders/`.
+The served copies of these SVGs live in `public/images/placeholders/`; this folder keeps the shot list for the photographer.
 
 | File | Used in | Format | Replace with |
 |---|---|---|---|

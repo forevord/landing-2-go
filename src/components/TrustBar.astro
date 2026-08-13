@@ -1,0 +1,25 @@
+---
+import { getDictionary, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+---
+
+<section class="border-b border-border bg-bg" aria-label={t.trust.srTitle}>
+  <ul class="mx-auto grid max-w-[1200px] grid-cols-2 gap-px bg-border px-4 py-0 md:grid-cols-4">
+    {
+      t.trust.items.map((item) => (
+        <li class="min-w-0 bg-bg px-4 py-8 text-center">
+          <span class="block break-words text-4xl font-bold tracking-[-0.02em] text-ink">
+            {item.value}
+          </span>
+          <span class="mt-1 block text-sm text-muted">{item.label}</span>
+        </li>
+      ))
+    }
+  </ul>
+</section>
