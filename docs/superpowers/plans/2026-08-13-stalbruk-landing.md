@@ -6,7 +6,7 @@
 
 **Architecture:** A static Astro site with no client framework. All copy lives in JSON dictionaries and is injected at build time. The only server-side code is a single Cloudflare Pages Function that validates a lead and fans it out to Web3Forms (email) and the Telegram Bot API. Client-side JavaScript is limited to four small vanilla-TypeScript islands: the lead form, the before/after slider, the scroll reveal, and the language hint.
 
-**Tech Stack:** Astro 5 (static output), TypeScript (strict), Tailwind CSS 4, Vitest, Cloudflare Pages + Pages Functions, Web3Forms, Telegram Bot API.
+**Tech Stack:** Astro 7 (static output), TypeScript (strict), Tailwind CSS 4, Vitest, Cloudflare Pages + Pages Functions, Web3Forms, Telegram Bot API.
 
 **Source documents:** [`docs/superpowers/specs/2026-08-13-stalbruk-landing-design.md`](../specs/2026-08-13-stalbruk-landing-design.md) (design spec) and [`info/SPEC.md`](../../../info/SPEC.md) (original product spec).
 
@@ -211,10 +211,14 @@ git commit -m "chore: scaffold Astro project with Tailwind, ESLint, Prettier and
 
 ## Task 2: First Deploy to Cloudflare Pages
 
+> **Deferred by the client (2026-08-13).** Everything is built and tested locally first;
+> the Cloudflare project is created only after Task 17. Steps 1 and 2 of this task
+> (`wrangler.toml` and the initial push) still run in order, because `wrangler pages dev`
+> needs the config file. Steps 3–5 run between Task 17 and Task 18.
+> Until then, `npm run preview` serves the Function locally and secrets live in `.dev.vars`.
+
 **Files:**
 - Create: `wrangler.toml`
-
-This task exists before any feature work so that every later task can be verified on the real host, not only locally.
 
 - [ ] **Step 1: Write `wrangler.toml`**
 
