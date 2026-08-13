@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Seo from '../components/Seo.astro';
+import LangHint from '../components/LangHint.astro';
 import { getDictionary, type Locale, type RouteKey } from '../i18n';
 
 interface Props {
@@ -38,6 +39,7 @@ const t = getDictionary(locale);
     </script>
   </head>
   <body>
+    <LangHint locale={locale} routeKey={routeKey} />
     <a
       href="#main"
       class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:m-4 focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-white"
@@ -45,5 +47,9 @@ const t = getDictionary(locale);
       {t.a11y.skipToContent}
     </a>
     <slot />
+    <script>
+      import '../scripts/reveal';
+      import '../scripts/lang-hint';
+    </script>
   </body>
 </html>
