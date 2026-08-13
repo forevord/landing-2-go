@@ -1,0 +1,350 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]: This page is also available in English.
+    - link "Switch to English" [ref=e4] [cursor=pointer]:
+      - /url: /en/
+    - button "Zamknij" [ref=e5]: ×
+  - link "Przejdź do treści" [ref=e7] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e8]:
+    - generic [ref=e9]:
+      - generic [ref=e10]: StalBruk
+      - generic [ref=e11]: Gdańsk i okolice
+      - generic [ref=e15]:
+        - 'link "Zadzwoń pod numer {{TELEFON}}" [ref=e16] [cursor=pointer]':
+          - /url: tel:+48600000000
+          - generic [ref=e19]: +48 600 000 000
+        - link "English" [ref=e20] [cursor=pointer]:
+          - /url: /en/
+          - text: EN
+        - link "Bezpłatna wycena" [ref=e21] [cursor=pointer]:
+          - /url: "#formularz"
+  - main [ref=e22]:
+    - generic [ref=e24]:
+      - generic [ref=e25]:
+        - paragraph [ref=e26]: Gdańsk i Pomorze
+        - heading "Bramy aluminiowe i kostka brukowa — jedna ekipa, jeden termin" [level=1] [ref=e27]
+        - paragraph [ref=e28]: Projektujemy, produkujemy i montujemy bramy spawane laserowo. Układamy kostkę brukową i wykonujemy roboty ziemne własnym sprzętem — bez czekania na podwykonawców.
+        - img "Nowoczesna aluminiowa brama przesuwna z poziomym wypełnieniem przed domem jednorodzinnym pod Gdańskiem" [ref=e29]
+      - generic [ref=e31]:
+        - paragraph [ref=e32]: Bezpłatna wycena
+        - generic [ref=e33]:
+          - text: Telefon
+          - textbox "Telefon Zadzwonimy lub napiszemy SMS-a" [ref=e34]:
+            - /placeholder: +48 600 000 000
+          - generic [ref=e35]: Zadzwonimy lub napiszemy SMS-a
+        - generic [ref=e36]:
+          - text: Rodzaj usługi
+          - combobox "Rodzaj usługi" [ref=e37]:
+            - option "Wybierz z listy" [selected]
+            - option "Brama przesuwna"
+            - option "Brama skrzydłowa"
+            - option "Brama przemysłowa"
+            - option "Automatyka do bramy"
+            - option "Furtka"
+            - option "Ogrodzenie"
+            - option "Brukarstwo / kostka"
+            - option "Realizacja pod klucz"
+            - option "Jeszcze nie wiem — doradźcie"
+        - generic [ref=e38]:
+          - checkbox "Wyrażam zgodę na przetwarzanie moich danych osobowych w celu przygotowania wyceny. Polityka prywatności" [ref=e39]
+          - generic [ref=e40]:
+            - text: Wyrażam zgodę na przetwarzanie moich danych osobowych w celu przygotowania wyceny.
+            - link "Polityka prywatności" [ref=e41] [cursor=pointer]:
+              - /url: /polityka-prywatnosci
+        - generic:
+          - text: Leave this field empty
+          - textbox
+        - button "Odbierz wycenę" [ref=e42]
+        - paragraph [ref=e44]: Odpowiadamy w ciągu 24 godzin. Pomiar i wycena bez zobowiązań.
+    - region "Nasze doświadczenie w liczbach" [ref=e45]:
+      - list [ref=e46]:
+        - listitem [ref=e47]:
+          - generic [ref=e48]: "{{LATA}}"
+          - generic [ref=e49]: lat na rynku
+        - listitem [ref=e50]:
+          - generic [ref=e51]: "{{REALIZACJE}}"
+          - generic [ref=e52]: zrealizowanych obiektów
+        - listitem [ref=e53]:
+          - generic [ref=e54]: "{{GWARANCJA}}"
+          - generic [ref=e55]: lat gwarancji
+        - listitem [ref=e56]:
+          - generic [ref=e57]: "0"
+          - generic [ref=e58]: podwykonawców — robimy wszystko sami
+    - generic [ref=e59]:
+      - heading "Znasz to?" [level=2] [ref=e60]
+      - paragraph [ref=e61]: Trzy rzeczy, które najczęściej słyszymy od klientów, zanim do nas trafią.
+      - list [ref=e62]:
+        - listitem [ref=e63]:
+          - paragraph [ref=e67]: “Ekipa zniknęła po zaliczce.”
+          - paragraph [ref=e68]: Umowa z terminem, harmonogramem i płatnością w etapach. Ostatnia rata dopiero po odbiorze.
+        - listitem [ref=e69]:
+          - paragraph [ref=e73]: “Termin przesunięty już trzeci raz.”
+          - paragraph [ref=e74]: Koparki, ludzie i produkcja są nasze. Nie czekamy, aż zwolni się podwykonawca.
+        - listitem [ref=e75]:
+          - paragraph [ref=e79]: “Brama zardzewiała po dwóch zimach.”
+          - paragraph [ref=e80]: Robimy z aluminium. Nadmorska wilgoć i sól nie mają się czego uchwycić.
+    - generic [ref=e82]:
+      - heading "Co robimy" [level=2] [ref=e83]
+      - paragraph [ref=e84]: Trzy obszary, które najczęściej zamawiane są razem — i dlatego wykonujemy je jedną ekipą.
+      - generic [ref=e85]:
+        - article [ref=e86]:
+          - img "Aluminiowa brama przesuwna z automatyką w trakcie otwierania" [ref=e87]
+          - generic [ref=e88]:
+            - heading "Bramy i ogrodzenia" [level=3] [ref=e89]
+            - paragraph [ref=e90]: Bramy przesuwne, skrzydłowe i przemysłowe, furtki, ogrodzenia. Automatyka, piloty, wideodomofon.
+            - list [ref=e91]:
+              - listitem [ref=e92]: Bramy przesuwne
+              - listitem [ref=e95]: Bramy skrzydłowe
+              - listitem [ref=e98]: Bramy przemysłowe
+              - listitem [ref=e101]: Automatyka i piloty
+              - listitem [ref=e104]: Furtki
+              - listitem [ref=e107]: Ogrodzenia
+            - link "Wyceń bramę" [ref=e110] [cursor=pointer]:
+              - /url: "#formularz"
+        - article [ref=e111]:
+          - img "Podjazd z szarej kostki brukowej ułożonej w jodełkę przed garażem" [ref=e112]
+          - generic [ref=e113]:
+            - heading "Brukarstwo" [level=3] [ref=e114]
+            - paragraph [ref=e115]: Podjazdy, tarasy, parkingi i ścieżki. Kostka betonowa, granitowa i płyty wielkoformatowe.
+            - list [ref=e116]:
+              - listitem [ref=e117]: Podjazdy i wjazdy
+              - listitem [ref=e120]: Tarasy
+              - listitem [ref=e123]: Parkingi
+              - listitem [ref=e126]: Ścieżki i opaski
+              - listitem [ref=e129]: Krawężniki i odwodnienie
+              - listitem [ref=e132]: Kostka granitowa
+            - link "Wyceń brukarstwo" [ref=e135] [cursor=pointer]:
+              - /url: "#formularz"
+        - article [ref=e136]:
+          - img "Koparka podczas przygotowania terenu pod podjazd i ogrodzenie" [ref=e137]
+          - generic [ref=e138]:
+            - heading "Realizacje pod klucz" [level=3] [ref=e139]
+            - paragraph [ref=e140]: Roboty ziemne, niwelacja terenu, przeniesienie słupów i przyłączy, odwodnienie. Własne koparki.
+            - list [ref=e141]:
+              - listitem [ref=e142]: Roboty ziemne
+              - listitem [ref=e145]: Niwelacja terenu
+              - listitem [ref=e148]: Przeniesienie słupów
+              - listitem [ref=e151]: Przyłącza i przekopy
+              - listitem [ref=e154]: Odwodnienie
+              - listitem [ref=e157]: Wywóz urobku
+            - link "Opisz projekt" [ref=e160] [cursor=pointer]:
+              - /url: "#formularz"
+    - generic [ref=e161]:
+      - heading "Dlaczego my" [level=2] [ref=e162]
+      - paragraph [ref=e163]: Cztery powody, dla których klienci wybierają nas zamiast tańszej oferty z ogłoszenia.
+      - list [ref=e164]:
+        - listitem [ref=e165]:
+          - generic [ref=e169]:
+            - heading "Nie rdzewieje. Nigdy." [level=3] [ref=e170]
+            - paragraph [ref=e171]: Aluminium zamiast stali. Pięć zim nad morzem nie robi na nim wrażenia — nie ma czego szlifować ani malować co sezon.
+        - listitem [ref=e172]:
+          - generic [ref=e176]:
+            - heading "Spoiny, które się nie rozejdą" [level=3] [ref=e177]
+            - paragraph [ref=e178]: "Spawanie laserowe zamiast metody MIG: dokładność rzędu dziesiątych części milimetra i szew, którego praktycznie nie widać."
+        - listitem [ref=e179]:
+          - generic [ref=e185]:
+            - heading "Jeden wykonawca zamiast czterech" [level=3] [ref=e186]
+            - paragraph [ref=e187]: Koparka, brukarz, spawacz i monter to my. Nie umawiasz czterech ekip i nie godzisz ich terminów między sobą.
+        - listitem [ref=e188]:
+          - generic [ref=e193]:
+            - heading "Kosztorys rozbity na pozycje" [level=3] [ref=e194]
+            - paragraph [ref=e195]: Widzisz, za co płacisz — materiał, robocizna, sprzęt osobno. Każda zmiana zakresu ustalana jest z Tobą przed wykonaniem, nie po.
+    - generic [ref=e197]:
+      - heading "Jak to wygląda" [level=2] [ref=e198]
+      - paragraph [ref=e199]: Cztery kroki od telefonu do gotowej realizacji.
+      - list [ref=e200]:
+        - listitem [ref=e201]:
+          - text: "01"
+          - heading "Zgłoszenie" [level=3] [ref=e202]
+          - paragraph [ref=e203]: Zostawiasz numer telefonu. Oddzwaniamy i zadajemy kilka pytań o zakres prac.
+          - generic [ref=e204]: do 24 h
+        - listitem [ref=e205]:
+          - text: "02"
+          - heading "Bezpłatny pomiar" [level=3] [ref=e206]
+          - paragraph [ref=e207]: Przyjeżdżamy na miejsce, mierzymy, sprawdzamy podłoże, dojazd i przebieg instalacji.
+          - generic [ref=e208]: 2–3 dni
+        - listitem [ref=e209]:
+          - text: "03"
+          - heading "Wycena i umowa" [level=3] [ref=e210]
+          - paragraph [ref=e211]: Dostajesz kosztorys rozbity na pozycje oraz termin realizacji potwierdzony na piśmie.
+          - generic [ref=e212]: do 3 dni
+        - listitem [ref=e213]:
+          - text: "04"
+          - heading "Montaż i gwarancja" [level=3] [ref=e214]
+          - paragraph [ref=e215]: Realizujemy, sprzątamy po sobie teren i przekazujemy dokumenty gwarancyjne.
+          - generic [ref=e216]: "{{GWARANCJA}} lat gwarancji"
+      - link "Zacznij od bezpłatnej wyceny" [ref=e217] [cursor=pointer]:
+        - /url: "#formularz"
+    - generic [ref=e219]:
+      - heading "Realizacje" [level=2] [ref=e220]
+      - paragraph [ref=e221]: Zdjęcia z obiektów, które oddaliśmy na Pomorzu.
+      - list [ref=e222]:
+        - listitem [ref=e223]:
+          - img "Aluminiowa brama przesuwna o szerokości czterech i pół metra przed domem jednorodzinnym" [ref=e224]
+          - paragraph [ref=e225]: Brama przesuwna 4,5 m z automatyką — Gdańsk Osowa
+        - listitem [ref=e226]:
+          - img "Podjazd i taras wyłożone jasną kostką betonową przy domu z czerwonej cegły" [ref=e227]
+          - paragraph [ref=e228]: Podjazd i taras z kostki betonowej — Rumia
+        - listitem [ref=e229]:
+          - img "Szeroka brama przemysłowa z ogrodzeniem panelowym na terenie hali produkcyjnej" [ref=e230]
+          - paragraph [ref=e231]: Brama przemysłowa i ogrodzenie panelowe — Gdynia
+        - listitem [ref=e232]:
+          - img "Aluminiowe ogrodzenie z poziomych profili z wbudowaną furtką i wideodomofonem" [ref=e233]
+          - paragraph [ref=e234]: Ogrodzenie aluminiowe z furtką — Sopot
+        - listitem [ref=e235]:
+          - img "Firmowy parking z kostki brukowej z wyznaczonymi miejscami postojowymi" [ref=e236]
+          - paragraph [ref=e237]: Parking dla firmy, 400 m² — Pruszcz Gdański
+        - listitem [ref=e238]:
+          - img "Wjazd na posesję wyłożony ciemną kostką granitową w łuku" [ref=e239]
+          - paragraph [ref=e240]: Wjazd z kostki granitowej — Kartuzy
+      - figure "Podjazd przed i po Przeciągnij suwak, żeby porównać" [ref=e241]:
+        - generic [ref=e242]:
+          - generic [ref=e243]: Podjazd przed i po
+          - generic [ref=e244]: Przeciągnij suwak, żeby porównać
+        - generic [ref=e245]:
+          - 'img "Podjazd przed remontem: nierówny grunt z koleinami i resztkami starej nawierzchni" [ref=e246]'
+          - 'img "Ten sam podjazd po realizacji: równa kostka brukowa z krawężnikiem i odwodnieniem liniowym" [ref=e247]'
+          - slider "Przeciągnij suwak, żeby porównać" [ref=e248]: "50"
+    - generic [ref=e249]:
+      - heading "Częste pytania" [level=2] [ref=e250]
+      - paragraph [ref=e251]: Jeśli czegoś tu brakuje — zadzwoń, odpowiemy od ręki.
+      - generic [ref=e252]:
+        - group [ref=e253]:
+          - generic "Ile kosztuje brama? +" [ref=e254] [cursor=pointer]:
+            - text: Ile kosztuje brama?
+            - generic [ref=e255]: +
+        - group [ref=e256]:
+          - generic "Jak długo trwa realizacja? +" [ref=e257] [cursor=pointer]:
+            - text: Jak długo trwa realizacja?
+            - generic [ref=e258]: +
+        - group [ref=e259]:
+          - generic "Na jakim obszarze pracujecie? +" [ref=e260] [cursor=pointer]:
+            - text: Na jakim obszarze pracujecie?
+            - generic [ref=e261]: +
+        - group [ref=e262]:
+          - generic "Jaka jest gwarancja? +" [ref=e263] [cursor=pointer]:
+            - text: Jaka jest gwarancja?
+            - generic [ref=e264]: +
+        - group [ref=e265]:
+          - generic "Czy pomiar jest płatny? +" [ref=e266] [cursor=pointer]:
+            - text: Czy pomiar jest płatny?
+            - generic [ref=e267]: +
+        - group [ref=e268]:
+          - generic "Jak wygląda płatność? +" [ref=e269] [cursor=pointer]:
+            - text: Jak wygląda płatność?
+            - generic [ref=e270]: +
+        - group [ref=e271]:
+          - generic "Czy zajmujecie się też robotami ziemnymi? +" [ref=e272] [cursor=pointer]:
+            - text: Czy zajmujecie się też robotami ziemnymi?
+            - generic [ref=e273]: +
+        - group [ref=e274]:
+          - generic "Dlaczego aluminium, a nie stal? +" [ref=e275] [cursor=pointer]:
+            - text: Dlaczego aluminium, a nie stal?
+            - generic [ref=e276]: +
+    - generic [ref=e278]:
+      - paragraph [ref=e279]: Zamów bezpłatną wycenę
+      - paragraph [ref=e280]: Wypełnienie zajmuje minutę. Oddzwaniamy w ciągu 24 godzin.
+      - generic [ref=e281]:
+        - text: Imię
+        - textbox "Imię" [ref=e282]:
+          - /placeholder: Jan
+      - generic [ref=e283]:
+        - text: Telefon
+        - textbox "Telefon Zadzwonimy lub napiszemy SMS-a" [ref=e284]:
+          - /placeholder: +48 600 000 000
+        - generic [ref=e285]: Zadzwonimy lub napiszemy SMS-a
+      - generic [ref=e286]:
+        - text: Rodzaj usługi
+        - combobox "Rodzaj usługi" [ref=e287]:
+          - option "Wybierz z listy" [selected]
+          - option "Brama przesuwna"
+          - option "Brama skrzydłowa"
+          - option "Brama przemysłowa"
+          - option "Automatyka do bramy"
+          - option "Furtka"
+          - option "Ogrodzenie"
+          - option "Brukarstwo / kostka"
+          - option "Realizacja pod klucz"
+          - option "Jeszcze nie wiem — doradźcie"
+      - generic [ref=e288]:
+        - text: Miejscowość
+        - textbox "Miejscowość" [ref=e289]:
+          - /placeholder: Gdańsk
+      - generic [ref=e290]:
+        - text: E-mail (opcjonalnie)
+        - textbox "E-mail (opcjonalnie)" [ref=e291]:
+          - /placeholder: jan@example.com
+      - generic [ref=e292]:
+        - text: Opisz projekt (opcjonalnie)
+        - textbox "Opisz projekt (opcjonalnie)" [ref=e293]:
+          - /placeholder: Wymiary, termin, dodatkowe pytania
+      - generic [ref=e294]:
+        - checkbox "Wyrażam zgodę na przetwarzanie moich danych osobowych w celu przygotowania wyceny. Polityka prywatności" [ref=e295]
+        - generic [ref=e296]:
+          - text: Wyrażam zgodę na przetwarzanie moich danych osobowych w celu przygotowania wyceny.
+          - link "Polityka prywatności" [ref=e297] [cursor=pointer]:
+            - /url: /polityka-prywatnosci
+      - generic:
+        - text: Leave this field empty
+        - textbox
+      - button "Wyślij zgłoszenie" [ref=e298]
+      - paragraph [ref=e300]: Nie wysyłamy newslettera. Dane wykorzystujemy wyłącznie do przygotowania wyceny.
+    - generic [ref=e302]:
+      - generic [ref=e303]:
+        - heading "Kontakt" [level=2] [ref=e304]
+        - paragraph [ref=e305]: Wolisz zadzwonić? Odbieramy w godzinach pracy.
+        - generic [ref=e306]:
+          - generic [ref=e307]:
+            - term [ref=e308]: Telefon
+            - definition [ref=e309]:
+              - link "+48 600 000 000" [ref=e310] [cursor=pointer]:
+                - /url: tel:+48600000000
+          - generic [ref=e313]:
+            - term [ref=e314]: E-mail
+            - definition [ref=e315]:
+              - link "kontakt@example.com" [ref=e316] [cursor=pointer]:
+                - /url: mailto:kontakt@example.com
+          - generic [ref=e317]:
+            - term [ref=e318]: Godziny pracy
+            - definition [ref=e319]: pon.–pt. 8:00–18:00, sob. 9:00–14:00
+          - generic [ref=e320]:
+            - term [ref=e321]: Obszar działania
+            - definition [ref=e322]: Gdańsk, Gdynia, Sopot i województwo pomorskie
+      - generic [ref=e323]:
+        - generic [ref=e324]:
+          - 'img "Mapa obszaru działania: Trójmiasto i województwo pomorskie" [ref=e325]'
+          - button "Pokaż mapę" [ref=e326]
+        - paragraph [ref=e327]: Mapa ładuje się po kliknięciu, żeby nie spowalniać strony.
+        - link "Otwórz w Mapach Google" [ref=e328] [cursor=pointer]:
+          - /url: https://www.google.com/maps/search/?api=1&query=Gda%C5%84sk
+  - contentinfo [ref=e329]:
+    - generic [ref=e330]:
+      - generic [ref=e331]:
+        - paragraph [ref=e332]: StalBruk
+        - paragraph [ref=e333]: Bramy aluminiowe, ogrodzenia i brukarstwo. Gdańsk i Pomorze.
+        - paragraph [ref=e334]: "{{NAZWA_FIRMY}}"
+        - paragraph [ref=e335]: "{{ADRES}}"
+        - paragraph [ref=e336]: "NIP {{NIP}}"
+      - navigation "Na stronie" [ref=e337]:
+        - paragraph [ref=e338]: Na stronie
+        - list [ref=e339]:
+          - listitem [ref=e340]:
+            - link "Usługi" [ref=e341] [cursor=pointer]:
+              - /url: "#uslugi"
+          - listitem [ref=e342]:
+            - link "Realizacje" [ref=e343] [cursor=pointer]:
+              - /url: "#realizacje"
+          - listitem [ref=e344]:
+            - link "Jak pracujemy" [ref=e345] [cursor=pointer]:
+              - /url: "#proces"
+          - listitem [ref=e346]:
+            - link "Pytania" [ref=e347] [cursor=pointer]:
+              - /url: "#faq"
+          - listitem [ref=e348]:
+            - link "Kontakt" [ref=e349] [cursor=pointer]:
+              - /url: "#kontakt"
+          - listitem [ref=e350]:
+            - link "Polityka prywatności" [ref=e351] [cursor=pointer]:
+              - /url: /polityka-prywatnosci
+    - generic [ref=e352]: © 2026 StalBruk. Wszelkie prawa zastrzeżone.

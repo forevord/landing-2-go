@@ -32,6 +32,8 @@ const businessSchema = {
   telephone: '{{TELEFON}}',
   url: Astro.site?.origin,
 };
+
+const beaconToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
 ---
 
 <!doctype html>
@@ -67,5 +69,15 @@ const businessSchema = {
       import '../scripts/reveal';
       import '../scripts/lang-hint';
     </script>
+    {
+      beaconToken && (
+        <script
+          is:inline
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={JSON.stringify({ token: beaconToken })}
+        />
+      )
+    }
   </body>
 </html>
