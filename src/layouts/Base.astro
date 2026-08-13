@@ -1,0 +1,49 @@
+---
+import '../styles/global.css';
+import Seo from '../components/Seo.astro';
+import { getDictionary, type Locale, type RouteKey } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  routeKey: RouteKey;
+  title: string;
+  description: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImageAlt?: string;
+  noindex?: boolean;
+}
+
+const { locale, routeKey, ...seo } = Astro.props;
+const t = getDictionary(locale);
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="preload"
+      href="/fonts/inter-variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <Seo locale={locale} routeKey={routeKey} {...seo} />
+    <script is:inline>
+      // Marks JS availability before first paint so reveal styles never hide
+      // content for users without JavaScript.
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:m-4 focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-white"
+    >
+      {t.a11y.skipToContent}
+    </a>
+    <slot />
+  </body>
+</html>

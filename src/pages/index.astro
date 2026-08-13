@@ -1,17 +1,21 @@
 ---
+import Base from '../layouts/Base.astro';
+import { getDictionary } from '../i18n';
 
+const locale = 'pl' as const;
+const t = getDictionary(locale);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base
+  locale={locale}
+  routeKey="home"
+  title={t.seo.title}
+  description={t.seo.description}
+  ogTitle={t.seo.ogTitle}
+  ogDescription={t.seo.ogDescription}
+  ogImageAlt={t.seo.ogImageAlt}
+>
+  <main id="main">
+    <h1>{t.hero.h1}</h1>
+  </main>
+</Base>
