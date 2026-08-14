@@ -10,11 +10,14 @@ const t = getDictionary(locale);
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-ink pt-20 pb-24 text-white/70 md:pb-16">
+{/* The reference's footer is paper white with a hairline top rule. It also ends
+    the page on a light band, so the graphite contacts section above it reads as
+    a block rather than as the start of an unbroken dark tail. */}
+<footer class="border-t border-border pt-20 pb-24 text-muted md:pb-16">
   <div class="mx-auto max-w-page px-6 lg:px-10">
-    <p class="t-display text-white">{t.topbar.brand}</p>
+    <p class="t-display text-ink">{t.topbar.brand}</p>
 
-    <div class="mt-12 grid gap-10 border-t border-ink-soft pt-10 md:grid-cols-2">
+    <div class="mt-12 grid gap-10 border-t border-border pt-10 md:grid-cols-2">
       <div>
         <p class="max-w-[40ch]">{t.footer.tagline}</p>
         <p class="mt-4 text-sm">{t.footer.company}</p>
@@ -23,23 +26,23 @@ const year = new Date().getFullYear();
       </div>
 
       <nav aria-label={t.footer.navTitle}>
-        <p class="t-label text-white/50">{t.footer.navTitle}</p>
+        <p class="t-label text-muted">{t.footer.navTitle}</p>
         <ul class="mt-4 grid gap-2 text-sm">
           {
             t.footer.nav.map((item) => (
               <li>
-                <a href={item.href} class="hover:text-white">
+                <a href={item.href} class="hover:text-ink">
                   {item.label}
                 </a>
               </li>
             ))
           }
-          <li><a href={route('privacy', locale)} class="hover:text-white">{t.footer.privacy}</a></li>
+          <li><a href={route('privacy', locale)} class="hover:text-ink">{t.footer.privacy}</a></li>
         </ul>
       </nav>
     </div>
 
-    <div class="mt-10 border-t border-ink-soft pt-6 text-xs">
+    <div class="mt-10 border-t border-border pt-6 text-xs">
       © {year} {t.topbar.brand}. {t.footer.rights}
     </div>
   </div>

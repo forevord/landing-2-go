@@ -21,12 +21,10 @@
    visible gain. */
 @theme {
   --color-ink: #000000; /* obsidian: primary ink and dark surfaces */
-  --color-ink-soft: #4b514d; /* anodised graphite; white on it 8.13:1 */
-  --color-graphite: #4b514d;
+  --color-graphite: #4b514d; /* anodised graphite; white on it 8.12:1 */
   --color-gunmetal: #9ea29f; /* the canvas — BLACK text only, 8.12:1 */
   --color-primary: #000000;
   --color-muted: #5f6462; /* 5.05:1 on paper — never place on gunmetal */
-  --color-bg: #f2f2f0; /* paper for alternating sections */
   --color-surface: #ffffff;
   --color-border: #d8d8d8; /* aluminium hairline */
   --color-cta: #c2410c; /* white on it 5.17:1 */
@@ -82,6 +80,34 @@ body {
    silently override — which is how `.media { position: relative }` once beat an
    `absolute` utility and pushed the hero content off screen. */
 @layer components {
+  /* ---------- Rhythm ----------
+     The reference's 110px band gap, as one knob rather than a py- pair repeated
+     on every section. Narrow screens get 76px, the largest step on the
+     reference's own spacing scale. */
+
+  .section {
+    padding-block: 76px;
+  }
+
+  /* The reference's Two-Column Text Block: a 280px caption rail on the left,
+     the heading and body beside it, 24px apart. It is the shape that recurs
+     through every content band, so it lives here once. */
+
+  .split {
+    display: grid;
+    gap: 24px;
+  }
+
+  @media (min-width: 1024px) {
+    .section {
+      padding-block: 110px;
+    }
+
+    .split {
+      grid-template-columns: 280px minmax(0, 1fr);
+    }
+  }
+
   /* ---------- Type ----------
      The reference's scale, one family, and no negative tracking. The calm comes
      from letting size alone carry the hierarchy: 57px display down to a 15px

@@ -18,28 +18,31 @@ const t = getDictionary(locale);
 const IMAGES = [heroPhoto, pavingPhoto, earthworksPhoto, work1Photo, work2Photo, work3Photo];
 ---
 
-<section id="realizacje" class="bg-bg py-24 lg:py-32">
+<section id="realizacje" class="section">
   <div class="mx-auto max-w-page px-6 lg:px-10">
-    <h2 class="t-h2 text-ink">{t.gallery.title}</h2>
-    <p class="t-lead mt-4 max-w-[60ch] text-muted">{t.gallery.lead}</p>
+    <div class="split">
+      <p class="t-label text-ink">{t.gallery.title}</p>
+      <h2 class="t-h2 max-w-[26ch] text-ink">{t.gallery.lead}</h2>
+    </div>
 
-    <ul
-      class="mt-16 grid snap-x snap-mandatory grid-flow-col auto-cols-[85%] gap-4 overflow-x-auto pb-4 sm:auto-cols-[45%] lg:grid-flow-row lg:auto-cols-auto lg:grid-cols-3 lg:gap-6 lg:overflow-visible"
-    >
+    {/* The reference's product image card grid: three up on desktop, one on
+        mobile. The horizontal snap-scroller this replaced hid four of the six
+        photographs behind a gesture. */}
+    <ul class="mt-20 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {
         t.gallery.items.map((item, index) => (
-          <li class={`snap-start ${index === 0 ? 'lg:col-span-2' : ''}`}>
-            <div class="relative media aspect-video">
+          <li>
+            <div class="relative media aspect-[3/2]">
               <Image
                 src={IMAGES[index]}
                 alt={item.alt}
-                widths={index === 0 ? [640, 960, 1280] : [400, 640]}
-                sizes={index === 0 ? '(min-width: 1024px) 66vw, 85vw' : '(min-width: 1024px) 33vw, 45vw'}
+                widths={[400, 640, 800]}
+                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                 loading="lazy"
                 quality={72}
               />
             </div>
-            <p class="t-label mt-3 text-graphite">{item.caption}</p>
+            <p class="t-label mt-3 text-muted">{item.caption}</p>
           </li>
         ))
       }

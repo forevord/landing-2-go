@@ -12,7 +12,7 @@ The site is functionally complete and visually mid-redesign.
 
 **Working and verified:** bilingual Polish/English static build (six pages), lead form with client and server validation posting to a Cloudflare Pages Function that fans out to Web3Forms and Telegram, honeypot spam trap, scroll reveals, language hint, before/after slider, sitemap, robots, JSON-LD, and a CI guard that fails if Polish copy appears outside `src/i18n/`.
 
-**Lighthouse:** 100 / 100 / 100 / 100 on both desktop and mobile. LCP 0.6s desktop, 1.7s mobile, CLS 0. Keep it there — every change below must be re-measured.
+**Lighthouse:** 100 / 100 / 100 / 100 on desktop. On mobile, accessibility, best practices and SEO are 100 and performance measures 99 (LCP 2.1s, CLS 0, TBT 0ms) against `dist/` served over plain HTTP on this machine. The same run on the commit before the section rebuild gives the identical 99 / 2.1s, so the rebuild costs nothing — the earlier 100 / 1.7s figure came from a different serving setup and is not reproducible here. Compare against a freshly measured baseline, not against the number in this file.
 
 **Test suite:** 21 pass, 1 fails on purpose (`carry no invented demo data`). That failure is the pre-launch gate; see below.
 
@@ -29,13 +29,17 @@ npm run check:copy   # fails if Polish diacritics appear outside src/i18n/
 
 ---
 
-## Open item 1 — a responsive report I could not reproduce
+## Open item 1 — a responsive report that does not reproduce
 
 The client reports the layout "does not narrow" and that there is effectively one fixed container.
 
-I measured at 1024, 1280, 1440 and 1780px: the container is `max-w-page` (1280px), correctly centred, and `document.documentElement.scrollWidth === clientWidth` at every width including 375px. No horizontal overflow anywhere. So either the problem is outside the widths I tried, or it is specific to the viewing environment.
+Two rounds of measurement now say otherwise.
 
-The screenshot that prompted the report was taken in what appears to be a VS Code preview pane rather than a standalone browser window, which is worth ruling out first — an embedded pane can report a layout viewport that does not match its rendered width.
+**Round one** (spot widths): the container is `max-w-page` (1280px), correctly centred, and `document.documentElement.scrollWidth === clientWidth` at 1024, 1280, 1440, 1780 and 375px.
+
+**Round two** (the VS Code preview pane hypothesis): the preview pane is an iframe, so the page was loaded into an iframe and the iframe resized — the same rendering path the client's screenshot came through. The container tracks the frame exactly (420px frame → 420px container, 600 → 600, 900 → 900, 1100 → 1100), and a sweep from 320 to 1920px in 32px steps found no width with horizontal overflow. The layout reflows correctly inside an embedded pane.
+
+So the page is not the cause. What remains is the viewing environment — most likely the pane's own zoom level, which changes the CSS-pixel viewport without changing the visible pane width and makes a wide pane render the narrow layout (or the reverse).
 
 **Before changing any layout code, get:**
 - the exact viewport width where it breaks, and the browser
@@ -44,19 +48,21 @@ The screenshot that prompted the report was taken in what appears to be a VS Cod
 
 Do not "fix" this speculatively. Changing breakpoints without a reproduction risks breaking the widths that currently work.
 
-## Open item 2 — finish aligning the page with the Custo reference
+## Open item 2 — aligning the page with the Custo reference (done)
 
 The reference is `redesign/DESIGN.md` plus `tokens.json`, `variables.css`, `theme.css`. Read it first.
 
 The design system in `src/styles/global.css` and the hero (`Hero.astro`, `TopBar.astro`) were rebuilt on it: gunmetal canvas `#9ea29f`, obsidian type, the 57 → 15px scale with tracking left alone, 8px radii, pill primary button.
 
-**The remaining sections have not been recomposed.** They were built during an earlier, darker pass and now merely inherit the new token values. They work and they pass contrast, but they do not yet read as the reference. Bring them across:
+The remaining sections have now been recomposed on it too:
 
-- `TrustBar`, `Pain`, `WhyUs` — the reference's two-column block: a small caption on the left, the large heading and body on the right, 24px column gap.
-- `Services` — currently alternating full-width rows; keep the zigzag but move the photographs onto 8px-radius cards on a canvas band rather than bleeding them.
-- `Gallery` — the reference's "product image card" grid: 8px radius, three up on desktop, one column on mobile.
-- `Process`, `Contacts`, `Footer` — currently pure black. Consider the graphite `#4b514d` surface instead, which is the reference's dark tone.
-- Section rhythm should be the reference's 110px.
+- **`.section` and `.split`** in `global.css` carry the reference's 110px band gap (76px below `lg`) and its two-column text block — a 280px caption rail, heading and body beside it, 24px apart. Both are single knobs; change them there, not per section.
+- `TrustBar`, `Pain`, `WhyUs`, `Services`, `Gallery`, `Process`, `Contacts` all open with that block: the section's `title` string is the caption, its `lead` string is the `h2`. No new copy was needed for the change.
+- `Services` sits on a gunmetal band with each photograph in a paper card at 20px padding — the reference's product image card — instead of bleeding into the section.
+- `Gallery` is a three-up card grid (one column on mobile). It replaced a horizontal snap-scroller that hid four of the six photographs behind a gesture.
+- `Process` and `Contacts` are graphite `#4b514d`, not black; every rule and muted tone on them is a white alpha.
+- `Footer` went the other way, to paper white with a hairline top rule, which is what the reference specifies and stops the page ending in one unbroken dark tail.
+- `--color-bg` (`#f2f2f0`) and `--color-ink-soft` are gone. The first was not one of the reference's three surfaces and nothing referenced the second any more.
 
 **Two contrast rules that override the reference and are not negotiable:**
 - White text on gunmetal is 2.58:1 and fails. Gunmetal takes black type only. Black at 75% opacity on it is 5.59:1 and is fine; at 60% it is 3.98:1 and is not.

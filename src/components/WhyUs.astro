@@ -9,27 +9,30 @@ const { locale } = Astro.props;
 const t = getDictionary(locale);
 ---
 
-<section class="mx-auto max-w-page px-6 py-24 lg:px-10 lg:py-32">
-  <div class="grid gap-10 lg:grid-cols-[280px_1fr] lg:gap-16">
-    <div>
-      <p class="t-label text-graphite">{t.why.title}</p>
-      <p class="mt-4 max-w-[38ch] text-muted">{t.why.lead}</p>
-    </div>
+<section class="section">
+  <div class="mx-auto max-w-page px-6 lg:px-10">
+    <div class="split">
+      <p class="t-label text-ink">{t.why.title}</p>
 
-    <ul class="grid gap-0 sm:grid-cols-2">
-      {
-        t.why.items.map((item, index) => (
-          <li
-            class="border-t border-border py-8 sm:odd:pr-8 lg:odd:pr-16"
-            data-reveal
-            style={`transition-delay:${index * 50}ms`}
-          >
-            <span class="t-h2 text-graphite">{String(index + 1).padStart(2, '0')}</span>
-            <h3 class="t-h3 mt-4 text-ink">{item.title}</h3>
-            <p class="mt-2 text-muted">{item.desc}</p>
-          </li>
-        ))
-      }
-    </ul>
+      <div>
+        <h2 class="t-h2 max-w-[26ch] text-ink">{t.why.lead}</h2>
+
+        <ul class="mt-12 grid gap-0 sm:grid-cols-2 sm:gap-x-6">
+          {
+            t.why.items.map((item, index) => (
+              <li
+                class="border-t border-border py-8"
+                data-reveal
+                style={`transition-delay:${index * 50}ms`}
+              >
+                <span class="t-h2 text-graphite">{String(index + 1).padStart(2, '0')}</span>
+                <h3 class="t-h3 mt-4 text-ink">{item.title}</h3>
+                <p class="mt-2 text-muted">{item.desc}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
   </div>
 </section>

@@ -27,12 +27,17 @@ const SERVICE_PARAM: Record<string, string> = {
 };
 ---
 
-<section id="uslugi" class="bg-bg py-24 lg:py-32">
+{/* The canvas band. Every piece of type on it is obsidian — the muted grey
+    used on paper measures 2.3:1 here and the reference's reversed white is
+    worse still, so the hierarchy is carried by opacity on black instead. */}
+<section id="uslugi" class="section bg-gunmetal text-ink">
   <div class="mx-auto max-w-page px-6 lg:px-10">
-    <h2 class="t-h2 text-ink">{t.services.title}</h2>
-    <p class="t-lead mt-4 max-w-[60ch] text-muted">{t.services.lead}</p>
+    <div class="split">
+      <p class="t-label">{t.services.title}</p>
+      <h2 class="t-h2 max-w-[26ch]">{t.services.lead}</h2>
+    </div>
 
-    <div class="mt-16 grid gap-16 lg:gap-24">
+    <div class="mt-20 grid gap-16 lg:gap-24">
       {
         t.services.items.map((item, index) => (
           <article
@@ -40,24 +45,28 @@ const SERVICE_PARAM: Record<string, string> = {
             data-reveal
             style={`transition-delay:${index * 50}ms`}
           >
-            <div class={`relative media aspect-[3/2] ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
-              <Image
-                src={IMAGES[item.id]}
-                alt={item.imageAlt}
-                widths={[480, 768, 1024]}
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                loading="lazy"
-                quality={72}
-              />
+            {/* The reference's product image card: the photograph sits inside a
+                paper card on the canvas rather than bleeding into it. */}
+            <div class={`rounded-card bg-surface p-5 ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+              <div class="relative media aspect-[3/2]">
+                <Image
+                  src={IMAGES[item.id]}
+                  alt={item.imageAlt}
+                  widths={[480, 768, 1024]}
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  loading="lazy"
+                  quality={72}
+                />
+              </div>
             </div>
             <div class={index % 2 === 1 ? 'lg:order-1' : ''}>
-              <span class="t-label text-graphite">{String(index + 1).padStart(2, '0')}</span>
-              <h3 class="t-h2 mt-4 text-ink">{item.title}</h3>
-              <p class="t-lead mt-4 text-muted">{item.desc}</p>
+              <span class="t-label text-ink/75">{String(index + 1).padStart(2, '0')}</span>
+              <h3 class="t-h2 mt-4">{item.title}</h3>
+              <p class="t-lead mt-4 text-ink/75">{item.desc}</p>
               <ul class="mt-6 grid gap-2.5">
                 {item.list.map((entry) => (
-                  <li class="flex items-center gap-2.5 text-ink">
-                    <Icon name="check" class="h-4 w-4 shrink-0 text-muted" />
+                  <li class="flex items-center gap-2.5">
+                    <Icon name="check" class="h-4 w-4 shrink-0 text-ink/75" />
                     {entry}
                   </li>
                 ))}
