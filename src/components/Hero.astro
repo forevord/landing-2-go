@@ -30,20 +30,19 @@ const t = getDictionary(locale);
       contains rather than by its mood: white at 20% over graphite is 4.76:1,
       at 25% it is 4.21:1 and the 19px lead fails. The dark photograph measured
       24% against the old one's 26%, so the swap buys tone, not headroom. */}
+  {/* This image is the LCP element, and sparks are the worst case a codec can
+      be handed — fine bright detail everywhere. At the settings the flat brick
+      wall it replaced used, it came to 124kB against that wall at 11kB, and
+      cost 0.3s of LCP.
+
+      None of the detail survives 20% opacity and full desaturation, so `sizes`
+      is a flat 800px rather than the layout width: it stops a 2x phone from
+      pulling a 1200w source for a backdrop nobody can resolve. Do not copy this
+      onto a photograph that is actually looked at. */}
   <div class="absolute inset-0 overflow-hidden">
     <Image
       src={heroPhoto}
       alt=""
-      {/* This image is the LCP element, and sparks are the worst case a codec
-          can be handed — fine bright detail everywhere. At the settings the old
-          flat brick wall used it came to 124kB against that wall's 11kB, and
-          cost 0.3s of LCP.
-
-          None of the detail survives 20% opacity and full desaturation, so the
-          `sizes` here is a flat 800px rather than the layout width: it stops a
-          2× phone from pulling a 1200w source for a backdrop nobody can
-          resolve. Do not copy this onto a photograph that is actually looked
-          at. */}
       widths={[480, 800, 1200]}
       sizes="800px"
       loading="eager"

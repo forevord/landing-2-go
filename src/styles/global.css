@@ -292,6 +292,12 @@ body {
      keyboard user pays for. */
 
   .lead-form :where(input:not([type='checkbox']), select, textarea) {
+    /* A textarea carries an intrinsic width from its `cols` default, and a grid
+       track sized to max-content will honour it. Once these fields gained
+       horizontal padding that intrinsic width stopped fitting, and the whole
+       form pushed the document 6px past a 320px viewport. */
+    width: 100%;
+    min-width: 0;
     min-height: 52px;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-control);

@@ -1,6 +1,5 @@
 ---
 import { Image } from 'astro:assets';
-import Icon from './Icon.astro';
 import { getDictionary, type Locale } from '../i18n';
 import gatePhoto from '../assets/photos/hero.jpg';
 import pavingPhoto from '../assets/photos/paving.jpg';
@@ -27,50 +26,78 @@ const SERVICE_PARAM: Record<string, string> = {
 };
 ---
 
-{/* The canvas band. Every piece of type on it is obsidian — the muted grey
-    used on paper measures 2.3:1 here and the reference's reversed white is
-    worse still, so the hierarchy is carried by opacity on black instead. */}
-<section id="uslugi" class="section bg-gunmetal text-ink">
+{/* Composed against what the field actually does. Four Pomeranian gate and
+    fencing sites were rendered and read: all four surface the whole offer as a
+    flat grid a visitor can compare at a glance, and all four give every entry
+    its own button. None uses an alternating zigzag of large rows, which is what
+    this section was — it made a buyer scroll past each service in turn instead
+    of weighing them against each other. None uses a tick-marked feature list
+    either; scope is set in the buyer's own vocabulary.
+
+    Where the whole field falls down is facts: not one of the four publishes a
+    price, a lead time or a warranty beside the offer. Every one says "free
+    quote" and makes you telephone. Those facts already existed here, buried in
+    the FAQ accordion at the foot of the page. The strip below moves them to
+    where the decision is actually made. */}
+<section id="uslugi" class="section">
   <div class="mx-auto max-w-page px-6 lg:px-10">
     <div class="split">
-      <p class="t-label">{t.services.title}</p>
-      <h2 class="t-h2 max-w-[26ch]">{t.services.lead}</h2>
+      <p class="t-label text-ink">{t.services.title}</p>
+      <h2 class="t-h2 max-w-[26ch] text-ink">{t.services.lead}</h2>
     </div>
 
-    <div class="mt-20 grid gap-16 lg:gap-24">
+    <dl class="mt-14 grid gap-px overflow-hidden rounded-card border border-border bg-border sm:grid-cols-3">
+      {
+        t.services.promises.map((promise) => (
+          <div class="bg-surface px-6 py-5">
+            <dt class="t-label text-muted">{promise.label}</dt>
+            <dd class="mt-1 font-medium text-ink">{promise.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    <div class="mt-6 grid gap-6 md:grid-cols-3">
       {
         t.services.items.map((item, index) => (
           <article
-            class="grid items-center gap-8 lg:grid-cols-2 lg:gap-16"
+            class="flex flex-col overflow-hidden rounded-card border border-border"
             data-reveal
             style={`transition-delay:${index * 50}ms`}
           >
-            <div class={`relative media aspect-[3/2] ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+            {/* The photograph fills the head of the card rather than floating
+                inside a white mat, so the card reads as one object. */}
+            <div class="relative media aspect-[3/2] rounded-none">
               <Image
                 src={IMAGES[item.id]}
                 alt={item.imageAlt}
-                widths={[480, 768, 1024]}
-                sizes="(min-width: 1024px) 50vw, 100vw"
+                widths={[400, 640, 800]}
+                sizes="(min-width: 768px) 33vw, 100vw"
                 loading="lazy"
                 quality={72}
               />
             </div>
-            <div class={index % 2 === 1 ? 'lg:order-1' : ''}>
-              <span class="t-label text-ink/75">{String(index + 1).padStart(2, '0')}</span>
-              <h3 class="t-h2 mt-4">{item.title}</h3>
-              <p class="t-lead mt-4 text-ink/75">{item.desc}</p>
-              <ul class="mt-6 grid gap-2.5">
+
+            <div class="flex flex-1 flex-col p-6">
+              <h3 class="t-h3 text-ink">{item.title}</h3>
+              <p class="mt-3 text-muted">{item.desc}</p>
+
+              {/* Scope set as the words a buyer searches for, on hairlines.
+                  No site in the field uses tick marks. The bottom margin here
+                  rather than on the button: the button is pinned to the foot of
+                  the card with mt-auto, because the three descriptions differ
+                  by a line and the actions would otherwise sit at three
+                  different heights across the row. */}
+              <ul class="mt-6 mb-6 grid border-t border-border text-sm">
                 {item.list.map((entry) => (
-                  <li class="flex items-center gap-2.5">
-                    <Icon name="check" class="h-4 w-4 shrink-0 text-ink/75" />
-                    {entry}
-                  </li>
+                  <li class="border-b border-border py-2.5 text-ink">{entry}</li>
                 ))}
               </ul>
+
               <a
                 href="#formularz"
                 data-service={SERVICE_PARAM[item.id]}
-                class="btn btn-primary mt-8"
+                class="btn btn-primary mt-auto w-full"
               >
                 {item.cta}
               </a>
