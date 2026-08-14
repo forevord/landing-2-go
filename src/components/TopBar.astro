@@ -13,7 +13,7 @@ interface Props {
 const { locale, routeKey, phone, variant = 'solid' } = Astro.props;
 const isOverlay = variant === 'overlay';
 const headerClass = isOverlay
-  ? 'sticky top-0 z-40 text-ink'
+  ? 'sticky top-0 z-40 text-white'
   : 'sticky top-0 z-40 bg-ink text-surface';
 const t = getDictionary(locale);
 const other = otherLocale(locale);
@@ -66,7 +66,7 @@ const phoneAria = t.topbar.phoneAria.replace('{{TELEFON}}', phone);
       </a>
     </div>
   </div>
-  <hr class="mx-6 border-0 border-t border-ink/15 lg:mx-10" />
+  <hr class="mx-6 border-0 border-t border-current/25 lg:mx-10" />
 </header>
 
 <script>

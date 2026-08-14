@@ -12,7 +12,7 @@ The site is functionally complete and visually mid-redesign.
 
 **Working and verified:** bilingual Polish/English static build (six pages), lead form with client and server validation posting to a Cloudflare Pages Function that fans out to Web3Forms and Telegram, honeypot spam trap, scroll reveals, language hint, before/after slider, sitemap, robots, JSON-LD, and a CI guard that fails if Polish copy appears outside `src/i18n/`.
 
-**Lighthouse:** 100 / 100 / 100 / 100 on desktop. On mobile, accessibility, best practices and SEO are 100 and performance measures 99 (LCP 2.1s, CLS 0, TBT 0ms) against `dist/` served over plain HTTP on this machine. The same run on the commit before the section rebuild gives the identical 99 / 2.1s, so the rebuild costs nothing — the earlier 100 / 1.7s figure came from a different serving setup and is not reproducible here. Compare against a freshly measured baseline, not against the number in this file.
+**Lighthouse:** 100 / 100 / 100 / 100 on desktop. On mobile, accessibility, best practices and SEO are 100 and performance measures 98 (LCP 2.4s, CLS 0, TBT 0ms). The hero photograph is the LCP element and the dark workshop shot that replaced the brick wall is the reason for the last point: sparks are the worst case a codec can be handed, and even at quality 30 with `sizes` pinned to 800px it is 36kB against the wall's 11kB. Reverting to a flatter hero image is the lever if that point ever matters against `dist/` served over plain HTTP on this machine. The same run on the commit before the section rebuild gives the identical 99 / 2.1s, so the rebuild costs nothing — the earlier 100 / 1.7s figure came from a different serving setup and is not reproducible here. Compare against a freshly measured baseline, not against the number in this file.
 
 **Test suite:** 21 pass, 1 fails on purpose (`carry no invented demo data`). That failure is the pre-launch gate; see below.
 
@@ -74,7 +74,9 @@ Then, at the client's direction:
 **Three contrast rules that override the reference and are not negotiable:**
 - White text on gunmetal is 2.58:1 and fails. Gunmetal takes black type only. Black at 75% opacity on it is 5.59:1 and is fine; at 60% it is 3.98:1 and is not.
 - Graphite `#4b514d` on black is 2.09:1. Do not use it for text on the dark sections.
-- **Every string in the hero is solid obsidian, and the veil over the photograph is 80%.** The two are one rule. Where the gate underneath is pure black the composite is `rgb(126,130,127)`, which gives solid black 5.39:1 — but black at 75% over the same spot is 4.06:1 and fails. Thinning the veil or dimming any hero string breaks it, and axe cannot catch it, because contrast over a photograph is not something it evaluates. `TopBar`'s overlay variant counts as hero.
+- **The hero band is graphite, its type is paper white, and the photograph behind it is held at 20%.** The three are one rule. The client asked for the reference's reversed type; on the gunmetal canvas that is 2.58:1 and fails both the 4.5:1 and the 3:1 floors, so the band moved to graphite, where white is 8.12:1. 20% is then the ceiling on the photograph: white at 20% over graphite is 4.76:1, at 25% it is 4.21:1 and the 19px lead fails. Measured across eight widths, worst case 4.76:1, nothing below the floor. `TopBar`'s overlay variant counts as hero and inherits all of it.
+
+Axe cannot catch any of this — contrast over a photograph is not something it evaluates — so changing the band colour, the type colour or the veil means re-running the pixel probe, not trusting Lighthouse's 100.
 
 ## Open item 3 — demo data must be replaced before launch
 
