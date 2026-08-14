@@ -50,10 +50,18 @@ describe('dictionaries', () => {
   });
 
   it('leave no unresolved placeholders in production builds', () => {
-    // This assertion is expected to FAIL until the client supplies the real data.
-    // Un-skip it as the final pre-launch gate (Task 18).
     const serialised = JSON.stringify(pl) + JSON.stringify(en);
     const unresolved = serialised.match(/\{\{[A-Z_]+\}\}/g) ?? [];
     expect.soft(unresolved).toEqual([]);
+  });
+
+  it('carry no invented demo data', () => {
+    // The trust figures, phone number, prices and legal details are currently
+    // plausible-looking inventions used to show the client a finished-looking
+    // page. They must not ship. This assertion is expected to FAIL until a
+    // human replaces them with real values and clears the flag — it is the
+    // pre-launch gate that the {{PLACEHOLDER}} tokens used to provide.
+    expect.soft(pl._meta.demo, 'pl.json still holds demo data').toBe(false);
+    expect.soft(en._meta.demo, 'en.json still holds demo data').toBe(false);
   });
 });
