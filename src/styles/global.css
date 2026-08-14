@@ -234,11 +234,23 @@ body {
      rather than a scroll listener, so nothing runs per frame. */
 
   [data-topbar] {
-    transition: background-color var(--dur-enter) var(--ease-out);
+    transition:
+      background-color var(--dur-enter) var(--ease-out),
+      color var(--dur-enter) var(--ease-out);
+  }
+
+  /* The colour has to flip with the background. Over the hero the bar is paper
+     white on a graphite band; once it becomes a paper plate that same white is
+     white on white, and the whole header disappears. Everything inside follows
+     currentColor — the pill's border, the rule, the icons — so this one
+     declaration carries all of them. */
+  [data-topbar] {
+    color: #fff;
   }
 
   [data-topbar][data-stuck] {
     background: var(--color-surface);
+    color: var(--color-ink);
   }
 
   /* Over the hero the rule is inset to match the content column; once the bar

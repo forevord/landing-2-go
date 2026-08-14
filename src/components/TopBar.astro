@@ -13,7 +13,7 @@ interface Props {
 const { locale, routeKey, phone, variant = 'solid' } = Astro.props;
 const isOverlay = variant === 'overlay';
 const headerClass = isOverlay
-  ? 'sticky top-0 z-40 text-white'
+  ? 'sticky top-0 z-40'
   : 'sticky top-0 z-40 bg-ink text-surface';
 const t = getDictionary(locale);
 const other = otherLocale(locale);
@@ -30,7 +30,7 @@ const phoneAria = t.topbar.phoneAria.replace('{{TELEFON}}', phone);
     the reference's own scroll behaviour. Nothing here is dimmed: over the veil,
     75% black measures 4.06:1, and on the solid variant it was black on a black
     bar and could not be read at all. */}
-{isOverlay && <div data-topbar-sentinel aria-hidden="true"></div>}
+{isOverlay && <div data-topbar-sentinel aria-hidden="true" class="h-px w-full"></div>}
 <header class={headerClass} data-topbar={isOverlay ? '' : undefined}>
   <div class="mx-auto flex h-20 max-w-page items-center gap-6 px-6 lg:px-10">
     <a href={route('home', locale)} class="text-lg font-medium">
