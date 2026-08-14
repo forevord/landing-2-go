@@ -20,7 +20,7 @@ const t = getDictionary(locale);
     {
       t.why.items.map((item, index) => (
         <li class="flex gap-4" data-reveal style={`transition-delay:${index * 50}ms`}>
-          <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-[--radius-control] bg-ink text-white">
+          <span class="flex h-12 w-12 shrink-0 items-center justify-center bg-ink text-white">
             <Icon name={item.icon as 'zap'} class="h-5 w-5" />
           </span>
           <div>

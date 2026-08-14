@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import heroPhoto from '../assets/photos/hero.jpg';
 import LeadForm from './LeadForm.astro';
 import { getDictionary, type Locale } from '../i18n';
 
@@ -10,30 +12,46 @@ const { locale } = Astro.props;
 const t = getDictionary(locale);
 ---
 
-<section class="bg-ink text-white">
-  <div class="mx-auto grid max-w-[1200px] gap-10 px-4 py-16 lg:grid-cols-[1.1fr_0.9fr] lg:py-24">
-    <div>
-      <p class="text-[0.8125rem] font-medium uppercase tracking-[0.12em] text-cta-hover">
-        {t.hero.eyebrow}
-      </p>
-      <h1 class="mt-4 text-[clamp(2.5rem,6vw,4.5rem)] font-bold leading-[1.05] tracking-[-0.015em]">
-        {t.hero.h1}
-      </h1>
-      <p class="mt-6 max-w-[52ch] text-lg text-white/70">{t.hero.lead}</p>
+<section class="relative isolate -mt-20 flex min-h-[92svh] flex-col justify-end bg-ink text-white">
+  {/* The photograph is the section, not an illustration inside it. It carries
+      the LCP, so it is eager and high priority, with an explicit aspect ratio
+      so nothing shifts once it decodes. */}
+  <div class="media media-hero absolute inset-0 -z-10">
+    <Image
+      src={heroPhoto}
+      alt={t.hero.imageAlt}
+      widths={[768, 1280, 1920, 2400]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      decoding="sync"
+      quality={72}
+    />
+  </div>
 
-      <img
-        src="/images/placeholders/hero-gate.svg"
-        alt={t.hero.imageAlt}
-        width="1600"
-        height="900"
-        fetchpriority="high"
-        decoding="async"
-        class="mt-10 w-full rounded-[--radius-card]"
-      />
-    </div>
+  <div class="mx-auto w-full max-w-page px-6 pt-36 pb-14 lg:px-10 lg:pt-40 lg:pb-20">
+    <div class="grid items-end gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+      <div>
+        <p class="t-label text-cta-hover">{t.hero.eyebrow}</p>
+        <h1 class="t-display mt-7 max-w-[15ch] text-white">{t.hero.h1}</h1>
+        <p class="t-lead mt-8 max-w-[46ch] text-white/75">{t.hero.lead}</p>
 
-    <div class="lg:pt-16">
-      <LeadForm locale={locale} variant="compact" id="hero-form" />
+        <div class="mt-10 flex flex-wrap items-center gap-4">
+          {/* On wide screens the form is already beside this text, so a second
+              primary button would just compete with it. It reappears below the
+              lg breakpoint, where the form has moved further down the page. */}
+          <a href="#formularz" class="btn btn-primary lg:hidden">{t.hero.cta}</a>
+          <a href="#realizacje" class="btn btn-ghost text-white">
+            <span>{t.hero.ctaSecondary}</span>
+          </a>
+        </div>
+      </div>
+
+      {/* The form sits on a white panel that cuts into the photograph — the one
+          bright plane on a dark screen, so the eye lands on it unprompted. */}
+      <div class="shadow-raised">
+        <LeadForm locale={locale} variant="compact" id="hero-form" />
+      </div>
     </div>
   </div>
 </section>

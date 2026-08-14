@@ -6,9 +6,15 @@ interface Props {
   locale: Locale;
   routeKey: RouteKey;
   phone: string;
+  /** `overlay` floats the bar on a dark hero; `solid` is for pages without one. */
+  variant?: 'overlay' | 'solid';
 }
 
-const { locale, routeKey, phone } = Astro.props;
+const { locale, routeKey, phone, variant = 'solid' } = Astro.props;
+const isOverlay = variant === 'overlay';
+const headerClass = isOverlay
+  ? 'relative z-40 text-white'
+  : 'sticky top-0 z-40 bg-ink text-white';
 const t = getDictionary(locale);
 const other = otherLocale(locale);
 const otherHref = route(routeKey, other);
@@ -19,31 +25,43 @@ const telHref = `tel:${phone.replace(/\s/g, '')}`;
 const phoneAria = t.topbar.phoneAria.replace('{{TELEFON}}', phone);
 ---
 
-<header class="sticky top-0 z-40 border-b border-ink-soft bg-ink text-white">
-  <div class="mx-auto flex h-14 max-w-[1200px] items-center gap-4 px-4">
-    <span class="font-semibold tracking-tight">{t.topbar.brand}</span>
+{/* Transparent over the hero rather than a solid bar: the dark photograph and
+    the header read as one field, which is what stops the page looking like a
+    template with a navbar bolted on. */}
+<header class={headerClass}>
+  <div class="mx-auto flex h-20 max-w-page items-center gap-6 px-6 lg:px-10">
+    <a href={route('home', locale)} class="t-label text-base font-semibold tracking-[0.2em]">
+      {t.topbar.brand}
+    </a>
 
-    <span class="hidden items-center gap-1.5 text-sm text-white/70 sm:flex">
+    <span class="hidden items-center gap-1.5 text-sm text-white/60 md:flex">
       <Icon name="map-pin" class="h-4 w-4" />
       {t.topbar.location}
     </span>
 
-    <div class="ml-auto flex items-center gap-2">
-      <a href={telHref} class="flex min-h-11 items-center gap-2 px-2 text-sm" aria-label={phoneAria}>
+    <div class="ml-auto flex items-center gap-1 sm:gap-4">
+      <a
+        href={telHref}
+        class="flex min-h-11 items-center gap-2 px-2 text-sm tracking-tight"
+        aria-label={phoneAria}
+      >
         <Icon name="phone" class="h-4 w-4" />
-        <span class="hidden md:inline">{phone}</span>
+        <span class="hidden lg:inline">{phone}</span>
       </a>
 
       <a
         href={otherHref}
         hreflang={other}
-        class="min-h-11 px-2 text-sm leading-[2.75rem] text-white/70"
+        class="t-label flex min-h-11 items-center px-2 text-white/60"
         aria-label={t.topbar.langSwitchTo}
       >
         {other.toUpperCase()}
       </a>
 
-      <a href="#formularz" class="btn btn-primary h-11 min-h-11 text-sm">{t.topbar.cta}</a>
+      <a href="#formularz" class="btn btn-ghost hidden h-11 min-h-11 text-white sm:inline-flex">
+        <span>{t.topbar.cta}</span>
+      </a>
     </div>
   </div>
+  <hr class="rule-dark mx-6 border-white/15 lg:mx-10" />
 </header>

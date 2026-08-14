@@ -53,7 +53,7 @@ const mapsEmbed = `https://www.google.com/maps?q=${mapsQuery}&output=embed`;
       {/* Facade pattern: the heavy embed loads only on request, so no third-party
           cookies are set and the map never competes with LCP. */}
       <div
-        class="relative aspect-[4/3] overflow-hidden rounded-[--radius-card] border border-border bg-ink-soft"
+        class="relative aspect-[4/3] overflow-hidden border border-border bg-ink-soft"
         data-map
         data-embed={mapsEmbed}
       >
