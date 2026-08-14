@@ -1,5 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import { getDictionary, type Locale } from '../i18n';
+import beforePhoto from '../assets/photos/before-driveway.jpg';
+import afterPhoto from '../assets/photos/after-driveway.jpg';
 
 interface Props {
   locale: Locale;
@@ -16,23 +19,23 @@ const ba = getDictionary(locale).gallery.beforeAfter;
   </figcaption>
 
   <div
-    class="relative aspect-video w-full touch-pan-y select-none overflow-hidden"
+    class="relative media aspect-video w-full touch-pan-y select-none overflow-hidden"
     data-before-after
   >
-    <img
-      src="/images/placeholders/before-driveway.svg"
+    <Image
+      src={beforePhoto}
       alt={ba.beforeAlt}
-      width="1600"
-      height="900"
+      widths={[640, 960, 1280, 1600]}
+      sizes="(min-width: 1024px) 66vw, 100vw"
       loading="lazy"
       decoding="async"
       class="absolute inset-0 h-full w-full object-cover"
     />
-    <img
-      src="/images/placeholders/after-driveway.svg"
+    <Image
+      src={afterPhoto}
       alt={ba.afterAlt}
-      width="1600"
-      height="900"
+      widths={[640, 960, 1280, 1600]}
+      sizes="(min-width: 1024px) 66vw, 100vw"
       loading="lazy"
       decoding="async"
       class="absolute inset-0 h-full w-full object-cover"

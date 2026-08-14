@@ -18,6 +18,24 @@ here for a photograph of the company's own completed work in Gdańsk.
 | `work-2.jpg` | [Unsplash](https://unsplash.com/photos/hA6nChzApqo) | Shane McKnight ([@mcknight_shane](https://unsplash.com/@mcknight_shane)) | Unsplash License |
 | `work-3.jpg` | [Unsplash](https://unsplash.com/photos/close-up-of-industrial-metal-pipes-and-machinery-8EJjrMP5d1I) | Ries Bosch | Unsplash License |
 | `texture.jpg` | [Unsplash](https://unsplash.com/photos/a-brushed-metal-surface-with-subtle-texture-k-jMzM6E9vg) | Logan Voss ([@loganvoss](https://unsplash.com/@loganvoss)) | Unsplash License |
+| `before-driveway.jpg` | [Unsplash](https://unsplash.com/photos/construction-site-with-piles-of-gravel-and-debris-wdYyYY9F0Ts) | Sergej ([@skstrannik](https://unsplash.com/@skstrannik)) | Unsplash License |
+| `after-driveway.jpg` | [Unsplash](https://unsplash.com/photos/a-cobblestone-road-with-a-brick-walkway-A5IILTdd-WI) | Philipp Torres | Unsplash License |
+
+## WARNING: before/after slider pair is not a real pair
+
+`before-driveway.jpg` and `after-driveway.jpg` are two **unrelated stock
+photographs from different locations**, sourced only to match the site's
+grey/overcast tone and to have roughly comparable ground-level framing. They
+were picked to demo the before/after slider component, not to document any
+real StalBruk job.
+
+Presenting them side-by-side in a wipe slider implies one site photographed
+twice — that is not true here, and shipping this pair to production would be
+fabricated evidence of work, no different from an invented testimonial.
+
+**Before launch:** replace both files with a genuine before/after pair shot
+from the same fixed camera position at one real StalBruk site. Do not ship
+this demo pair to production.
 
 ## Notes on fit
 
