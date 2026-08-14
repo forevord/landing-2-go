@@ -27,8 +27,14 @@
   --color-muted: #5f6462; /* 5.05:1 on paper — never place on gunmetal */
   --color-surface: #ffffff;
   --color-border: #d8d8d8; /* aluminium hairline */
-  --color-cta: #c2410c; /* white on it 5.17:1 */
-  --color-cta-hover: #9a3412;
+  /* The reference has no chromatic colour at all — no accent exists to borrow.
+     Its whole arsenal is obsidian, graphite, brushed steel, linen mist, the
+     aluminium hairline, paper and the gunmetal canvas. So the filled primary
+     action becomes obsidian, which is both the strongest object on every light
+     surface and the one the reference already treats as primary. It darkens to
+     graphite on hover rather than lightening, so the press still reads. */
+  --color-cta: #000000; /* white on it 21:1 */
+  --color-cta-hover: #4b514d; /* white on it 8.12:1 */
   --color-error: #b91c1c;
   --color-success: #047857;
 
@@ -168,8 +174,8 @@ body {
   /* ---------- Buttons ----------
      The reference uses a ghost pill everywhere. This page exists to collect
      enquiries and a transparent button loses measurably to a filled one, so the
-     primary action is filled and everything else on the page stays achromatic —
-     the single filled pill then carries all the emphasis on its own. */
+     primary action is filled — but in obsidian, so the page stays achromatic
+     and the single black pill carries all the emphasis on its own. */
 
   .btn {
     display: inline-flex;
@@ -198,15 +204,58 @@ body {
     color: #fff;
   }
 
+  /* On the graphite bands an obsidian pill would sit at 2.59:1 against its own
+     background — legible inside, but the shape itself would fall below the 3:1
+     floor for a control. There the fill inverts to paper. */
+  .btn-paper {
+    background: var(--color-surface);
+    color: var(--color-ink);
+  }
+
   .btn-ghost {
     border: 1px solid currentColor;
     background: transparent;
+  }
+
+  /* ---------- Form ----------
+     The reference's text input: an 8px box behind an aluminium hairline that
+     deepens to obsidian when the field is in use. Declared once here rather
+     than as an identical class string on each of the nine fields.
+
+     Two departures. The placeholder is the muted grey rather than the
+     reference's brushed steel, which measures 3.2:1 on paper and fails; and
+     the focus ring stays, because the reference dropping it is a choice a
+     keyboard user pays for. */
+
+  .lead-form :where(input:not([type='checkbox']), select, textarea) {
+    min-height: 52px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-control);
+    background: var(--color-surface);
+    padding: 0.75rem 1rem;
+    transition: border-color var(--dur-hover) var(--ease-out);
+  }
+
+  .lead-form textarea {
+    min-height: 0;
+  }
+
+  .lead-form :where(input, select, textarea):focus {
+    border-color: var(--color-ink);
+  }
+
+  .lead-form ::placeholder {
+    color: var(--color-muted);
   }
 }
 
 @media (hover: hover) and (pointer: fine) {
   .btn-primary:hover {
     background: var(--color-cta-hover);
+  }
+
+  .btn-paper:hover {
+    background: var(--color-gunmetal);
   }
 }
 

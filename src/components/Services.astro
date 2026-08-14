@@ -45,19 +45,15 @@ const SERVICE_PARAM: Record<string, string> = {
             data-reveal
             style={`transition-delay:${index * 50}ms`}
           >
-            {/* The reference's product image card: the photograph sits inside a
-                paper card on the canvas rather than bleeding into it. */}
-            <div class={`rounded-card bg-surface p-5 ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
-              <div class="relative media aspect-[3/2]">
-                <Image
-                  src={IMAGES[item.id]}
-                  alt={item.imageAlt}
-                  widths={[480, 768, 1024]}
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  loading="lazy"
-                  quality={72}
-                />
-              </div>
+            <div class={`relative media aspect-[3/2] ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+              <Image
+                src={IMAGES[item.id]}
+                alt={item.imageAlt}
+                widths={[480, 768, 1024]}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                loading="lazy"
+                quality={72}
+              />
             </div>
             <div class={index % 2 === 1 ? 'lg:order-1' : ''}>
               <span class="t-label text-ink/75">{String(index + 1).padStart(2, '0')}</span>

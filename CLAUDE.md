@@ -25,5 +25,5 @@ TBD — filled in after Step 1.
 - Reply to the user in Russian.
 - No user-visible string may live outside `src/i18n/`.
 - Animate only `transform` and `opacity`; never use `ease-in` for UI motion.
-- Buttons use `--cta: #C2410C` (contrast 5.17:1); `#EA580C` is for hover and accents only.
+- The palette is achromatic. The primary button is obsidian (`--cta: #000000`), darkening to graphite on hover; on the graphite bands it inverts to `.btn-paper`, because a black pill there sits at 2.59:1 against its own background. Red survives only on form errors.
 - Never publish invented testimonials or unresolved `{{PLACEHOLDER}}` values.
