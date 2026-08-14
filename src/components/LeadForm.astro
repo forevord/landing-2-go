@@ -42,8 +42,9 @@ const clientMessages = {
           placeholder={f.fields.name.placeholder}
           class="min-h-11 rounded-[--radius-control] border border-border px-3"
           required
+          aria-describedby={`${id}-name-error`}
         />
-        <span class="error text-sm text-error" data-error-for="name" aria-live="polite" />
+        <span class="error text-sm text-error" id={`${id}-name-error`} data-error-for="name" aria-live="polite" />
       </label>
     )
   }
@@ -58,9 +59,10 @@ const clientMessages = {
       placeholder={f.fields.phone.placeholder}
       class="min-h-11 rounded-[--radius-control] border border-border px-3"
       required
+      aria-describedby={`${id}-phone-hint ${id}-phone-error`}
     />
-    <span class="text-xs text-muted">{f.fields.phone.hint}</span>
-    <span class="error text-sm text-error" data-error-for="phone" aria-live="polite"></span>
+    <span class="text-xs text-muted" id={`${id}-phone-hint`}>{f.fields.phone.hint}</span>
+    <span class="error text-sm text-error" id={`${id}-phone-error`} data-error-for="phone" aria-live="polite"></span>
   </label>
 
   <label class="grid gap-1.5 text-sm font-medium">
@@ -69,11 +71,12 @@ const clientMessages = {
       name="service"
       class="min-h-11 rounded-[--radius-control] border border-border px-3"
       required
+      aria-describedby={`${id}-service-error`}
     >
       <option value="">{f.fields.service.placeholder}</option>
       {f.serviceOptions.map((o) => <option value={o.value}>{o.label}</option>)}
     </select>
-    <span class="error text-sm text-error" data-error-for="service" aria-live="polite"></span>
+    <span class="error text-sm text-error" id={`${id}-service-error`} data-error-for="service" aria-live="polite"></span>
   </label>
 
   {
@@ -88,8 +91,9 @@ const clientMessages = {
             placeholder={f.fields.city.placeholder}
             class="min-h-11 rounded-[--radius-control] border border-border px-3"
             required
+            aria-describedby={`${id}-city-error`}
           />
-          <span class="error text-sm text-error" data-error-for="city" aria-live="polite" />
+          <span class="error text-sm text-error" id={`${id}-city-error`} data-error-for="city" aria-live="polite" />
         </label>
 
         <label class="grid gap-1.5 text-sm font-medium">
@@ -100,8 +104,9 @@ const clientMessages = {
             autocomplete="email"
             placeholder={f.fields.email.placeholder}
             class="min-h-11 rounded-[--radius-control] border border-border px-3"
+            aria-describedby={`${id}-email-error`}
           />
-          <span class="error text-sm text-error" data-error-for="email" aria-live="polite" />
+          <span class="error text-sm text-error" id={`${id}-email-error`} data-error-for="email" aria-live="polite" />
         </label>
 
         <label class="grid gap-1.5 text-sm font-medium">
@@ -118,13 +123,13 @@ const clientMessages = {
   }
 
   <label class="flex items-start gap-3 text-sm">
-    <input type="checkbox" name="gdpr" class="mt-1 h-5 w-5" required />
+    <input type="checkbox" name="gdpr" class="mt-1 h-5 w-5" required aria-describedby={`${id}-gdpr-error`} />
     <span>
       {f.fields.gdpr.label}{' '}
       <a href={privacyHref} class="underline">{f.fields.gdpr.linkText}</a>
     </span>
   </label>
-  <span class="error text-sm text-error" data-error-for="gdpr" aria-live="polite"></span>
+  <span class="error text-sm text-error" id={`${id}-gdpr-error`} data-error-for="gdpr" aria-live="polite"></span>
 
   {/* Honeypot: hidden from humans, irresistible to bots. */}
   <div class="pointer-events-none absolute left-[-9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
