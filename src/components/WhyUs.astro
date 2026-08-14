@@ -9,30 +9,27 @@ const { locale } = Astro.props;
 const t = getDictionary(locale);
 ---
 
+{/* Same compaction as the objections above: four short reasons stacked two-up
+    inside the content rail ran to 907px. Four across, with the numeral at
+    caption size instead of heading size, they fit in a third of that and can be
+    read as one comparison rather than four separate arguments. */}
 <section class="section bg-gunmetal text-ink">
   <div class="mx-auto max-w-page px-6 lg:px-10">
     <div class="split">
       <p class="t-label">{t.why.title}</p>
-
-      <div>
-        <h2 class="t-h2 max-w-[26ch]">{t.why.lead}</h2>
-
-        <ul class="mt-12 grid gap-0 sm:grid-cols-2 sm:gap-x-6">
-          {
-            t.why.items.map((item, index) => (
-              <li
-                class="border-t border-ink/20 py-8"
-                data-reveal
-                style={`transition-delay:${index * 50}ms`}
-              >
-                <span class="t-h2 text-ink/60">{String(index + 1).padStart(2, '0')}</span>
-                <h3 class="t-h3 mt-4">{item.title}</h3>
-                <p class="mt-2 text-ink/75">{item.desc}</p>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
+      <h2 class="t-h2 max-w-[26ch]">{t.why.lead}</h2>
     </div>
+
+    <ul class="mt-12 grid gap-8 border-t border-ink/20 pt-8 sm:grid-cols-2 md:grid-cols-4 md:gap-6">
+      {
+        t.why.items.map((item, index) => (
+          <li data-reveal style={`transition-delay:${index * 50}ms`}>
+            <span class="t-label text-ink/60">{String(index + 1).padStart(2, '0')}</span>
+            <h3 class="t-h3 mt-2">{item.title}</h3>
+            <p class="mt-2 text-ink/75">{item.desc}</p>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </section>
