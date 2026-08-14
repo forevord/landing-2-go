@@ -13,6 +13,10 @@ const t = getDictionary(locale);
 const other = otherLocale(locale);
 const otherHref = route(routeKey, other);
 const telHref = `tel:${phone.replace(/\s/g, '')}`;
+
+// The dictionary carries a {{TELEFON}} token; substituting the real number keeps
+// the accessible name containing the visible text, as WCAG 2.5.3 requires.
+const phoneAria = t.topbar.phoneAria.replace('{{TELEFON}}', phone);
 ---
 
 <header class="sticky top-0 z-40 border-b border-ink-soft bg-ink text-white">
@@ -25,7 +29,7 @@ const telHref = `tel:${phone.replace(/\s/g, '')}`;
     </span>
 
     <div class="ml-auto flex items-center gap-2">
-      <a href={telHref} class="flex min-h-11 items-center gap-2 px-2 text-sm" aria-label={t.topbar.phoneAria}>
+      <a href={telHref} class="flex min-h-11 items-center gap-2 px-2 text-sm" aria-label={phoneAria}>
         <Icon name="phone" class="h-4 w-4" />
         <span class="hidden md:inline">{phone}</span>
       </a>

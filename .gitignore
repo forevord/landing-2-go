@@ -25,3 +25,9 @@ pnpm-debug.log*
 
 # Cloudflare
 .wrangler/
+
+# Local QA artifacts, never committed
+lh-*.json
+.playwright-mcp/
+.DS_Store
+dev.log
