@@ -57,13 +57,15 @@ const beaconToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
     </script>
   </head>
   <body>
-    <LangHint locale={locale} routeKey={routeKey} />
+    {/* The skip link must be the first focusable element on the page, so it
+        precedes the language hint rather than following it. */}
     <a
       href="#main"
       class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:m-4 focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-white"
     >
       {t.a11y.skipToContent}
     </a>
+    <LangHint locale={locale} routeKey={routeKey} />
     <slot />
     <script>
       import '../scripts/reveal';
