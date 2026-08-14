@@ -217,6 +217,58 @@ body {
     background: transparent;
   }
 
+  /* The reference's own header pill, which its written spec describes as
+     transparent but its screens actually show as a soft grey plate lifted off
+     the canvas. Both are here: the plate gives the label a surface of its own
+     instead of the photograph behind it, and the hairline stays, because the
+     plate alone sits at 1.43:1 against the canvas and a control has to clear
+     3:1 to be findable. */
+  .btn-soft {
+    border: 1px solid currentColor;
+    background: rgb(255 255 255 / 0.28);
+  }
+
+  /* ---------- Header ----------
+     Transparent over the hero, paper white once the page moves, as the
+     reference specifies. The state is driven by an observer on a sentinel
+     rather than a scroll listener, so nothing runs per frame. */
+
+  [data-topbar] {
+    transition: background-color var(--dur-enter) var(--ease-out);
+  }
+
+  [data-topbar][data-stuck] {
+    background: var(--color-surface);
+  }
+
+  /* Over the hero the rule is inset to match the content column; once the bar
+     is a solid plate it has to run the full width or it reads as a stray line
+     across the page. */
+  [data-topbar][data-stuck] hr {
+    margin-inline: 0;
+    border-color: var(--color-border);
+  }
+
+  /* ---------- Links ----------
+     The reference's text link with arrow — its secondary action everywhere,
+     and the thing that keeps a page from filling up with pills. The arrow
+     moves on hover; nothing else does. */
+
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    min-height: 44px;
+    border-bottom: 1px solid currentColor;
+    font-size: 1rem;
+    line-height: 1.62;
+  }
+
+  .link-arrow::after {
+    content: '→';
+    transition: transform var(--dur-hover) var(--ease-out);
+  }
+
   /* ---------- Form ----------
      The reference's text input: an 8px box behind an aluminium hairline that
      deepens to obsidian when the field is in use. Declared once here rather
@@ -256,6 +308,10 @@ body {
 
   .btn-paper:hover {
     background: var(--color-gunmetal);
+  }
+
+  .link-arrow:hover::after {
+    transform: translateX(4px);
   }
 }
 

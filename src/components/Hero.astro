@@ -32,7 +32,7 @@ const t = getDictionary(locale);
       fetchpriority="high"
       decoding="sync"
       quality={72}
-      class="h-full w-full object-cover opacity-20 grayscale-[0.55] contrast-105"
+      class="h-full w-full object-cover opacity-25 grayscale-[0.55] contrast-105"
     />
   </div>
 
@@ -47,7 +47,8 @@ const t = getDictionary(locale);
           {/* On wide screens the form is already beside this text, so a second
               primary button would only compete with it. */}
           <a href="#formularz" class="btn btn-primary lg:hidden">{t.hero.cta}</a>
-          <a href="#realizacje" class="btn btn-ghost">{t.hero.ctaSecondary}</a>
+          {/* The reference pairs one pill with an arrow link, never two pills. */}
+          <a href="#realizacje" class="link-arrow">{t.hero.ctaSecondary}</a>
         </div>
       </div>
 

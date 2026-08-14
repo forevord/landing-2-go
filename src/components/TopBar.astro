@@ -13,7 +13,7 @@ interface Props {
 const { locale, routeKey, phone, variant = 'solid' } = Astro.props;
 const isOverlay = variant === 'overlay';
 const headerClass = isOverlay
-  ? 'relative z-40 text-ink'
+  ? 'sticky top-0 z-40 text-ink'
   : 'sticky top-0 z-40 bg-ink text-surface';
 const t = getDictionary(locale);
 const other = otherLocale(locale);
@@ -26,10 +26,12 @@ const phoneAria = t.topbar.phoneAria.replace('{{TELEFON}}', phone);
 ---
 
 {/* Transparent over the hero rather than a solid bar, so the veiled photograph
-    and the header read as one field. Nothing here is dimmed: over the veil, 75%
-    black measures 4.06:1, and on the solid variant it was black on a black bar
-    and could not be read at all. */}
-<header class={headerClass}>
+    and the header read as one field, then paper white once the page moves —
+    the reference's own scroll behaviour. Nothing here is dimmed: over the veil,
+    75% black measures 4.06:1, and on the solid variant it was black on a black
+    bar and could not be read at all. */}
+{isOverlay && <div data-topbar-sentinel aria-hidden="true"></div>}
+<header class={headerClass} data-topbar={isOverlay ? '' : undefined}>
   <div class="mx-auto flex h-20 max-w-page items-center gap-6 px-6 lg:px-10">
     <a href={route('home', locale)} class="text-lg font-medium">
       {t.topbar.brand}
@@ -59,10 +61,22 @@ const phoneAria = t.topbar.phoneAria.replace('{{TELEFON}}', phone);
         {other.toUpperCase()}
       </a>
 
-      <a href="#formularz" class="btn btn-ghost hidden h-11 min-h-11 sm:inline-flex">
+      <a href="#formularz" class="btn btn-soft hidden h-11 min-h-11 sm:inline-flex">
         <span>{t.topbar.cta}</span>
       </a>
     </div>
   </div>
   <hr class="mx-6 border-0 border-t border-ink/15 lg:mx-10" />
 </header>
+
+<script>
+  // Paper white once the sentinel above the bar leaves the viewport. An
+  // observer rather than a scroll listener, so nothing runs per frame.
+  const bar = document.querySelector<HTMLElement>('[data-topbar]');
+  const sentinel = document.querySelector('[data-topbar-sentinel]');
+  if (bar && sentinel) {
+    new IntersectionObserver(([entry]) => {
+      bar.toggleAttribute('data-stuck', !entry.isIntersecting);
+    }).observe(sentinel);
+  }
+</script>
