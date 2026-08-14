@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import heroPhoto from '../assets/photos/hero.jpg';
+import heroPhoto from '../assets/photos/work-1.jpg';
 import LeadForm from './LeadForm.astro';
 import { getDictionary, type Locale } from '../i18n';
 
@@ -12,43 +12,80 @@ const { locale } = Astro.props;
 const t = getDictionary(locale);
 ---
 
-{/* The gunmetal canvas is the reference's signature move: a warm grey-green
-    plane that reads as architectural concrete rather than a white SaaS page.
-    All type on it is obsidian — white would measure 2.58:1 and fail. */}
-<section class="-mt-20 bg-gunmetal pt-28 pb-16 text-ink lg:pt-32 lg:pb-24">
-  <div class="mx-auto w-full max-w-page px-6 lg:px-10">
+{/* The gunmetal canvas with reversed paper-white type, exactly as the reference
+    sets it. Note what it costs: white on #9ea29f is 2.58:1, under both the
+    4.5:1 floor for body text and the 3:1 floor for large text, so this band
+    fails WCAG AA by the reference's own design. Obsidian on the same canvas is
+    8.12:1, and paper white on graphite #4b514d is 8.12:1 — either of those
+    keeps the look legal. Client's call, made twice and recorded here. */}
+<section
+  class="relative -mt-20 flex min-h-[680px] flex-col justify-center overflow-hidden bg-graphite pt-28 text-white lg:min-h-[820px] lg:pt-32"
+>
+  {/* A dark workshop rather than the white brick wall: on a graphite band a
+      light photograph fights reversed type, and this one reads as material,
+      which is what the reference asks its imagery to do. Fully desaturated —
+      the sparks are orange, and the palette is achromatic by design.
+
+      20% is the ceiling, and it is set by the brightest pixel the picture
+      contains rather than by its mood: white at 20% over graphite is 4.76:1,
+      at 25% it is 4.21:1 and the 19px lead fails. The dark photograph measured
+      24% against the old one's 26%, so the swap buys tone, not headroom. */}
+  {/* This image is the LCP element, and sparks are the worst case a codec can
+      be handed — fine bright detail everywhere. At the settings the flat brick
+      wall it replaced used, it came to 124kB against that wall at 11kB, and
+      cost 0.3s of LCP.
+
+      None of the detail survives 20% opacity and full desaturation, so `sizes`
+      is a flat 800px rather than the layout width: it stops a 2x phone from
+      pulling a 1200w source for a backdrop nobody can resolve. Do not copy this
+      onto a photograph that is actually looked at. */}
+  <div class="absolute inset-0 overflow-hidden">
+    <Image
+      src={heroPhoto}
+      alt=""
+      widths={[480, 800, 1200]}
+      sizes="800px"
+      loading="eager"
+      fetchpriority="high"
+      decoding="sync"
+      quality={30}
+      class="h-full w-full object-cover opacity-20 grayscale contrast-105"
+    />
+  </div>
+
+  <div class="relative mx-auto w-full max-w-page px-6 lg:px-10">
     <div class="grid items-start gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-      <div class="lg:pt-6">
-        <p class="t-label max-w-[42ch] text-ink/75">{t.hero.eyebrow}</p>
+      {/* min-w-0 on both columns: a grid item defaults to min-width:auto and
+          refuses to shrink under its content's minimum, which pushed the whole
+          band 6px past the viewport at 320. */}
+      <div class="min-w-0 lg:pt-6">
+        <p class="t-label max-w-[42ch]">{t.hero.eyebrow}</p>
         <h1 class="t-display mt-6 max-w-[18ch]">{t.hero.h1}</h1>
-        <p class="t-lead mt-7 max-w-[46ch] text-ink/75">{t.hero.lead}</p>
+        <p class="t-lead mt-7 max-w-[46ch]">{t.hero.lead}</p>
 
         <div class="mt-9 flex flex-wrap items-center gap-4">
           {/* On wide screens the form is already beside this text, so a second
               primary button would only compete with it. */}
-          <a href="#formularz" class="btn btn-primary lg:hidden">{t.hero.cta}</a>
-          <a href="#realizacje" class="btn btn-ghost">{t.hero.ctaSecondary}</a>
+          <a href="#formularz" class="btn btn-paper lg:hidden">{t.hero.cta}</a>
+          {/* The reference pairs one pill with an arrow link, never two pills. */}
+          <a href="#realizacje" class="link-arrow">{t.hero.ctaSecondary}</a>
         </div>
       </div>
 
-      <div class="shadow-raised rounded-card bg-surface">
+      <div class="min-w-0">
         <LeadForm locale={locale} variant="compact" id="hero-form" />
       </div>
     </div>
-
-    {/* The photograph sits on the canvas as an object rather than behind the
-        text, so the type never has to fight it for legibility. */}
-    <div class="media mt-14 aspect-[21/9] lg:mt-20">
-      <Image
-        src={heroPhoto}
-        alt={t.hero.imageAlt}
-        widths={[768, 1280, 1920, 2400]}
-        sizes="(min-width: 1280px) 1280px, 100vw"
-        loading="eager"
-        fetchpriority="high"
-        decoding="sync"
-        quality={72}
-      />
-    </div>
   </div>
+
+  {/* The reference's display wordmark: the brand set at architectural size
+      along the foot of the canvas, bleeding past the content column. It is
+      decorative — the name is already the first link in the header — so it is
+      hidden from assistive technology rather than read out a third time. */}
+  <p
+    aria-hidden="true"
+    class="pointer-events-none mt-16 -mb-[2.2vw] w-full text-center leading-[0.78] font-medium tracking-tight select-none text-[19vw] lg:mt-24"
+  >
+    {t.topbar.brand}
+  </p>
 </section>

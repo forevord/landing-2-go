@@ -81,6 +81,20 @@
   "services": {
     "title": "What we do",
     "lead": "Three areas that are most often ordered together — which is exactly why one crew handles all of them.",
+    "promises": [
+      {
+        "label": "Survey and quote",
+        "value": "free, no obligation"
+      },
+      {
+        "label": "Lead time",
+        "value": "3–5 weeks from the survey"
+      },
+      {
+        "label": "Warranty",
+        "value": "5 years on structure and welds"
+      }
+    ],
     "items": [
       {
         "id": "bramy",

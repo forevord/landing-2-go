@@ -81,6 +81,20 @@
   "services": {
     "title": "Co robimy",
     "lead": "Trzy obszary, które najczęściej zamawiane są razem — i dlatego wykonujemy je jedną ekipą.",
+    "promises": [
+      {
+        "label": "Pomiar i wycena",
+        "value": "bezpłatne, bez zobowiązań"
+      },
+      {
+        "label": "Termin realizacji",
+        "value": "3–5 tygodni od pomiaru"
+      },
+      {
+        "label": "Gwarancja",
+        "value": "5 lat na konstrukcję i spoiny"
+      }
+    ],
     "items": [
       {
         "id": "bramy",

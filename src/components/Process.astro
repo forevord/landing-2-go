@@ -9,12 +9,18 @@ const { locale } = Astro.props;
 const t = getDictionary(locale);
 ---
 
-<section id="proces" class="bg-ink py-24 text-white lg:py-32">
+{/* Graphite, not black: the reference's three surfaces are gunmetal, paper and
+    graphite, and the dark band is meant to echo the anodised finish in the
+    photographs. Every rule and muted tone below is a white alpha — graphite on
+    graphite would be invisible and graphite on black measures 2.09:1. */}
+<section id="proces" class="section bg-graphite text-white">
   <div class="mx-auto max-w-page px-6 lg:px-10">
-    <h2 class="t-h2">{t.process.title}</h2>
-    <p class="t-lead mt-4 max-w-[60ch] text-white/70">{t.process.lead}</p>
+    <div class="split">
+      <p class="t-label">{t.process.title}</p>
+      <h2 class="t-h2 max-w-[26ch]">{t.process.lead}</h2>
+    </div>
 
-    <ol class="mt-16 grid divide-y divide-ink-soft border-t border-ink-soft md:grid-cols-4 md:divide-x md:divide-y-0">
+    <ol class="mt-20 grid divide-y divide-white/20 border-t border-white/20 md:grid-cols-4 md:divide-x md:divide-y-0">
       {
         t.process.steps.map((step, index) => (
           <li
@@ -22,12 +28,12 @@ const t = getDictionary(locale);
             data-reveal
             style={`transition-delay:${index * 50}ms`}
           >
-            <span class="t-display block text-white/35" aria-hidden="true">
+            <span class="t-display block text-white/50" aria-hidden="true">
               {step.num}
             </span>
             <h3 class="t-h3 mt-4">{step.title}</h3>
-            <p class="mt-2 text-white/70">{step.desc}</p>
-            <span class="mt-4 inline-block border border-ink-soft px-2 py-1 text-xs text-white/60">
+            <p class="mt-2 text-white/75">{step.desc}</p>
+            <span class="mt-4 inline-block rounded-control border border-white/30 px-2 py-1 text-xs text-white/75">
               {step.badge}
             </span>
           </li>
@@ -35,6 +41,6 @@ const t = getDictionary(locale);
       }
     </ol>
 
-    <a href="#formularz" class="btn btn-primary mt-12">{t.process.cta}</a>
+    <a href="#formularz" class="btn btn-paper mt-12">{t.process.cta}</a>
   </div>
 </section>

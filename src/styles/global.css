@@ -21,16 +21,20 @@
    visible gain. */
 @theme {
   --color-ink: #000000; /* obsidian: primary ink and dark surfaces */
-  --color-ink-soft: #4b514d; /* anodised graphite; white on it 8.13:1 */
-  --color-graphite: #4b514d;
+  --color-graphite: #4b514d; /* anodised graphite; white on it 8.12:1 */
   --color-gunmetal: #9ea29f; /* the canvas — BLACK text only, 8.12:1 */
   --color-primary: #000000;
   --color-muted: #5f6462; /* 5.05:1 on paper — never place on gunmetal */
-  --color-bg: #f2f2f0; /* paper for alternating sections */
   --color-surface: #ffffff;
   --color-border: #d8d8d8; /* aluminium hairline */
-  --color-cta: #c2410c; /* white on it 5.17:1 */
-  --color-cta-hover: #9a3412;
+  /* The reference has no chromatic colour at all — no accent exists to borrow.
+     Its whole arsenal is obsidian, graphite, brushed steel, linen mist, the
+     aluminium hairline, paper and the gunmetal canvas. So the filled primary
+     action becomes obsidian, which is both the strongest object on every light
+     surface and the one the reference already treats as primary. It darkens to
+     graphite on hover rather than lightening, so the press still reads. */
+  --color-cta: #000000; /* white on it 21:1 */
+  --color-cta-hover: #4b514d; /* white on it 8.12:1 */
   --color-error: #b91c1c;
   --color-success: #047857;
 
@@ -82,6 +86,34 @@ body {
    silently override — which is how `.media { position: relative }` once beat an
    `absolute` utility and pushed the hero content off screen. */
 @layer components {
+  /* ---------- Rhythm ----------
+     The reference's 110px band gap, as one knob rather than a py- pair repeated
+     on every section. Narrow screens get 76px, the largest step on the
+     reference's own spacing scale. */
+
+  .section {
+    padding-block: 76px;
+  }
+
+  /* The reference's Two-Column Text Block: a 280px caption rail on the left,
+     the heading and body beside it, 24px apart. It is the shape that recurs
+     through every content band, so it lives here once. */
+
+  .split {
+    display: grid;
+    gap: 24px;
+  }
+
+  @media (min-width: 1024px) {
+    .section {
+      padding-block: 110px;
+    }
+
+    .split {
+      grid-template-columns: 280px minmax(0, 1fr);
+    }
+  }
+
   /* ---------- Type ----------
      The reference's scale, one family, and no negative tracking. The calm comes
      from letting size alone carry the hierarchy: 57px display down to a 15px
@@ -142,8 +174,8 @@ body {
   /* ---------- Buttons ----------
      The reference uses a ghost pill everywhere. This page exists to collect
      enquiries and a transparent button loses measurably to a filled one, so the
-     primary action is filled and everything else on the page stays achromatic —
-     the single filled pill then carries all the emphasis on its own. */
+     primary action is filled — but in obsidian, so the page stays achromatic
+     and the single black pill carries all the emphasis on its own. */
 
   .btn {
     display: inline-flex;
@@ -172,15 +204,132 @@ body {
     color: #fff;
   }
 
+  /* On the graphite bands an obsidian pill would sit at 2.59:1 against its own
+     background — legible inside, but the shape itself would fall below the 3:1
+     floor for a control. There the fill inverts to paper. */
+  .btn-paper {
+    background: var(--color-surface);
+    color: var(--color-ink);
+  }
+
   .btn-ghost {
     border: 1px solid currentColor;
     background: transparent;
+  }
+
+  /* The reference's own header pill, which its written spec describes as
+     transparent but its screens actually show as a soft grey plate lifted off
+     the canvas. Both are here: the plate gives the label a surface of its own
+     instead of the photograph behind it, and the hairline stays, because the
+     plate alone sits at 1.43:1 against the canvas and a control has to clear
+     3:1 to be findable. */
+  .btn-soft {
+    border: 1px solid currentColor;
+    background: rgb(255 255 255 / 0.28);
+  }
+
+  /* ---------- Header ----------
+     Transparent over the hero, paper white once the page moves, as the
+     reference specifies. The state is driven by an observer on a sentinel
+     rather than a scroll listener, so nothing runs per frame. */
+
+  [data-topbar] {
+    transition:
+      background-color var(--dur-enter) var(--ease-out),
+      color var(--dur-enter) var(--ease-out);
+  }
+
+  /* The colour has to flip with the background. Over the hero the bar is paper
+     white on a graphite band; once it becomes a paper plate that same white is
+     white on white, and the whole header disappears. Everything inside follows
+     currentColor — the pill's border, the rule, the icons — so this one
+     declaration carries all of them. */
+  [data-topbar] {
+    color: #fff;
+  }
+
+  [data-topbar][data-stuck] {
+    background: var(--color-surface);
+    color: var(--color-ink);
+  }
+
+  /* Over the hero the rule is inset to match the content column; once the bar
+     is a solid plate it has to run the full width or it reads as a stray line
+     across the page. */
+  [data-topbar][data-stuck] hr {
+    margin-inline: 0;
+    border-color: var(--color-border);
+  }
+
+  /* ---------- Links ----------
+     The reference's text link with arrow — its secondary action everywhere,
+     and the thing that keeps a page from filling up with pills. The arrow
+     moves on hover; nothing else does. */
+
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    min-height: 44px;
+    border-bottom: 1px solid currentColor;
+    font-size: 1rem;
+    line-height: 1.62;
+  }
+
+  .link-arrow::after {
+    content: '→';
+    transition: transform var(--dur-hover) var(--ease-out);
+  }
+
+  /* ---------- Form ----------
+     The reference's text input: an 8px box behind an aluminium hairline that
+     deepens to obsidian when the field is in use. Declared once here rather
+     than as an identical class string on each of the nine fields.
+
+     Two departures. The placeholder is the muted grey rather than the
+     reference's brushed steel, which measures 3.2:1 on paper and fails; and
+     the focus ring stays, because the reference dropping it is a choice a
+     keyboard user pays for. */
+
+  .lead-form :where(input:not([type='checkbox']), select, textarea) {
+    /* A textarea carries an intrinsic width from its `cols` default, and a grid
+       track sized to max-content will honour it. Once these fields gained
+       horizontal padding that intrinsic width stopped fitting, and the whole
+       form pushed the document 6px past a 320px viewport. */
+    width: 100%;
+    min-width: 0;
+    min-height: 52px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-control);
+    background: var(--color-surface);
+    padding: 0.75rem 1rem;
+    transition: border-color var(--dur-hover) var(--ease-out);
+  }
+
+  .lead-form textarea {
+    min-height: 0;
+  }
+
+  .lead-form :where(input, select, textarea):focus {
+    border-color: var(--color-ink);
+  }
+
+  .lead-form ::placeholder {
+    color: var(--color-muted);
   }
 }
 
 @media (hover: hover) and (pointer: fine) {
   .btn-primary:hover {
     background: var(--color-cta-hover);
+  }
+
+  .btn-paper:hover {
+    background: var(--color-gunmetal);
+  }
+
+  .link-arrow:hover::after {
+    transform: translateX(4px);
   }
 }
 

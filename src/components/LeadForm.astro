@@ -23,7 +23,7 @@ const clientMessages = {
 
 <form
   id={id}
-  class="lead-form grid gap-4 bg-surface p-6 text-primary sm:p-8"
+  class="lead-form grid gap-4 rounded-card border border-border bg-surface p-6 text-primary sm:p-8"
   data-variant={variant}
   data-messages={JSON.stringify(clientMessages)}
   novalidate
@@ -40,7 +40,7 @@ const clientMessages = {
           name="name"
           autocomplete="given-name"
           placeholder={f.fields.name.placeholder}
-          class="min-h-11 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:outline-offset-0"
+         
           required
           aria-describedby={`${id}-name-error`}
         />
@@ -57,7 +57,7 @@ const clientMessages = {
       inputmode="tel"
       autocomplete="tel"
       placeholder={f.fields.phone.placeholder}
-      class="min-h-11 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:outline-offset-0"
+     
       required
       aria-describedby={`${id}-phone-hint ${id}-phone-error`}
     />
@@ -69,7 +69,7 @@ const clientMessages = {
     <span class="t-label text-ink">{f.fields.service.label}</span>
     <select
       name="service"
-      class="min-h-11 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:outline-offset-0"
+     
       required
       aria-describedby={`${id}-service-error`}
     >
@@ -89,7 +89,7 @@ const clientMessages = {
             name="city"
             autocomplete="address-level2"
             placeholder={f.fields.city.placeholder}
-            class="min-h-11 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:outline-offset-0"
+           
             required
             aria-describedby={`${id}-city-error`}
           />
@@ -103,7 +103,7 @@ const clientMessages = {
             name="email"
             autocomplete="email"
             placeholder={f.fields.email.placeholder}
-            class="min-h-11 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:outline-offset-0"
+           
             aria-describedby={`${id}-email-error`}
           />
           <span class="error text-sm text-error" id={`${id}-email-error`} data-error-for="email" aria-live="polite" />
@@ -115,7 +115,6 @@ const clientMessages = {
             name="message"
             rows="4"
             placeholder={f.fields.message.placeholder}
-            class="rounded-none border border-border bg-transparent p-3"
           />
         </label>
       </>
@@ -149,7 +148,7 @@ const clientMessages = {
   <p class="text-sm text-muted">{isFull ? f.microcopy : t.hero.microcopy}</p>
 
   <p
-    class="hidden bg-error/10 p-3 text-sm text-error"
+    class="hidden rounded-control bg-error/10 p-3 text-sm text-error"
     data-form-error
     role="alert"
   >
