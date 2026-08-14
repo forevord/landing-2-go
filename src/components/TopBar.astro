@@ -25,16 +25,17 @@ const telHref = `tel:${phone.replace(/\s/g, '')}`;
 const phoneAria = t.topbar.phoneAria.replace('{{TELEFON}}', phone);
 ---
 
-{/* Transparent over the hero rather than a solid bar: the dark photograph and
-    the header read as one field, which is what stops the page looking like a
-    template with a navbar bolted on. */}
+{/* Transparent over the hero rather than a solid bar, so the veiled photograph
+    and the header read as one field. Nothing here is dimmed: over the veil, 75%
+    black measures 4.06:1, and on the solid variant it was black on a black bar
+    and could not be read at all. */}
 <header class={headerClass}>
   <div class="mx-auto flex h-20 max-w-page items-center gap-6 px-6 lg:px-10">
     <a href={route('home', locale)} class="text-lg font-medium">
       {t.topbar.brand}
     </a>
 
-    <span class="hidden items-center gap-1.5 text-sm text-ink/75 md:flex">
+    <span class="hidden items-center gap-1.5 text-sm md:flex">
       <Icon name="map-pin" class="h-4 w-4" />
       {t.topbar.location}
     </span>
@@ -52,7 +53,7 @@ const phoneAria = t.topbar.phoneAria.replace('{{TELEFON}}', phone);
       <a
         href={otherHref}
         hreflang={other}
-        class="t-label flex min-h-11 items-center px-2 text-ink/75"
+        class="t-label flex min-h-11 items-center px-2"
         aria-label={t.topbar.langSwitchTo}
       >
         {other.toUpperCase()}

@@ -64,9 +64,17 @@ The remaining sections have now been recomposed on it too:
 - `Footer` went the other way, to paper white with a hairline top rule, which is what the reference specifies and stops the page ending in one unbroken dark tail.
 - `--color-bg` (`#f2f2f0`) and `--color-ink-soft` are gone. The first was not one of the reference's three surfaces and nothing referenced the second any more.
 
-**Two contrast rules that override the reference and are not negotiable:**
+Then, at the client's direction:
+
+- **The orange is gone.** The reference has no chromatic colour at all, so there was nothing to swap it for; the filled primary action is obsidian, darkening to graphite on hover. On the graphite bands it inverts to `.btn-paper`, because a black pill there sits at 2.59:1 against its own background — legible inside, but the shape itself falls below the 3:1 floor for a control. Red survives only on form errors, where the alternative costs more than the rule.
+- **The hero photograph is the band's background again**, ghosted to 20% under the gunmetal. It is not a decorative choice that can be dialled back freely — see the third contrast rule below.
+- **The white mats around the service photographs are gone.** They sit on the canvas at 8px, like the gallery cards.
+- **The hero form is the reference's input**: an 8px box behind an aluminium hairline that deepens to obsidian in use, declared once in `.lead-form` rather than as a class string repeated on nine fields. The card lost its shadow, which the reference bans.
+
+**Three contrast rules that override the reference and are not negotiable:**
 - White text on gunmetal is 2.58:1 and fails. Gunmetal takes black type only. Black at 75% opacity on it is 5.59:1 and is fine; at 60% it is 3.98:1 and is not.
 - Graphite `#4b514d` on black is 2.09:1. Do not use it for text on the dark sections.
+- **Every string in the hero is solid obsidian, and the veil over the photograph is 80%.** The two are one rule. Where the gate underneath is pure black the composite is `rgb(126,130,127)`, which gives solid black 5.39:1 — but black at 75% over the same spot is 4.06:1 and fails. Thinning the veil or dimming any hero string breaks it, and axe cannot catch it, because contrast over a photograph is not something it evaluates. `TopBar`'s overlay variant counts as hero.
 
 ## Open item 3 — demo data must be replaced before launch
 

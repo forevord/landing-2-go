@@ -15,13 +15,33 @@ const t = getDictionary(locale);
 {/* The gunmetal canvas is the reference's signature move: a warm grey-green
     plane that reads as architectural concrete rather than a white SaaS page.
     All type on it is obsidian — white would measure 2.58:1 and fail. */}
-<section class="-mt-20 bg-gunmetal pt-28 pb-16 text-ink lg:pt-32 lg:pb-24">
-  <div class="mx-auto w-full max-w-page px-6 lg:px-10">
+<section
+  class="relative -mt-20 flex min-h-[680px] items-center bg-gunmetal pt-28 pb-20 text-ink lg:min-h-[820px] lg:pt-32 lg:pb-24"
+>
+  {/* The photograph is the band's background rather than an object on it, under
+      a gunmetal veil heavy enough that obsidian type clears 5.2:1 even where the
+      gate underneath is pure black. That veil is what forces every hero string
+      to solid obsidian: black at 75% over the same spot measures 4.06:1. */}
+  <div class="absolute inset-0 overflow-hidden">
+    <Image
+      src={heroPhoto}
+      alt=""
+      widths={[768, 1280, 1920, 2400]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      decoding="sync"
+      quality={72}
+      class="h-full w-full object-cover opacity-20 grayscale-[0.55] contrast-105"
+    />
+  </div>
+
+  <div class="relative mx-auto w-full max-w-page px-6 lg:px-10">
     <div class="grid items-start gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
       <div class="lg:pt-6">
-        <p class="t-label max-w-[42ch] text-ink/75">{t.hero.eyebrow}</p>
+        <p class="t-label max-w-[42ch]">{t.hero.eyebrow}</p>
         <h1 class="t-display mt-6 max-w-[18ch]">{t.hero.h1}</h1>
-        <p class="t-lead mt-7 max-w-[46ch] text-ink/75">{t.hero.lead}</p>
+        <p class="t-lead mt-7 max-w-[46ch]">{t.hero.lead}</p>
 
         <div class="mt-9 flex flex-wrap items-center gap-4">
           {/* On wide screens the form is already beside this text, so a second
@@ -34,21 +54,6 @@ const t = getDictionary(locale);
       <div>
         <LeadForm locale={locale} variant="compact" id="hero-form" />
       </div>
-    </div>
-
-    {/* The photograph sits on the canvas as an object rather than behind the
-        text, so the type never has to fight it for legibility. */}
-    <div class="media mt-14 aspect-[21/9] lg:mt-20">
-      <Image
-        src={heroPhoto}
-        alt={t.hero.imageAlt}
-        widths={[768, 1280, 1920, 2400]}
-        sizes="(min-width: 1280px) 1280px, 100vw"
-        loading="eager"
-        fetchpriority="high"
-        decoding="sync"
-        quality={72}
-      />
     </div>
   </div>
 </section>
