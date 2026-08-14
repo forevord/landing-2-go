@@ -13,9 +13,9 @@ const ba = getDictionary(locale).gallery.beforeAfter;
 ---
 
 <figure class="mt-12">
-  <figcaption class="mb-4 flex items-baseline justify-between gap-4">
-    <span class="text-lg font-semibold text-ink">{ba.title}</span>
-    <span class="text-sm text-muted">{ba.hint}</span>
+  <figcaption class="mb-4 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+    <span class="t-h3 text-ink">{ba.title}</span>
+    <span class="t-label text-graphite">{ba.hint}</span>
   </figcaption>
 
   <div
@@ -58,6 +58,20 @@ const ba = getDictionary(locale).gallery.beforeAfter;
       data-handle
       style="left: 50%"
     ></span>
+
+    {/* The SVG placeholders carried these labels inside the artwork; with real
+        photographs the sides are otherwise unmarked. They sit after the range
+        input in the DOM and ignore pointer events, so dragging still works. */}
+    <span
+      class="t-label pointer-events-none absolute top-4 left-4 bg-ink/75 px-2.5 py-1.5 text-white"
+    >
+      {ba.beforeLabel}
+    </span>
+    <span
+      class="t-label pointer-events-none absolute top-4 right-4 bg-ink/75 px-2.5 py-1.5 text-white"
+    >
+      {ba.afterLabel}
+    </span>
   </div>
 </figure>
 
