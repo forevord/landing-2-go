@@ -16,44 +16,42 @@ const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
 const mapsEmbed = `https://www.google.com/maps?q=${mapsQuery}&output=embed`;
 ---
 
-<section id="kontakt" class="bg-bg py-20">
-  <div class="mx-auto grid max-w-[1200px] gap-10 px-4 lg:grid-cols-2">
-    <div>
-      <h2 class="text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold tracking-[-0.01em] text-ink">
-        {t.contacts.title}
-      </h2>
-      <p class="mt-3 text-muted">{t.contacts.lead}</p>
+<section id="kontakt" class="bg-ink text-white">
+  <div class="mx-auto grid max-w-page lg:grid-cols-2">
+    <div class="px-6 py-24 lg:px-10 lg:py-32">
+      <h2 class="t-h2">{t.contacts.title}</h2>
+      <p class="t-lead mt-4 max-w-[46ch] text-white/70">{t.contacts.lead}</p>
 
-      <dl class="mt-8 grid gap-5">
+      <dl class="mt-10 grid gap-6 border-t border-ink-soft pt-8">
         <div>
-          <dt class="text-sm text-muted">{t.contacts.phoneLabel}</dt>
+          <dt class="t-label text-white/60">{t.contacts.phoneLabel}</dt>
           <dd>
-            <a href={telHref} class="flex min-h-11 items-center gap-2 text-lg font-medium text-ink">
-              <Icon name="phone" class="h-5 w-5 text-cta" />
+            <a href={telHref} class="mt-2 flex min-h-11 items-center gap-2 text-lg font-medium">
+              <Icon name="phone" class="h-5 w-5 text-white/60" />
               {phone}
             </a>
           </dd>
         </div>
         <div>
-          <dt class="text-sm text-muted">{t.contacts.emailLabel}</dt>
-          <dd><a href={`mailto:${email}`} class="text-lg text-ink underline">{email}</a></dd>
+          <dt class="t-label text-white/60">{t.contacts.emailLabel}</dt>
+          <dd><a href={`mailto:${email}`} class="mt-2 inline-block text-lg underline">{email}</a></dd>
         </div>
         <div>
-          <dt class="text-sm text-muted">{t.contacts.hoursLabel}</dt>
-          <dd class="text-ink">{t.contacts.hours}</dd>
+          <dt class="t-label text-white/60">{t.contacts.hoursLabel}</dt>
+          <dd class="mt-2">{t.contacts.hours}</dd>
         </div>
         <div>
-          <dt class="text-sm text-muted">{t.contacts.areaLabel}</dt>
-          <dd class="text-ink">{t.contacts.area}</dd>
+          <dt class="t-label text-white/60">{t.contacts.areaLabel}</dt>
+          <dd class="mt-2">{t.contacts.area}</dd>
         </div>
       </dl>
     </div>
 
-    <div>
+    <div class="px-6 pb-24 lg:px-10 lg:py-32">
       {/* Facade pattern: the heavy embed loads only on request, so no third-party
           cookies are set and the map never competes with LCP. */}
       <div
-        class="relative aspect-[4/3] overflow-hidden border border-border bg-ink-soft"
+        class="relative aspect-[4/3] overflow-hidden bg-ink-soft"
         data-map
         data-embed={mapsEmbed}
       >
@@ -69,7 +67,7 @@ const mapsEmbed = `https://www.google.com/maps?q=${mapsQuery}&output=embed`;
           {t.contacts.mapLoad}
         </button>
       </div>
-      <p class="mt-2 text-xs text-muted">{t.contacts.mapNote}</p>
+      <p class="mt-3 text-xs text-white/60">{t.contacts.mapNote}</p>
       <a href={mapsUrl} rel="noopener" target="_blank" class="mt-2 inline-block text-sm underline">
         {t.contacts.mapCta}
       </a>

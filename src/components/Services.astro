@@ -1,6 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import Icon from './Icon.astro';
 import { getDictionary, type Locale } from '../i18n';
+import gatePhoto from '../assets/photos/hero.jpg';
+import pavingPhoto from '../assets/photos/paving.jpg';
+import earthworksPhoto from '../assets/photos/earthworks.jpg';
 
 interface Props {
   locale: Locale;
@@ -9,10 +13,10 @@ interface Props {
 const { locale } = Astro.props;
 const t = getDictionary(locale);
 
-const IMAGES: Record<string, string> = {
-  bramy: '/images/placeholders/hero-gate.svg',
-  brukarstwo: '/images/placeholders/service-paving.svg',
-  'pod-klucz': '/images/placeholders/service-earthworks.svg',
+const IMAGES: Record<string, ImageMetadata> = {
+  bramy: gatePhoto,
+  brukarstwo: pavingPhoto,
+  'pod-klucz': earthworksPhoto,
 };
 
 // Pre-selects the matching option in the full form.
@@ -23,37 +27,37 @@ const SERVICE_PARAM: Record<string, string> = {
 };
 ---
 
-<section id="uslugi" class="bg-bg py-20">
-  <div class="mx-auto max-w-[1200px] px-4">
-    <h2 class="text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold tracking-[-0.01em] text-ink">
-      {t.services.title}
-    </h2>
-    <p class="mt-3 max-w-[60ch] text-muted">{t.services.lead}</p>
+<section id="uslugi" class="bg-bg py-24 lg:py-32">
+  <div class="mx-auto max-w-page px-6 lg:px-10">
+    <h2 class="t-h2 text-ink">{t.services.title}</h2>
+    <p class="t-lead mt-4 max-w-[60ch] text-muted">{t.services.lead}</p>
 
-    <div class="mt-10 grid gap-6 md:grid-cols-3">
+    <div class="mt-16 grid gap-16 lg:gap-24">
       {
         t.services.items.map((item, index) => (
           <article
-            class="flex flex-col overflow-hidden border border-border bg-surface shadow-card"
+            class="grid items-center gap-8 lg:grid-cols-2 lg:gap-16"
             data-reveal
             style={`transition-delay:${index * 50}ms`}
           >
-            <img
-              src={IMAGES[item.id]}
-              alt={item.imageAlt}
-              width="1200"
-              height="900"
-              loading="lazy"
-              decoding="async"
-              class="aspect-[4/3] w-full object-cover"
-            />
-            <div class="flex flex-1 flex-col p-6">
-              <h3 class="text-xl font-semibold text-ink">{item.title}</h3>
-              <p class="mt-2 text-muted">{item.desc}</p>
-              <ul class="mt-4 grid gap-1.5 text-sm">
+            <div class={`relative media aspect-[4/5] ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+              <Image
+                src={IMAGES[item.id]}
+                alt={item.imageAlt}
+                widths={[480, 768, 1024]}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                loading="lazy"
+                quality={72}
+              />
+            </div>
+            <div class={index % 2 === 1 ? 'lg:order-1' : ''}>
+              <span class="t-label text-graphite">{String(index + 1).padStart(2, '0')}</span>
+              <h3 class="t-h2 mt-4 text-ink">{item.title}</h3>
+              <p class="t-lead mt-4 text-muted">{item.desc}</p>
+              <ul class="mt-6 grid gap-2.5">
                 {item.list.map((entry) => (
-                  <li class="flex items-center gap-2">
-                    <Icon name="check" class="h-4 w-4 shrink-0 text-cta" />
+                  <li class="flex items-center gap-2.5 text-ink">
+                    <Icon name="check" class="h-4 w-4 shrink-0 text-muted" />
                     {entry}
                   </li>
                 ))}
@@ -61,7 +65,7 @@ const SERVICE_PARAM: Record<string, string> = {
               <a
                 href="#formularz"
                 data-service={SERVICE_PARAM[item.id]}
-                class="btn btn-primary mt-6 w-full"
+                class="btn btn-primary mt-8"
               >
                 {item.cta}
               </a>

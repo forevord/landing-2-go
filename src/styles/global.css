@@ -19,7 +19,7 @@
   --color-graphite: #4b514d; /* anodised finish; white on it 8.13:1 */
   --color-gunmetal: #9ea29f; /* mid tone — BLACK text only, 8.12:1 */
   --color-primary: #1a1d1c; /* body text on light */
-  --color-muted: #6b716e; /* secondary text; 4.99:1 on white */
+  --color-muted: #656b68; /* secondary text; 4.86:1 on bg, 5.45:1 on white */
   --color-cta: #c2410c; /* white text on it 5.17:1 */
   --color-cta-hover: #ea580c;
   --color-bg: #f2f2f0; /* warm paper, not blue-tinted grey */

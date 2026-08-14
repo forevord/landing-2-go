@@ -28,19 +28,19 @@ const clientMessages = {
   data-messages={JSON.stringify(clientMessages)}
   novalidate
 >
-  <p class="text-lg font-semibold text-ink">{isFull ? f.title : f.compactTitle}</p>
+  <p class="t-h3 text-ink">{isFull ? f.title : f.compactTitle}</p>
   {isFull && <p class="text-sm text-muted">{f.lead}</p>}
 
   {
     isFull && (
-      <label class="grid gap-1.5 text-sm font-medium">
-        {f.fields.name.label}
+      <label class="grid gap-2">
+        <span class="t-label text-ink">{f.fields.name.label}</span>
         <input
           type="text"
           name="name"
           autocomplete="given-name"
           placeholder={f.fields.name.placeholder}
-          class="min-h-11 border border-border px-3"
+          class="min-h-11 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:outline-offset-0"
           required
           aria-describedby={`${id}-name-error`}
         />
@@ -49,27 +49,27 @@ const clientMessages = {
     )
   }
 
-  <label class="grid gap-1.5 text-sm font-medium">
-    {f.fields.phone.label}
+  <label class="grid gap-2">
+    <span class="t-label text-ink">{f.fields.phone.label}</span>
     <input
       type="tel"
       name="phone"
       inputmode="tel"
       autocomplete="tel"
       placeholder={f.fields.phone.placeholder}
-      class="min-h-11 border border-border px-3"
+      class="min-h-11 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:outline-offset-0"
       required
       aria-describedby={`${id}-phone-hint ${id}-phone-error`}
     />
-    <span class="text-xs text-muted" id={`${id}-phone-hint`}>{f.fields.phone.hint}</span>
+    <span class="text-sm text-muted" id={`${id}-phone-hint`}>{f.fields.phone.hint}</span>
     <span class="error text-sm text-error" id={`${id}-phone-error`} data-error-for="phone" aria-live="polite"></span>
   </label>
 
-  <label class="grid gap-1.5 text-sm font-medium">
-    {f.fields.service.label}
+  <label class="grid gap-2">
+    <span class="t-label text-ink">{f.fields.service.label}</span>
     <select
       name="service"
-      class="min-h-11 border border-border px-3"
+      class="min-h-11 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:outline-offset-0"
       required
       aria-describedby={`${id}-service-error`}
     >
@@ -82,40 +82,40 @@ const clientMessages = {
   {
     isFull && (
       <>
-        <label class="grid gap-1.5 text-sm font-medium">
-          {f.fields.city.label}
+        <label class="grid gap-2">
+          <span class="t-label text-ink">{f.fields.city.label}</span>
           <input
             type="text"
             name="city"
             autocomplete="address-level2"
             placeholder={f.fields.city.placeholder}
-            class="min-h-11 border border-border px-3"
+            class="min-h-11 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:outline-offset-0"
             required
             aria-describedby={`${id}-city-error`}
           />
           <span class="error text-sm text-error" id={`${id}-city-error`} data-error-for="city" aria-live="polite" />
         </label>
 
-        <label class="grid gap-1.5 text-sm font-medium">
-          {`${f.fields.email.label} (${f.fields.email.optional})`}
+        <label class="grid gap-2">
+          <span class="t-label text-ink">{`${f.fields.email.label} (${f.fields.email.optional})`}</span>
           <input
             type="email"
             name="email"
             autocomplete="email"
             placeholder={f.fields.email.placeholder}
-            class="min-h-11 border border-border px-3"
+            class="min-h-11 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:outline-offset-0"
             aria-describedby={`${id}-email-error`}
           />
           <span class="error text-sm text-error" id={`${id}-email-error`} data-error-for="email" aria-live="polite" />
         </label>
 
-        <label class="grid gap-1.5 text-sm font-medium">
-          {`${f.fields.message.label} (${f.fields.message.optional})`}
+        <label class="grid gap-2">
+          <span class="t-label text-ink">{`${f.fields.message.label} (${f.fields.message.optional})`}</span>
           <textarea
             name="message"
             rows="4"
             placeholder={f.fields.message.placeholder}
-            class="border border-border p-3"
+            class="rounded-none border border-border bg-transparent p-3"
           />
         </label>
       </>
@@ -146,7 +146,7 @@ const clientMessages = {
     <span data-submit-label>{isFull ? f.submit : f.submitCompact}</span>
   </button>
 
-  <p class="text-xs text-muted">{isFull ? f.microcopy : t.hero.microcopy}</p>
+  <p class="text-sm text-muted">{isFull ? f.microcopy : t.hero.microcopy}</p>
 
   <p
     class="hidden bg-error/10 p-3 text-sm text-error"

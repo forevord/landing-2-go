@@ -10,34 +10,37 @@ const t = getDictionary(locale);
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-ink py-12 pb-24 text-white/70 md:pb-12">
-  <div class="mx-auto grid max-w-[1200px] gap-8 px-4 md:grid-cols-2">
-    <div>
-      <p class="font-semibold text-white">{t.topbar.brand}</p>
-      <p class="mt-2 max-w-[40ch] text-sm">{t.footer.tagline}</p>
-      <p class="mt-4 text-sm">{t.footer.company}</p>
-      <p class="text-sm">{t.footer.address}</p>
-      <p class="text-sm">{t.footer.nip}</p>
+<footer class="bg-ink pt-20 pb-24 text-white/70 md:pb-16">
+  <div class="mx-auto max-w-page px-6 lg:px-10">
+    <p class="t-display text-white">{t.topbar.brand}</p>
+
+    <div class="mt-12 grid gap-10 border-t border-ink-soft pt-10 md:grid-cols-2">
+      <div>
+        <p class="max-w-[40ch]">{t.footer.tagline}</p>
+        <p class="mt-4 text-sm">{t.footer.company}</p>
+        <p class="text-sm">{t.footer.address}</p>
+        <p class="text-sm">{t.footer.nip}</p>
+      </div>
+
+      <nav aria-label={t.footer.navTitle}>
+        <p class="t-label text-white/50">{t.footer.navTitle}</p>
+        <ul class="mt-4 grid gap-2 text-sm">
+          {
+            t.footer.nav.map((item) => (
+              <li>
+                <a href={item.href} class="hover:text-white">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+          <li><a href={route('privacy', locale)} class="hover:text-white">{t.footer.privacy}</a></li>
+        </ul>
+      </nav>
     </div>
 
-    <nav aria-label={t.footer.navTitle}>
-      <p class="text-sm font-medium text-white">{t.footer.navTitle}</p>
-      <ul class="mt-3 grid gap-2 text-sm">
-        {
-          t.footer.nav.map((item) => (
-            <li>
-              <a href={item.href} class="hover:text-white">
-                {item.label}
-              </a>
-            </li>
-          ))
-        }
-        <li><a href={route('privacy', locale)} class="hover:text-white">{t.footer.privacy}</a></li>
-      </ul>
-    </nav>
-  </div>
-
-  <div class="mx-auto mt-10 max-w-[1200px] border-t border-ink-soft px-4 pt-6 text-xs">
-    © {year} {t.topbar.brand}. {t.footer.rights}
+    <div class="mt-10 border-t border-ink-soft pt-6 text-xs">
+      © {year} {t.topbar.brand}. {t.footer.rights}
+    </div>
   </div>
 </footer>

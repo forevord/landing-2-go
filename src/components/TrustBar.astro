@@ -10,14 +10,12 @@ const t = getDictionary(locale);
 ---
 
 <section class="border-b border-border bg-bg" aria-label={t.trust.srTitle}>
-  <ul class="mx-auto grid max-w-[1200px] grid-cols-2 gap-px bg-border px-4 py-0 md:grid-cols-4">
+  <ul class="mx-auto grid max-w-page grid-cols-2 divide-x divide-y divide-border border-t border-border px-6 md:grid-cols-4 md:divide-y-0 lg:px-10">
     {
       t.trust.items.map((item) => (
-        <li class="min-w-0 bg-bg px-4 py-8 text-center">
-          <span class="block break-words text-4xl font-bold tracking-[-0.02em] text-ink">
-            {item.value}
-          </span>
-          <span class="mt-1 block text-sm text-muted">{item.label}</span>
+        <li class="min-w-0 px-4 py-8 text-center sm:px-6">
+          <span class="t-h2 block break-words text-ink">{item.value}</span>
+          <span class="t-label mt-2 block text-graphite">{item.label}</span>
         </li>
       ))
     }
