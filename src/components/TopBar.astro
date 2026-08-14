@@ -13,8 +13,8 @@ interface Props {
 const { locale, routeKey, phone, variant = 'solid' } = Astro.props;
 const isOverlay = variant === 'overlay';
 const headerClass = isOverlay
-  ? 'relative z-40 text-white'
-  : 'sticky top-0 z-40 bg-ink text-white';
+  ? 'relative z-40 text-ink'
+  : 'sticky top-0 z-40 bg-ink text-surface';
 const t = getDictionary(locale);
 const other = otherLocale(locale);
 const otherHref = route(routeKey, other);
@@ -30,11 +30,11 @@ const phoneAria = t.topbar.phoneAria.replace('{{TELEFON}}', phone);
     template with a navbar bolted on. */}
 <header class={headerClass}>
   <div class="mx-auto flex h-20 max-w-page items-center gap-6 px-6 lg:px-10">
-    <a href={route('home', locale)} class="t-label text-base font-semibold tracking-[0.2em]">
+    <a href={route('home', locale)} class="text-lg font-medium">
       {t.topbar.brand}
     </a>
 
-    <span class="hidden items-center gap-1.5 text-sm text-white/60 md:flex">
+    <span class="hidden items-center gap-1.5 text-sm text-ink/75 md:flex">
       <Icon name="map-pin" class="h-4 w-4" />
       {t.topbar.location}
     </span>
@@ -52,16 +52,16 @@ const phoneAria = t.topbar.phoneAria.replace('{{TELEFON}}', phone);
       <a
         href={otherHref}
         hreflang={other}
-        class="t-label flex min-h-11 items-center px-2 text-white/60"
+        class="t-label flex min-h-11 items-center px-2 text-ink/75"
         aria-label={t.topbar.langSwitchTo}
       >
         {other.toUpperCase()}
       </a>
 
-      <a href="#formularz" class="btn btn-ghost hidden h-11 min-h-11 text-white sm:inline-flex">
+      <a href="#formularz" class="btn btn-ghost hidden h-11 min-h-11 sm:inline-flex">
         <span>{t.topbar.cta}</span>
       </a>
     </div>
   </div>
-  <hr class="rule-dark mx-6 border-white/15 lg:mx-10" />
+  <hr class="mx-6 border-0 border-t border-ink/15 lg:mx-10" />
 </header>
