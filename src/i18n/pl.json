@@ -1,0 +1,455 @@
+{
+  "_meta": {
+    "locale": "pl",
+    "status": "draft",
+    "note": "Draft. _meta.demo marks the trust figures, phone, prices and legal details as invented demo values — the i18n test fails while it is true. Replace them and set it to false before launch. The testimonials section holds placeholder content and stays out of the DOM.",
+    "demo": true
+  },
+  "seo": {
+    "title": "Bramy aluminiowe i brukarstwo — Gdańsk i Pomorze | StalBruk",
+    "description": "Produkcja i montaż bram aluminiowych spawanych laserowo, ogrodzeń i automatyki. Układanie kostki brukowej, roboty ziemne, realizacje pod klucz. Bezpłatny pomiar i wycena w 24 godziny.",
+    "ogTitle": "StalBruk — bramy aluminiowe i kostka brukowa na Pomorzu",
+    "ogDescription": "Jedna ekipa, jeden termin: bramy spawane laserowo, brukarstwo i roboty ziemne własnym sprzętem. Gdańsk, Gdynia, Sopot i okolice.",
+    "ogImageAlt": "Aluminiowa brama przesuwna i podjazd z kostki brukowej przed domem jednorodzinnym",
+    "addressLocality": "Gdańsk",
+    "areaServed": [
+      "Gdańsk",
+      "Pomorskie"
+    ]
+  },
+  "topbar": {
+    "brand": "StalBruk",
+    "location": "Gdańsk i okolice",
+    "phoneLabel": "Zadzwoń",
+    "phoneAria": "Zadzwoń pod numer +48 601 234 567",
+    "cta": "Bezpłatna wycena",
+    "langLabel": "Język",
+    "langCurrent": "PL",
+    "langSwitchTo": "English"
+  },
+  "hero": {
+    "eyebrow": "Gdańsk i Pomorze",
+    "h1": "Bramy aluminiowe i kostka brukowa — jedna ekipa, jeden termin",
+    "lead": "Projektujemy, produkujemy i montujemy bramy spawane laserowo. Układamy kostkę brukową i wykonujemy roboty ziemne własnym sprzętem — bez czekania na podwykonawców.",
+    "cta": "Odbierz bezpłatną wycenę",
+    "ctaSecondary": "Zobacz realizacje",
+    "microcopy": "Odpowiadamy w ciągu 24 godzin. Pomiar i wycena bez zobowiązań.",
+    "imageAlt": "Nowoczesna aluminiowa brama przesuwna z poziomym wypełnieniem przed domem jednorodzinnym pod Gdańskiem"
+  },
+  "trust": {
+    "srTitle": "Nasze doświadczenie w liczbach",
+    "items": [
+      {
+        "value": "12",
+        "label": "lat na rynku"
+      },
+      {
+        "value": "380",
+        "label": "zrealizowanych obiektów"
+      },
+      {
+        "value": "5",
+        "label": "lat gwarancji"
+      },
+      {
+        "value": "0",
+        "label": "podwykonawców — robimy wszystko sami"
+      }
+    ]
+  },
+  "pain": {
+    "title": "Znasz to?",
+    "lead": "Trzy rzeczy, które najczęściej słyszymy od klientów, zanim do nas trafią.",
+    "items": [
+      {
+        "quote": "Ekipa zniknęła po zaliczce.",
+        "answer": "Umowa z terminem, harmonogramem i płatnością w etapach. Ostatnia rata dopiero po odbiorze.",
+        "icon": "file-signature"
+      },
+      {
+        "quote": "Termin przesunięty już trzeci raz.",
+        "answer": "Koparki, ludzie i produkcja są nasze. Nie czekamy, aż zwolni się podwykonawca.",
+        "icon": "calendar-check"
+      },
+      {
+        "quote": "Brama zardzewiała po dwóch zimach.",
+        "answer": "Robimy z aluminium. Nadmorska wilgoć i sól nie mają się czego uchwycić.",
+        "icon": "shield-check"
+      }
+    ]
+  },
+  "services": {
+    "title": "Co robimy",
+    "lead": "Trzy obszary, które najczęściej zamawiane są razem — i dlatego wykonujemy je jedną ekipą.",
+    "items": [
+      {
+        "id": "bramy",
+        "title": "Bramy i ogrodzenia",
+        "desc": "Bramy przesuwne, skrzydłowe i przemysłowe, furtki, ogrodzenia. Automatyka, piloty, wideodomofon.",
+        "list": [
+          "Bramy przesuwne",
+          "Bramy skrzydłowe",
+          "Bramy przemysłowe",
+          "Automatyka i piloty",
+          "Furtki",
+          "Ogrodzenia"
+        ],
+        "cta": "Wyceń bramę",
+        "imageAlt": "Aluminiowa brama przesuwna z automatyką w trakcie otwierania"
+      },
+      {
+        "id": "brukarstwo",
+        "title": "Brukarstwo",
+        "desc": "Podjazdy, tarasy, parkingi i ścieżki. Kostka betonowa, granitowa i płyty wielkoformatowe.",
+        "list": [
+          "Podjazdy i wjazdy",
+          "Tarasy",
+          "Parkingi",
+          "Ścieżki i opaski",
+          "Krawężniki i odwodnienie",
+          "Kostka granitowa"
+        ],
+        "cta": "Wyceń brukarstwo",
+        "imageAlt": "Podjazd z szarej kostki brukowej ułożonej w jodełkę przed garażem"
+      },
+      {
+        "id": "pod-klucz",
+        "title": "Realizacje pod klucz",
+        "desc": "Roboty ziemne, niwelacja terenu, przeniesienie słupów i przyłączy, odwodnienie. Własne koparki.",
+        "list": [
+          "Roboty ziemne",
+          "Niwelacja terenu",
+          "Przeniesienie słupów",
+          "Przyłącza i przekopy",
+          "Odwodnienie",
+          "Wywóz urobku"
+        ],
+        "cta": "Opisz projekt",
+        "imageAlt": "Koparka podczas przygotowania terenu pod podjazd i ogrodzenie"
+      }
+    ]
+  },
+  "why": {
+    "title": "Dlaczego my",
+    "lead": "Cztery powody, dla których klienci wybierają nas zamiast tańszej oferty z ogłoszenia.",
+    "items": [
+      {
+        "title": "Nie rdzewieje. Nigdy.",
+        "desc": "Aluminium zamiast stali. Pięć zim nad morzem nie robi na nim wrażenia — nie ma czego szlifować ani malować co sezon.",
+        "icon": "droplets"
+      },
+      {
+        "title": "Spoiny, które się nie rozejdą",
+        "desc": "Spawanie laserowe zamiast metody MIG: dokładność rzędu dziesiątych części milimetra i szew, którego praktycznie nie widać.",
+        "icon": "zap"
+      },
+      {
+        "title": "Jeden wykonawca zamiast czterech",
+        "desc": "Koparka, brukarz, spawacz i monter to my. Nie umawiasz czterech ekip i nie godzisz ich terminów między sobą.",
+        "icon": "users"
+      },
+      {
+        "title": "Kosztorys rozbity na pozycje",
+        "desc": "Widzisz, za co płacisz — materiał, robocizna, sprzęt osobno. Każda zmiana zakresu ustalana jest z Tobą przed wykonaniem, nie po.",
+        "icon": "receipt"
+      }
+    ]
+  },
+  "process": {
+    "title": "Jak to wygląda",
+    "lead": "Cztery kroki od telefonu do gotowej realizacji.",
+    "steps": [
+      {
+        "num": "01",
+        "title": "Zgłoszenie",
+        "desc": "Zostawiasz numer telefonu. Oddzwaniamy i zadajemy kilka pytań o zakres prac.",
+        "badge": "do 24 h"
+      },
+      {
+        "num": "02",
+        "title": "Bezpłatny pomiar",
+        "desc": "Przyjeżdżamy na miejsce, mierzymy, sprawdzamy podłoże, dojazd i przebieg instalacji.",
+        "badge": "2–3 dni"
+      },
+      {
+        "num": "03",
+        "title": "Wycena i umowa",
+        "desc": "Dostajesz kosztorys rozbity na pozycje oraz termin realizacji potwierdzony na piśmie.",
+        "badge": "do 3 dni"
+      },
+      {
+        "num": "04",
+        "title": "Montaż i gwarancja",
+        "desc": "Realizujemy, sprzątamy po sobie teren i przekazujemy dokumenty gwarancyjne.",
+        "badge": "5 lat gwarancji"
+      }
+    ],
+    "cta": "Zacznij od bezpłatnej wyceny"
+  },
+  "gallery": {
+    "title": "Realizacje",
+    "lead": "Zdjęcia z obiektów, które oddaliśmy na Pomorzu.",
+    "beforeAfter": {
+      "title": "Podjazd przed i po",
+      "beforeLabel": "Przed",
+      "afterLabel": "Po",
+      "hint": "Przeciągnij suwak, żeby porównać",
+      "beforeAlt": "Podjazd przed remontem: nierówny grunt z koleinami i resztkami starej nawierzchni",
+      "afterAlt": "Ten sam podjazd po realizacji: równa kostka brukowa z krawężnikiem i odwodnieniem liniowym"
+    },
+    "items": [
+      {
+        "caption": "Brama przesuwna 4,5 m z automatyką — Gdańsk Osowa",
+        "alt": "Aluminiowa brama przesuwna o szerokości czterech i pół metra przed domem jednorodzinnym"
+      },
+      {
+        "caption": "Podjazd i taras z kostki betonowej — Rumia",
+        "alt": "Podjazd i taras wyłożone jasną kostką betonową przy domu z czerwonej cegły"
+      },
+      {
+        "caption": "Brama przemysłowa i ogrodzenie panelowe — Gdynia",
+        "alt": "Szeroka brama przemysłowa z ogrodzeniem panelowym na terenie hali produkcyjnej"
+      },
+      {
+        "caption": "Ogrodzenie aluminiowe z furtką — Sopot",
+        "alt": "Aluminiowe ogrodzenie z poziomych profili z wbudowaną furtką i wideodomofonem"
+      },
+      {
+        "caption": "Parking dla firmy, 400 m² — Pruszcz Gdański",
+        "alt": "Firmowy parking z kostki brukowej z wyznaczonymi miejscami postojowymi"
+      },
+      {
+        "caption": "Wjazd z kostki granitowej — Kartuzy",
+        "alt": "Wjazd na posesję wyłożony ciemną kostką granitową w łuku"
+      }
+    ]
+  },
+  "testimonials": {
+    "_placeholder": true,
+    "_warning": "PLACEHOLDER CONTENT. Publishing invented reviews breaches the EU Omnibus Directive and carries financial penalties. Replace with genuine customer reviews before the site goes live.",
+    "title": "Co mówią klienci",
+    "lead": "Opinie osób, dla których pracowaliśmy w ostatnim sezonie.",
+    "items": [
+      {
+        "quote": "Brama przesuwna cztery i pół metra plus furtka. Termin dotrzymany co do dnia, teren po montażu posprzątany. Po dwóch zimach brama wygląda tak samo jak w dniu odbioru.",
+        "author": "Marek W.",
+        "role": "dom jednorodzinny, Gdańsk Osowa",
+        "avatarAlt": "Zdjęcie klienta Marka W."
+      },
+      {
+        "quote": "Robili nam podjazd i taras. Najbardziej doceniliśmy to, że nie musieliśmy szukać osobno kogoś do wykopów — przyjechali z własną koparką i zrobili wszystko za jednym razem.",
+        "author": "Anna i Piotr K.",
+        "role": "dom jednorodzinny, Rumia",
+        "avatarAlt": "Zdjęcie klientów Anny i Piotra K."
+      },
+      {
+        "quote": "Współpracujemy przy kilku inwestycjach. Wchodzą w harmonogram budowy bez poprawek i nie trzeba ich pilnować — dla nas to główne kryterium.",
+        "author": "Tomasz L.",
+        "role": "firma budowlana, Gdynia",
+        "avatarAlt": "Zdjęcie klienta Tomasza L."
+      }
+    ]
+  },
+  "faq": {
+    "title": "Częste pytania",
+    "lead": "Jeśli czegoś tu brakuje — zadzwoń, odpowiemy od ręki.",
+    "items": [
+      {
+        "q": "Ile kosztuje brama?",
+        "a": "Cena zależy od wymiarów, rodzaju wypełnienia i automatyki. Brama przesuwna do domu jednorodzinnego zaczyna się od 6 500 zł. Dokładną kwotę podajemy po bezpłatnym pomiarze — bez niego każda liczba byłaby zgadywaniem."
+      },
+      {
+        "q": "Jak długo trwa realizacja?",
+        "a": "Od pomiaru do montażu zwykle 3–5 tygodni, w zależności od sezonu i zakresu prac. Termin potwierdzamy na piśmie w umowie."
+      },
+      {
+        "q": "Na jakim obszarze pracujecie?",
+        "a": "Gdańsk, Gdynia, Sopot i całe województwo pomorskie. Przy większych zleceniach dojeżdżamy dalej — zapytaj, sprawdzimy."
+      },
+      {
+        "q": "Jaka jest gwarancja?",
+        "a": "5 lat na konstrukcję i spoiny. Na automatykę obowiązuje gwarancja producenta — 2 lata."
+      },
+      {
+        "q": "Czy pomiar jest płatny?",
+        "a": "Nie. Pomiar i wycena są bezpłatne i nie zobowiązują do złożenia zamówienia."
+      },
+      {
+        "q": "Jak wygląda płatność?",
+        "a": "W etapach: zaliczka na materiał, część po dostawie, reszta po odbiorze. Nie pobieramy przedpłaty za całość."
+      },
+      {
+        "q": "Czy zajmujecie się też robotami ziemnymi?",
+        "a": "Tak. Mamy własne koparki, więc niwelacja terenu, przeniesienie słupa, przyłącza czy odwodnienie to dla nas część tego samego zlecenia, a nie osobny podwykonawca."
+      },
+      {
+        "q": "Dlaczego aluminium, a nie stal?",
+        "a": "Aluminium nie koroduje, a nad morzem to realny problem — słona wilgoć zjada stalowe bramy w kilka sezonów. Aluminiowa brama nie wymaga malowania i jest lżejsza, więc automatyka pracuje dłużej bez awarii."
+      }
+    ]
+  },
+  "form": {
+    "title": "Zamów bezpłatną wycenę",
+    "lead": "Wypełnienie zajmuje minutę. Oddzwaniamy w ciągu 24 godzin.",
+    "compactTitle": "Bezpłatna wycena",
+    "fields": {
+      "name": {
+        "label": "Imię",
+        "placeholder": "Jan"
+      },
+      "phone": {
+        "label": "Telefon",
+        "placeholder": "+48 600 000 000",
+        "hint": "Zadzwonimy lub napiszemy SMS-a"
+      },
+      "email": {
+        "label": "E-mail",
+        "placeholder": "jan@example.com",
+        "optional": "opcjonalnie"
+      },
+      "service": {
+        "label": "Rodzaj usługi",
+        "placeholder": "Wybierz z listy"
+      },
+      "city": {
+        "label": "Miejscowość",
+        "placeholder": "Gdańsk"
+      },
+      "message": {
+        "label": "Opisz projekt",
+        "placeholder": "Wymiary, termin, dodatkowe pytania",
+        "optional": "opcjonalnie"
+      },
+      "gdpr": {
+        "label": "Wyrażam zgodę na przetwarzanie moich danych osobowych w celu przygotowania wyceny.",
+        "linkText": "Polityka prywatności"
+      }
+    },
+    "serviceOptions": [
+      {
+        "value": "brama-przesuwna",
+        "label": "Brama przesuwna"
+      },
+      {
+        "value": "brama-skrzydlowa",
+        "label": "Brama skrzydłowa"
+      },
+      {
+        "value": "brama-przemyslowa",
+        "label": "Brama przemysłowa"
+      },
+      {
+        "value": "automatyka",
+        "label": "Automatyka do bramy"
+      },
+      {
+        "value": "furtka",
+        "label": "Furtka"
+      },
+      {
+        "value": "ogrodzenie",
+        "label": "Ogrodzenie"
+      },
+      {
+        "value": "brukarstwo",
+        "label": "Brukarstwo / kostka"
+      },
+      {
+        "value": "pod-klucz",
+        "label": "Realizacja pod klucz"
+      },
+      {
+        "value": "nie-wiem",
+        "label": "Jeszcze nie wiem — doradźcie"
+      }
+    ],
+    "submit": "Wyślij zgłoszenie",
+    "submitCompact": "Odbierz wycenę",
+    "submitting": "Wysyłamy…",
+    "microcopy": "Nie wysyłamy newslettera. Dane wykorzystujemy wyłącznie do przygotowania wyceny.",
+    "errors": {
+      "required": "To pole jest wymagane",
+      "nameShort": "Wpisz imię — co najmniej 2 znaki",
+      "phoneInvalid": "Sprawdź numer telefonu — potrzebujemy co najmniej 9 cyfr",
+      "emailInvalid": "Sprawdź adres e-mail — brakuje znaku @ lub domeny",
+      "serviceRequired": "Wybierz rodzaj usługi z listy",
+      "gdprRequired": "Bez tej zgody nie możemy przetwarzać zgłoszenia",
+      "network": "Nie udało się wysłać zgłoszenia. Zadzwoń pod +48 601 234 567 — odbierzemy.",
+      "server": "Coś poszło nie tak po naszej stronie. Spróbuj ponownie za chwilę albo zadzwoń pod +48 601 234 567."
+    }
+  },
+  "contacts": {
+    "mapsQuery": "Gdańsk",
+    "title": "Kontakt",
+    "lead": "Wolisz zadzwonić? Odbieramy w godzinach pracy.",
+    "phoneLabel": "Telefon",
+    "emailLabel": "E-mail",
+    "hoursLabel": "Godziny pracy",
+    "hours": "pon.–pt. 8:00–18:00, sob. 9:00–14:00",
+    "areaLabel": "Obszar działania",
+    "area": "Gdańsk, Gdynia, Sopot i województwo pomorskie",
+    "mapCta": "Otwórz w Mapach Google",
+    "mapLoad": "Pokaż mapę",
+    "mapAlt": "Mapa obszaru działania: Trójmiasto i województwo pomorskie",
+    "mapNote": "Mapa ładuje się po kliknięciu, żeby nie spowalniać strony."
+  },
+  "footer": {
+    "tagline": "Bramy aluminiowe, ogrodzenia i brukarstwo. Gdańsk i Pomorze.",
+    "company": "StalBruk Sp. z o.o.",
+    "address": "ul. Przemysłowa 12, 80-298 Gdańsk",
+    "nip": "NIP 000-000-00-00",
+    "privacy": "Polityka prywatności",
+    "rights": "Wszelkie prawa zastrzeżone.",
+    "navTitle": "Na stronie",
+    "nav": [
+      {
+        "label": "Usługi",
+        "href": "#uslugi"
+      },
+      {
+        "label": "Realizacje",
+        "href": "#realizacje"
+      },
+      {
+        "label": "Jak pracujemy",
+        "href": "#proces"
+      },
+      {
+        "label": "Pytania",
+        "href": "#faq"
+      },
+      {
+        "label": "Kontakt",
+        "href": "#kontakt"
+      }
+    ]
+  },
+  "thankyou": {
+    "seoTitle": "Dziękujemy za zgłoszenie | StalBruk",
+    "title": "Zgłoszenie przyjęte",
+    "lead": "Oddzwonimy w ciągu 24 godzin, a jeśli wysłałeś je wieczorem — następnego dnia rano.",
+    "next": "W międzyczasie możesz obejrzeć nasze realizacje albo zadzwonić od razu pod +48 601 234 567.",
+    "backHome": "Wróć na stronę główną",
+    "callNow": "Zadzwoń teraz"
+  },
+  "langHint": {
+    "message": "This page is also available in English.",
+    "cta": "Switch to English",
+    "dismiss": "Zamknij"
+  },
+  "privacy": {
+    "seoTitle": "Polityka prywatności | StalBruk",
+    "title": "Polityka prywatności",
+    "body": "Treść polityki prywatności zostanie dostarczona przez klienta przed publikacją."
+  },
+  "a11y": {
+    "skipToContent": "Przejdź do treści",
+    "openMenu": "Otwórz menu",
+    "closeMenu": "Zamknij menu",
+    "scrollTop": "Wróć na górę"
+  },
+  "stickyBar": {
+    "call": "Zadzwoń",
+    "quote": "Wycena"
+  }
+}

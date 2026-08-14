@@ -1,0 +1,85 @@
+---
+import '../styles/global.css';
+import Seo from '../components/Seo.astro';
+import LangHint from '../components/LangHint.astro';
+import { getDictionary, type Locale, type RouteKey } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  routeKey: RouteKey;
+  title: string;
+  description: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImageAlt?: string;
+  noindex?: boolean;
+}
+
+const { locale, routeKey, ...seo } = Astro.props;
+const t = getDictionary(locale);
+
+const businessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HomeAndConstructionBusiness',
+  name: t.topbar.brand,
+  description: t.seo.description,
+  areaServed: t.seo.areaServed,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: t.seo.addressLocality,
+    addressCountry: 'PL',
+  },
+  telephone: '{{TELEFON}}',
+  url: Astro.site?.origin,
+};
+
+const beaconToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="preload"
+      href="/fonts/inter-variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <Seo locale={locale} routeKey={routeKey} {...seo} />
+    <script type="application/ld+json" set:html={JSON.stringify(businessSchema)} is:inline />
+    <script is:inline>
+      // Marks JS availability before first paint so reveal styles never hide
+      // content for users without JavaScript.
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+  <body>
+    {/* The skip link must be the first focusable element on the page, so it
+        precedes the language hint rather than following it. */}
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:m-4 focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-white"
+    >
+      {t.a11y.skipToContent}
+    </a>
+    <LangHint locale={locale} routeKey={routeKey} />
+    <slot />
+    <script>
+      import '../scripts/reveal';
+      import '../scripts/lang-hint';
+    </script>
+    {
+      beaconToken && (
+        <script
+          is:inline
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={JSON.stringify({ token: beaconToken })}
+        />
+      )
+    }
+  </body>
+</html>

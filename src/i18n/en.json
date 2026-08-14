@@ -1,0 +1,455 @@
+{
+  "_meta": {
+    "locale": "en",
+    "status": "draft",
+    "note": "Draft. _meta.demo marks the trust figures, phone, prices and legal details as invented demo values — the i18n test fails while it is true. Replace them and set it to false before launch. The testimonials section holds placeholder content and stays out of the DOM.",
+    "demo": true
+  },
+  "seo": {
+    "title": "Aluminium Gates & Paving — Gdańsk and Pomerania | StalBruk",
+    "description": "Laser-welded aluminium gates, fences and automation, manufactured and installed. Block paving, earthworks and turnkey projects with our own machinery. Free site survey and quote within 24 hours.",
+    "ogTitle": "StalBruk — aluminium gates and block paving in Pomerania",
+    "ogDescription": "One crew, one deadline: laser-welded gates, paving and earthworks with our own equipment. Gdańsk, Gdynia, Sopot and the surrounding region.",
+    "ogImageAlt": "Aluminium sliding gate and block-paved driveway in front of a family house",
+    "addressLocality": "Gdańsk",
+    "areaServed": [
+      "Gdańsk",
+      "Pomorskie"
+    ]
+  },
+  "topbar": {
+    "brand": "StalBruk",
+    "location": "Gdańsk and region",
+    "phoneLabel": "Call us",
+    "phoneAria": "Call +48 601 234 567",
+    "cta": "Free quote",
+    "langLabel": "Language",
+    "langCurrent": "EN",
+    "langSwitchTo": "Polski"
+  },
+  "hero": {
+    "eyebrow": "Gdańsk and Pomerania",
+    "h1": "Aluminium gates and block paving — one crew, one deadline",
+    "lead": "We design, manufacture and install laser-welded gates. We lay block paving and handle earthworks with our own machinery — so you are never waiting on a subcontractor.",
+    "cta": "Get a free quote",
+    "ctaSecondary": "See our work",
+    "microcopy": "We reply within 24 hours. Survey and quote at no cost, no obligation.",
+    "imageAlt": "Modern aluminium sliding gate with horizontal infill in front of a family house near Gdańsk"
+  },
+  "trust": {
+    "srTitle": "Our track record in numbers",
+    "items": [
+      {
+        "value": "12",
+        "label": "years in business"
+      },
+      {
+        "value": "380",
+        "label": "completed projects"
+      },
+      {
+        "value": "5",
+        "label": "year warranty"
+      },
+      {
+        "value": "0",
+        "label": "subcontractors — we do it all in-house"
+      }
+    ]
+  },
+  "pain": {
+    "title": "Sound familiar?",
+    "lead": "The three things we hear most often from customers before they come to us.",
+    "items": [
+      {
+        "quote": "The crew vanished after taking the deposit.",
+        "answer": "A written contract with a deadline, a schedule and staged payments. The final instalment is due only after handover.",
+        "icon": "file-signature"
+      },
+      {
+        "quote": "The deadline has slipped three times already.",
+        "answer": "The excavators, the crew and the workshop are ours. We are not waiting for a subcontractor to free up.",
+        "icon": "calendar-check"
+      },
+      {
+        "quote": "The gate rusted through after two winters.",
+        "answer": "We build in aluminium. Coastal damp and salt have nothing to bite into.",
+        "icon": "shield-check"
+      }
+    ]
+  },
+  "services": {
+    "title": "What we do",
+    "lead": "Three areas that are most often ordered together — which is exactly why one crew handles all of them.",
+    "items": [
+      {
+        "id": "bramy",
+        "title": "Gates and fencing",
+        "desc": "Sliding, swing and industrial gates, wickets and fencing. Automation, remotes and video intercom.",
+        "list": [
+          "Sliding gates",
+          "Swing gates",
+          "Industrial gates",
+          "Automation and remotes",
+          "Wicket gates",
+          "Fencing"
+        ],
+        "cta": "Quote a gate",
+        "imageAlt": "Aluminium sliding gate with automation opening"
+      },
+      {
+        "id": "brukarstwo",
+        "title": "Block paving",
+        "desc": "Driveways, terraces, car parks and paths. Concrete block, granite setts and large-format slabs.",
+        "list": [
+          "Driveways and entrances",
+          "Terraces",
+          "Car parks",
+          "Paths and edging strips",
+          "Kerbs and drainage",
+          "Granite setts"
+        ],
+        "cta": "Quote paving",
+        "imageAlt": "Driveway laid in grey block paving in a herringbone pattern in front of a garage"
+      },
+      {
+        "id": "pod-klucz",
+        "title": "Turnkey projects",
+        "desc": "Earthworks, ground levelling, relocation of poles and utility connections, drainage. Our own excavators.",
+        "list": [
+          "Earthworks",
+          "Ground levelling",
+          "Pole relocation",
+          "Utility connections and trenching",
+          "Drainage",
+          "Spoil removal"
+        ],
+        "cta": "Describe your project",
+        "imageAlt": "Excavator preparing the ground for a driveway and fencing"
+      }
+    ]
+  },
+  "why": {
+    "title": "Why us",
+    "lead": "Four reasons customers choose us over the cheaper quote from the classifieds.",
+    "items": [
+      {
+        "title": "It will not rust. Ever.",
+        "desc": "Aluminium instead of steel. Five coastal winters leave it untouched — nothing to sand back or repaint every season.",
+        "icon": "droplets"
+      },
+      {
+        "title": "Welds that will not open up",
+        "desc": "Laser welding instead of MIG: accuracy measured in tenths of a millimetre and a seam you can barely see.",
+        "icon": "zap"
+      },
+      {
+        "title": "One contractor instead of four",
+        "desc": "The excavator operator, the paver, the welder and the fitter are all us. No juggling four crews and four calendars.",
+        "icon": "users"
+      },
+      {
+        "title": "A quote broken down line by line",
+        "desc": "You see what you are paying for — materials, labour and machinery listed separately. Any change of scope is agreed with you before the work, not after.",
+        "icon": "receipt"
+      }
+    ]
+  },
+  "process": {
+    "title": "How it works",
+    "lead": "Four steps from your first call to the finished job.",
+    "steps": [
+      {
+        "num": "01",
+        "title": "Enquiry",
+        "desc": "You leave your phone number. We call back and ask a few questions about the scope.",
+        "badge": "within 24 h"
+      },
+      {
+        "num": "02",
+        "title": "Free site survey",
+        "desc": "We come out, take measurements and check the ground, the access route and the utility runs.",
+        "badge": "2–3 days"
+      },
+      {
+        "num": "03",
+        "title": "Quote and contract",
+        "desc": "You receive an itemised quote and a completion date confirmed in writing.",
+        "badge": "within 3 days"
+      },
+      {
+        "num": "04",
+        "title": "Installation and warranty",
+        "desc": "We build it, clear the site behind us and hand over the warranty documents.",
+        "badge": "5-year warranty"
+      }
+    ],
+    "cta": "Start with a free quote"
+  },
+  "gallery": {
+    "title": "Our work",
+    "lead": "Photographs from projects we have handed over across Pomerania.",
+    "beforeAfter": {
+      "title": "A driveway, before and after",
+      "beforeLabel": "Before",
+      "afterLabel": "After",
+      "hint": "Drag the slider to compare",
+      "beforeAlt": "Driveway before the work: uneven ground with ruts and remains of the old surface",
+      "afterAlt": "The same driveway after completion: level block paving with kerbs and linear drainage"
+    },
+    "items": [
+      {
+        "caption": "4.5 m sliding gate with automation — Gdańsk Osowa",
+        "alt": "Aluminium sliding gate four and a half metres wide in front of a family house"
+      },
+      {
+        "caption": "Driveway and terrace in concrete block — Rumia",
+        "alt": "Driveway and terrace laid in light concrete block beside a red brick house"
+      },
+      {
+        "caption": "Industrial gate and mesh fencing — Gdynia",
+        "alt": "Wide industrial gate with mesh panel fencing at a production hall"
+      },
+      {
+        "caption": "Aluminium fence with wicket gate — Sopot",
+        "alt": "Aluminium fence of horizontal profiles with a built-in wicket gate and video intercom"
+      },
+      {
+        "caption": "Company car park, 400 m² — Pruszcz Gdański",
+        "alt": "Company car park in block paving with marked parking bays"
+      },
+      {
+        "caption": "Granite sett entrance — Kartuzy",
+        "alt": "Property entrance laid in dark granite setts along a curve"
+      }
+    ]
+  },
+  "testimonials": {
+    "_placeholder": true,
+    "_warning": "PLACEHOLDER CONTENT. Publishing invented reviews breaches the EU Omnibus Directive and carries financial penalties. Replace with genuine customer reviews before the site goes live.",
+    "title": "What customers say",
+    "lead": "From people we worked for this past season.",
+    "items": [
+      {
+        "quote": "A four-and-a-half-metre sliding gate plus a wicket gate. They hit the date to the day and left the site clean. Two winters on, the gate looks exactly as it did on handover.",
+        "author": "Marek W.",
+        "role": "family house, Gdańsk Osowa",
+        "avatarAlt": "Photograph of customer Marek W."
+      },
+      {
+        "quote": "They did our driveway and terrace. What we valued most was not having to find someone separately for the excavation — they turned up with their own digger and did the lot in one go.",
+        "author": "Anna and Piotr K.",
+        "role": "family house, Rumia",
+        "avatarAlt": "Photograph of customers Anna and Piotr K."
+      },
+      {
+        "quote": "We work with them on several developments. They slot into the build schedule without rework and need no chasing — for us that is the whole criterion.",
+        "author": "Tomasz L.",
+        "role": "construction company, Gdynia",
+        "avatarAlt": "Photograph of customer Tomasz L."
+      }
+    ]
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "lead": "If something is missing here, give us a call — we will answer on the spot.",
+    "items": [
+      {
+        "q": "How much does a gate cost?",
+        "a": "It depends on the dimensions, the infill and the automation. A sliding gate for a family house starts at 6 500 PLN. We give an exact figure after the free site survey — without one, any number would be guesswork."
+      },
+      {
+        "q": "How long does a project take?",
+        "a": "Usually 3–5 weeks from survey to installation, depending on the season and the scope. The date is confirmed in writing in the contract."
+      },
+      {
+        "q": "What area do you cover?",
+        "a": "Gdańsk, Gdynia, Sopot and the whole Pomeranian Voivodeship. For larger jobs we travel further — ask and we will check."
+      },
+      {
+        "q": "What warranty do you offer?",
+        "a": "5 years on the structure and the welds. Automation is covered by the manufacturer's warranty — 2 years."
+      },
+      {
+        "q": "Is the site survey chargeable?",
+        "a": "No. The survey and the quote are free and place you under no obligation to order."
+      },
+      {
+        "q": "How does payment work?",
+        "a": "In stages: a deposit for materials, a portion on delivery and the balance after handover. We never ask for the full amount up front."
+      },
+      {
+        "q": "Do you also handle earthworks?",
+        "a": "Yes. We own our excavators, so levelling the ground, moving a pole, running a utility connection or installing drainage is part of the same job rather than a separate subcontractor."
+      },
+      {
+        "q": "Why aluminium rather than steel?",
+        "a": "Aluminium does not corrode, and on the coast that matters — salt-laden damp eats through steel gates in a few seasons. An aluminium gate needs no repainting and is lighter, so the automation lasts longer before it fails."
+      }
+    ]
+  },
+  "form": {
+    "title": "Request a free quote",
+    "lead": "It takes a minute to fill in. We call back within 24 hours.",
+    "compactTitle": "Free quote",
+    "fields": {
+      "name": {
+        "label": "First name",
+        "placeholder": "John"
+      },
+      "phone": {
+        "label": "Phone",
+        "placeholder": "+48 600 000 000",
+        "hint": "We will call or send a text message"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "john@example.com",
+        "optional": "optional"
+      },
+      "service": {
+        "label": "Type of work",
+        "placeholder": "Choose from the list"
+      },
+      "city": {
+        "label": "Town",
+        "placeholder": "Gdańsk"
+      },
+      "message": {
+        "label": "Describe the project",
+        "placeholder": "Dimensions, timing, any questions",
+        "optional": "optional"
+      },
+      "gdpr": {
+        "label": "I consent to my personal data being processed for the purpose of preparing a quote.",
+        "linkText": "Privacy policy"
+      }
+    },
+    "serviceOptions": [
+      {
+        "value": "brama-przesuwna",
+        "label": "Sliding gate"
+      },
+      {
+        "value": "brama-skrzydlowa",
+        "label": "Swing gate"
+      },
+      {
+        "value": "brama-przemyslowa",
+        "label": "Industrial gate"
+      },
+      {
+        "value": "automatyka",
+        "label": "Gate automation"
+      },
+      {
+        "value": "furtka",
+        "label": "Wicket gate"
+      },
+      {
+        "value": "ogrodzenie",
+        "label": "Fencing"
+      },
+      {
+        "value": "brukarstwo",
+        "label": "Block paving"
+      },
+      {
+        "value": "pod-klucz",
+        "label": "Turnkey project"
+      },
+      {
+        "value": "nie-wiem",
+        "label": "Not sure yet — advise me"
+      }
+    ],
+    "submit": "Send enquiry",
+    "submitCompact": "Get my quote",
+    "submitting": "Sending…",
+    "microcopy": "No newsletter. Your details are used solely to prepare the quote.",
+    "errors": {
+      "required": "This field is required",
+      "nameShort": "Enter your first name — at least 2 characters",
+      "phoneInvalid": "Check the phone number — we need at least 9 digits",
+      "emailInvalid": "Check the email address — the @ sign or the domain is missing",
+      "serviceRequired": "Choose a type of work from the list",
+      "gdprRequired": "Without this consent we cannot process your enquiry",
+      "network": "We could not send your enquiry. Call +48 601 234 567 — we will pick up.",
+      "server": "Something went wrong on our side. Try again shortly or call +48 601 234 567."
+    }
+  },
+  "contacts": {
+    "mapsQuery": "Gdańsk",
+    "title": "Contact",
+    "lead": "Prefer to call? We answer during working hours.",
+    "phoneLabel": "Phone",
+    "emailLabel": "Email",
+    "hoursLabel": "Working hours",
+    "hours": "Mon–Fri 8:00–18:00, Sat 9:00–14:00",
+    "areaLabel": "Area covered",
+    "area": "Gdańsk, Gdynia, Sopot and the Pomeranian Voivodeship",
+    "mapCta": "Open in Google Maps",
+    "mapLoad": "Show map",
+    "mapAlt": "Map of the area covered: the Tricity and the Pomeranian Voivodeship",
+    "mapNote": "The map loads on click so it does not slow the page down."
+  },
+  "footer": {
+    "tagline": "Aluminium gates, fencing and block paving. Gdańsk and Pomerania.",
+    "company": "StalBruk Sp. z o.o.",
+    "address": "ul. Przemysłowa 12, 80-298 Gdańsk",
+    "nip": "VAT ID 000-000-00-00",
+    "privacy": "Privacy policy",
+    "rights": "All rights reserved.",
+    "navTitle": "On this page",
+    "nav": [
+      {
+        "label": "Services",
+        "href": "#services"
+      },
+      {
+        "label": "Our work",
+        "href": "#work"
+      },
+      {
+        "label": "How we work",
+        "href": "#process"
+      },
+      {
+        "label": "FAQ",
+        "href": "#faq"
+      },
+      {
+        "label": "Contact",
+        "href": "#contact"
+      }
+    ]
+  },
+  "thankyou": {
+    "seoTitle": "Thank you for your enquiry | StalBruk",
+    "title": "Enquiry received",
+    "lead": "We will call you back within 24 hours — or first thing the next morning if you sent it late in the evening.",
+    "next": "In the meantime, take a look at our work or call us straight away on +48 601 234 567.",
+    "backHome": "Back to the homepage",
+    "callNow": "Call now"
+  },
+  "langHint": {
+    "message": "Ta strona jest również dostępna po polsku.",
+    "cta": "Przełącz na polski",
+    "dismiss": "Dismiss"
+  },
+  "privacy": {
+    "seoTitle": "Privacy policy | StalBruk",
+    "title": "Privacy policy",
+    "body": "The privacy policy text will be supplied by the client before launch."
+  },
+  "a11y": {
+    "skipToContent": "Skip to content",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "scrollTop": "Back to top"
+  },
+  "stickyBar": {
+    "call": "Call",
+    "quote": "Quote"
+  }
+}

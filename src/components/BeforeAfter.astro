@@ -1,0 +1,80 @@
+---
+import { Image } from 'astro:assets';
+import { getDictionary, type Locale } from '../i18n';
+import beforePhoto from '../assets/photos/before-driveway.jpg';
+import afterPhoto from '../assets/photos/after-driveway.jpg';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const ba = getDictionary(locale).gallery.beforeAfter;
+---
+
+<figure class="mt-12">
+  <figcaption class="mb-4 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+    <span class="t-h3 text-ink">{ba.title}</span>
+    <span class="t-label text-graphite">{ba.hint}</span>
+  </figcaption>
+
+  <div
+    class="relative media aspect-video w-full touch-pan-y select-none overflow-hidden"
+    data-before-after
+  >
+    <Image
+      src={beforePhoto}
+      alt={ba.beforeAlt}
+      widths={[640, 960, 1280, 1600]}
+      sizes="(min-width: 1024px) 66vw, 100vw"
+      loading="lazy"
+      decoding="async"
+      class="absolute inset-0 h-full w-full object-cover"
+    />
+    <Image
+      src={afterPhoto}
+      alt={ba.afterAlt}
+      widths={[640, 960, 1280, 1600]}
+      sizes="(min-width: 1024px) 66vw, 100vw"
+      loading="lazy"
+      decoding="async"
+      class="absolute inset-0 h-full w-full object-cover"
+      data-after
+      style="clip-path: inset(0 0 0 50%)"
+    />
+
+    <input
+      type="range"
+      min="0"
+      max="100"
+      value="50"
+      class="absolute inset-0 h-full w-full cursor-ew-resize opacity-0"
+      aria-label={ba.hint}
+      data-range
+    />
+
+    <span
+      class="pointer-events-none absolute inset-y-0 w-0.5 bg-white"
+      data-handle
+      style="left: 50%"
+    ></span>
+
+    {/* The SVG placeholders carried these labels inside the artwork; with real
+        photographs the sides are otherwise unmarked. They sit after the range
+        input in the DOM and ignore pointer events, so dragging still works. */}
+    <span
+      class="t-label pointer-events-none absolute top-4 left-4 bg-ink/75 px-2.5 py-1.5 text-white"
+    >
+      {ba.beforeLabel}
+    </span>
+    <span
+      class="t-label pointer-events-none absolute top-4 right-4 bg-ink/75 px-2.5 py-1.5 text-white"
+    >
+      {ba.afterLabel}
+    </span>
+  </div>
+</figure>
+
+<script>
+  import '../scripts/before-after';
+</script>

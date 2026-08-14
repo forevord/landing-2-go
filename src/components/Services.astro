@@ -1,0 +1,90 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import { getDictionary, type Locale } from '../i18n';
+import gatePhoto from '../assets/photos/hero.jpg';
+import pavingPhoto from '../assets/photos/paving.jpg';
+import earthworksPhoto from '../assets/photos/earthworks.jpg';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+
+const IMAGES: Record<string, ImageMetadata> = {
+  bramy: gatePhoto,
+  brukarstwo: pavingPhoto,
+  'pod-klucz': earthworksPhoto,
+};
+
+// Pre-selects the matching option in the full form.
+const SERVICE_PARAM: Record<string, string> = {
+  bramy: 'brama-przesuwna',
+  brukarstwo: 'brukarstwo',
+  'pod-klucz': 'pod-klucz',
+};
+---
+
+<section id="uslugi" class="bg-bg py-24 lg:py-32">
+  <div class="mx-auto max-w-page px-6 lg:px-10">
+    <h2 class="t-h2 text-ink">{t.services.title}</h2>
+    <p class="t-lead mt-4 max-w-[60ch] text-muted">{t.services.lead}</p>
+
+    <div class="mt-16 grid gap-16 lg:gap-24">
+      {
+        t.services.items.map((item, index) => (
+          <article
+            class="grid items-center gap-8 lg:grid-cols-2 lg:gap-16"
+            data-reveal
+            style={`transition-delay:${index * 50}ms`}
+          >
+            <div class={`relative media aspect-[3/2] ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+              <Image
+                src={IMAGES[item.id]}
+                alt={item.imageAlt}
+                widths={[480, 768, 1024]}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                loading="lazy"
+                quality={72}
+              />
+            </div>
+            <div class={index % 2 === 1 ? 'lg:order-1' : ''}>
+              <span class="t-label text-graphite">{String(index + 1).padStart(2, '0')}</span>
+              <h3 class="t-h2 mt-4 text-ink">{item.title}</h3>
+              <p class="t-lead mt-4 text-muted">{item.desc}</p>
+              <ul class="mt-6 grid gap-2.5">
+                {item.list.map((entry) => (
+                  <li class="flex items-center gap-2.5 text-ink">
+                    <Icon name="check" class="h-4 w-4 shrink-0 text-muted" />
+                    {entry}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="#formularz"
+                data-service={SERVICE_PARAM[item.id]}
+                class="btn btn-primary mt-8"
+              >
+                {item.cta}
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  // Clicking a service card pre-selects that service in the full form.
+  // The href already points at #formularz, so this still works without JS —
+  // the visitor simply picks the service themselves.
+  document.querySelectorAll<HTMLAnchorElement>('a[data-service]').forEach((link) => {
+    link.addEventListener('click', () => {
+      const select = document.querySelector<HTMLSelectElement>('#full-form select[name="service"]');
+      if (select) select.value = link.dataset.service ?? '';
+    });
+  });
+</script>

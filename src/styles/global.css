@@ -1,0 +1,217 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter-variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* Palette and scale follow redesign/DESIGN.md (the Custo reference), with one
+   correction. The reference reverses Paper White onto the gunmetal canvas,
+   which measures 2.58:1 and fails even the 3:1 large-text floor. Obsidian on
+   gunmetal is 8.12:1 — and the reference itself calls Obsidian the primary
+   ink — so the canvas keeps its colour and the type goes black.
+
+   Token names are unchanged from the previous system on purpose: the twelve
+   components already reference them, and renaming would be churn for no
+   visible gain. */
+@theme {
+  --color-ink: #000000; /* obsidian: primary ink and dark surfaces */
+  --color-ink-soft: #4b514d; /* anodised graphite; white on it 8.13:1 */
+  --color-graphite: #4b514d;
+  --color-gunmetal: #9ea29f; /* the canvas — BLACK text only, 8.12:1 */
+  --color-primary: #000000;
+  --color-muted: #5f6462; /* 5.05:1 on paper — never place on gunmetal */
+  --color-bg: #f2f2f0; /* paper for alternating sections */
+  --color-surface: #ffffff;
+  --color-border: #d8d8d8; /* aluminium hairline */
+  --color-cta: #c2410c; /* white on it 5.17:1 */
+  --color-cta-hover: #9a3412;
+  --color-error: #b91c1c;
+  --color-success: #047857;
+
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* The reference's radii: 8px on cards, images and inputs, a pill on the
+     primary action. */
+  --radius-control: 8px;
+  --radius-card: 8px;
+  --radius-pill: 31.35px;
+
+  --shadow-card: none;
+  --shadow-raised: 0 24px 60px rgb(0 0 0 / 0.12);
+
+  --container-page: 1280px;
+}
+
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --dur-press: 120ms;
+  --dur-hover: 160ms;
+  --dur-enter: 300ms;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-size: 1rem;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings:
+    'kern' on,
+    'liga' on;
+}
+
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* Custom classes live in the components layer so Tailwind utilities always win
+   over them. At top level they come after the utilities in source order and
+   silently override — which is how `.media { position: relative }` once beat an
+   `absolute` utility and pushed the hero content off screen. */
+@layer components {
+  /* ---------- Type ----------
+     The reference's scale, one family, and no negative tracking. The calm comes
+     from letting size alone carry the hierarchy: 57px display down to a 15px
+     caption, nothing squeezed. */
+
+  .t-display {
+    font-size: clamp(2.375rem, 4.4vw, 3.5625rem); /* 38 → 57px */
+    line-height: 1.02;
+    font-weight: 500;
+    text-wrap: balance;
+  }
+
+  .t-h2 {
+    font-size: clamp(1.75rem, 3vw, 2.375rem); /* 28 → 38px */
+    line-height: 1.15;
+    font-weight: 500;
+    text-wrap: balance;
+  }
+
+  .t-h3 {
+    font-size: clamp(1.375rem, 2.2vw, 1.875rem); /* 22 → 30px */
+    line-height: 1.25;
+    font-weight: 500;
+  }
+
+  .t-lead {
+    font-size: 1.1875rem;
+    line-height: 1.42;
+  }
+
+  /* Small kicker marking the start of a section, before the big heading
+     arrives. Sentence case, not shouted caps — the reference never shouts. */
+  .t-label {
+    font-size: 0.9375rem;
+    line-height: 1.43;
+    letter-spacing: 0.02em;
+    font-weight: 500;
+  }
+
+  /* ---------- Media ----------
+     One grade across every photograph, so ten different photographers read as
+     one shoot. */
+
+  .media {
+    overflow: hidden;
+    border-radius: var(--radius-card);
+    background: var(--color-graphite);
+  }
+
+  .media > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(0.55) contrast(1.05);
+  }
+
+  /* ---------- Buttons ----------
+     The reference uses a ghost pill everywhere. This page exists to collect
+     enquiries and a transparent button loses measurably to a filled one, so the
+     primary action is filled and everything else on the page stays achromatic —
+     the single filled pill then carries all the emphasis on its own. */
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 52px;
+    padding: 0 1.75rem;
+    border-radius: var(--radius-pill);
+    font-size: 1rem;
+    line-height: 1.62;
+    font-weight: 500;
+    transition:
+      transform var(--dur-press) var(--ease-out),
+      background-color var(--dur-hover) var(--ease-out),
+      color var(--dur-hover) var(--ease-out),
+      border-color var(--dur-hover) var(--ease-out);
+  }
+
+  .btn:active {
+    transform: scale(0.97);
+  }
+
+  .btn-primary {
+    background: var(--color-cta);
+    color: #fff;
+  }
+
+  .btn-ghost {
+    border: 1px solid currentColor;
+    background: transparent;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover {
+    background: var(--color-cta-hover);
+  }
+}
+
+/* Scroll reveal. Elements start hidden only when JS is available, so the page
+   stays fully readable without it. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity var(--dur-enter) var(--ease-out),
+    transform var(--dur-enter) var(--ease-out);
+}
+
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}

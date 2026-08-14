@@ -1,0 +1,36 @@
+---
+import Icon from './Icon.astro';
+import { getDictionary, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+---
+
+<section class="mx-auto max-w-page px-6 py-24 lg:px-10 lg:py-32">
+  <div class="grid gap-10 lg:grid-cols-[280px_1fr] lg:gap-16">
+    <div>
+      <p class="t-label text-graphite">{t.pain.title}</p>
+      <p class="mt-4 max-w-[38ch] text-muted">{t.pain.lead}</p>
+    </div>
+
+    <ul class="grid">
+      {
+        t.pain.items.map((item, index) => (
+          <li
+            class="border-t border-border py-8"
+            data-reveal
+            style={`transition-delay:${index * 50}ms`}
+          >
+            <Icon name={item.icon as 'shield-check'} class="h-5 w-5 text-muted" />
+            <p class="t-h3 mt-4 text-ink">“{item.quote}”</p>
+            <p class="mt-3 max-w-[60ch] text-muted">{item.answer}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

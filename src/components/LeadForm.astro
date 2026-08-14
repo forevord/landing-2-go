@@ -1,0 +1,161 @@
+---
+import { getDictionary, route, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  variant: 'compact' | 'full';
+  id: string;
+}
+
+const { locale, variant, id } = Astro.props;
+const t = getDictionary(locale);
+const f = t.form;
+const isFull = variant === 'full';
+const privacyHref = route('privacy', locale);
+
+// Only the strings the island needs at runtime. Passing them as data avoids
+// shipping both dictionaries to the browser for six error messages.
+const clientMessages = {
+  errors: f.errors,
+  submitting: f.submitting,
+};
+---
+
+<form
+  id={id}
+  class="lead-form grid gap-4 bg-surface p-6 text-primary sm:p-8"
+  data-variant={variant}
+  data-messages={JSON.stringify(clientMessages)}
+  novalidate
+>
+  <p class="t-h3 text-ink">{isFull ? f.title : f.compactTitle}</p>
+  {isFull && <p class="text-sm text-muted">{f.lead}</p>}
+
+  {
+    isFull && (
+      <label class="grid gap-2">
+        <span class="t-label text-ink">{f.fields.name.label}</span>
+        <input
+          type="text"
+          name="name"
+          autocomplete="given-name"
+          placeholder={f.fields.name.placeholder}
+          class="min-h-11 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:outline-offset-0"
+          required
+          aria-describedby={`${id}-name-error`}
+        />
+        <span class="error text-sm text-error" id={`${id}-name-error`} data-error-for="name" aria-live="polite" />
+      </label>
+    )
+  }
+
+  <label class="grid gap-2">
+    <span class="t-label text-ink">{f.fields.phone.label}</span>
+    <input
+      type="tel"
+      name="phone"
+      inputmode="tel"
+      autocomplete="tel"
+      placeholder={f.fields.phone.placeholder}
+      class="min-h-11 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:outline-offset-0"
+      required
+      aria-describedby={`${id}-phone-hint ${id}-phone-error`}
+    />
+    <span class="text-sm text-muted" id={`${id}-phone-hint`}>{f.fields.phone.hint}</span>
+    <span class="error text-sm text-error" id={`${id}-phone-error`} data-error-for="phone" aria-live="polite"></span>
+  </label>
+
+  <label class="grid gap-2">
+    <span class="t-label text-ink">{f.fields.service.label}</span>
+    <select
+      name="service"
+      class="min-h-11 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:outline-offset-0"
+      required
+      aria-describedby={`${id}-service-error`}
+    >
+      <option value="">{f.fields.service.placeholder}</option>
+      {f.serviceOptions.map((o) => <option value={o.value}>{o.label}</option>)}
+    </select>
+    <span class="error text-sm text-error" id={`${id}-service-error`} data-error-for="service" aria-live="polite"></span>
+  </label>
+
+  {
+    isFull && (
+      <>
+        <label class="grid gap-2">
+          <span class="t-label text-ink">{f.fields.city.label}</span>
+          <input
+            type="text"
+            name="city"
+            autocomplete="address-level2"
+            placeholder={f.fields.city.placeholder}
+            class="min-h-11 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:outline-offset-0"
+            required
+            aria-describedby={`${id}-city-error`}
+          />
+          <span class="error text-sm text-error" id={`${id}-city-error`} data-error-for="city" aria-live="polite" />
+        </label>
+
+        <label class="grid gap-2">
+          <span class="t-label text-ink">{`${f.fields.email.label} (${f.fields.email.optional})`}</span>
+          <input
+            type="email"
+            name="email"
+            autocomplete="email"
+            placeholder={f.fields.email.placeholder}
+            class="min-h-11 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:outline-offset-0"
+            aria-describedby={`${id}-email-error`}
+          />
+          <span class="error text-sm text-error" id={`${id}-email-error`} data-error-for="email" aria-live="polite" />
+        </label>
+
+        <label class="grid gap-2">
+          <span class="t-label text-ink">{`${f.fields.message.label} (${f.fields.message.optional})`}</span>
+          <textarea
+            name="message"
+            rows="4"
+            placeholder={f.fields.message.placeholder}
+            class="rounded-none border border-border bg-transparent p-3"
+          />
+        </label>
+      </>
+    )
+  }
+
+  <label class="flex items-start gap-3 text-sm">
+    <input type="checkbox" name="gdpr" class="mt-1 h-5 w-5" required aria-describedby={`${id}-gdpr-error`} />
+    <span>
+      {f.fields.gdpr.label}{' '}
+      <a href={privacyHref} class="underline">{f.fields.gdpr.linkText}</a>
+    </span>
+  </label>
+  <span class="error text-sm text-error" id={`${id}-gdpr-error`} data-error-for="gdpr" aria-live="polite"></span>
+
+  {/* Honeypot: hidden from humans, irresistible to bots. */}
+  <div class="pointer-events-none absolute left-[-9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+    <label>
+      Leave this field empty
+      <input type="text" name="hp" tabindex="-1" autocomplete="off" />
+    </label>
+  </div>
+
+  <input type="hidden" name="source" value={isFull ? 'full' : 'hero'} />
+  <input type="hidden" name="thanks" value={route('thanks', locale)} />
+
+  <button type="submit" class="btn btn-primary w-full" data-submit>
+    <span data-submit-label>{isFull ? f.submit : f.submitCompact}</span>
+  </button>
+
+  <p class="text-sm text-muted">{isFull ? f.microcopy : t.hero.microcopy}</p>
+
+  <p
+    class="hidden bg-error/10 p-3 text-sm text-error"
+    data-form-error
+    role="alert"
+  >
+  </p>
+</form>
+
+<script>
+  import '../scripts/form';
+</script>

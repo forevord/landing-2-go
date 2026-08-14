@@ -1,0 +1,54 @@
+---
+import { Image } from 'astro:assets';
+import heroPhoto from '../assets/photos/hero.jpg';
+import LeadForm from './LeadForm.astro';
+import { getDictionary, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+---
+
+{/* The gunmetal canvas is the reference's signature move: a warm grey-green
+    plane that reads as architectural concrete rather than a white SaaS page.
+    All type on it is obsidian — white would measure 2.58:1 and fail. */}
+<section class="-mt-20 bg-gunmetal pt-28 pb-16 text-ink lg:pt-32 lg:pb-24">
+  <div class="mx-auto w-full max-w-page px-6 lg:px-10">
+    <div class="grid items-start gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+      <div class="lg:pt-6">
+        <p class="t-label max-w-[42ch] text-ink/75">{t.hero.eyebrow}</p>
+        <h1 class="t-display mt-6 max-w-[18ch]">{t.hero.h1}</h1>
+        <p class="t-lead mt-7 max-w-[46ch] text-ink/75">{t.hero.lead}</p>
+
+        <div class="mt-9 flex flex-wrap items-center gap-4">
+          {/* On wide screens the form is already beside this text, so a second
+              primary button would only compete with it. */}
+          <a href="#formularz" class="btn btn-primary lg:hidden">{t.hero.cta}</a>
+          <a href="#realizacje" class="btn btn-ghost">{t.hero.ctaSecondary}</a>
+        </div>
+      </div>
+
+      <div class="shadow-raised rounded-card bg-surface">
+        <LeadForm locale={locale} variant="compact" id="hero-form" />
+      </div>
+    </div>
+
+    {/* The photograph sits on the canvas as an object rather than behind the
+        text, so the type never has to fight it for legibility. */}
+    <div class="media mt-14 aspect-[21/9] lg:mt-20">
+      <Image
+        src={heroPhoto}
+        alt={t.hero.imageAlt}
+        widths={[768, 1280, 1920, 2400]}
+        sizes="(min-width: 1280px) 1280px, 100vw"
+        loading="eager"
+        fetchpriority="high"
+        decoding="sync"
+        quality={72}
+      />
+    </div>
+  </div>
+</section>

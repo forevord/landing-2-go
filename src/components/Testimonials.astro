@@ -1,0 +1,51 @@
+---
+import { getDictionary, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+
+// The section stays out of the DOM while the copy is placeholder material.
+// Publishing invented reviews breaches the EU Omnibus Directive (spec §7).
+const isPlaceholder = t.testimonials._placeholder === true;
+---
+
+{
+  !isPlaceholder && (
+    <section class="mx-auto max-w-[1200px] px-4 py-20">
+      <h2 class="text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold tracking-[-0.01em] text-ink">
+        {t.testimonials.title}
+      </h2>
+      <p class="mt-3 max-w-[60ch] text-muted">{t.testimonials.lead}</p>
+
+      <ul class="mt-10 grid gap-6 md:grid-cols-3">
+        {t.testimonials.items.map((item, index) => (
+          <li
+            class="border border-border p-6 shadow-card"
+            data-reveal
+            style={`transition-delay:${index * 50}ms`}
+          >
+            <blockquote class="text-ink">“{item.quote}”</blockquote>
+            <figcaption class="mt-4 flex items-center gap-3">
+              <img
+                src="/images/placeholders/avatar.svg"
+                alt={item.avatarAlt}
+                width="160"
+                height="160"
+                loading="lazy"
+                class="h-10 w-10 rounded-full"
+              />
+              <span class="text-sm">
+                <span class="block font-medium text-ink">{item.author}</span>
+                <span class="block text-muted">{item.role}</span>
+              </span>
+            </figcaption>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}

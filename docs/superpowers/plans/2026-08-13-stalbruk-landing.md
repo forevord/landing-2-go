@@ -6,7 +6,7 @@
 
 **Architecture:** A static Astro site with no client framework. All copy lives in JSON dictionaries and is injected at build time. The only server-side code is a single Cloudflare Pages Function that validates a lead and fans it out to Web3Forms (email) and the Telegram Bot API. Client-side JavaScript is limited to four small vanilla-TypeScript islands: the lead form, the before/after slider, the scroll reveal, and the language hint.
 
-**Tech Stack:** Astro 5 (static output), TypeScript (strict), Tailwind CSS 4, Vitest, Cloudflare Pages + Pages Functions, Web3Forms, Telegram Bot API.
+**Tech Stack:** Astro 7 (static output), TypeScript (strict), Tailwind CSS 4, Vitest, Cloudflare Pages + Pages Functions, Web3Forms, Telegram Bot API.
 
 **Source documents:** [`docs/superpowers/specs/2026-08-13-stalbruk-landing-design.md`](../specs/2026-08-13-stalbruk-landing-design.md) (design spec) and [`info/SPEC.md`](../../../info/SPEC.md) (original product spec).
 
@@ -211,10 +211,14 @@ git commit -m "chore: scaffold Astro project with Tailwind, ESLint, Prettier and
 
 ## Task 2: First Deploy to Cloudflare Pages
 
+> **Deferred by the client (2026-08-13).** Everything is built and tested locally first;
+> the Cloudflare project is created only after Task 17. Steps 1 and 2 of this task
+> (`wrangler.toml` and the initial push) still run in order, because `wrangler pages dev`
+> needs the config file. Steps 3–5 run between Task 17 and Task 18.
+> Until then, `npm run preview` serves the Function locally and secrets live in `.dev.vars`.
+
 **Files:**
 - Create: `wrangler.toml`
-
-This task exists before any feature work so that every later task can be verified on the real host, not only locally.
 
 - [ ] **Step 1: Write `wrangler.toml`**
 
@@ -2546,8 +2550,29 @@ Expected: an orange bar appears offering the English version; the URL does **not
 
 - [ ] **Step 6: Check the JavaScript budget**
 
-Run: `npm run build && find dist/_astro -name '*.js' -exec gzip -c {} + | wc -c`
-Expected: under 6144 bytes. If it exceeds that, the usual cause is the full dictionaries being bundled into `lang-hint.ts` — narrow the import to just the `langHint` branch by extracting those strings into a `data-` attribute set by the layout.
+Astro inlines small scripts into the HTML instead of emitting a chunk, so counting
+`dist/_astro/*.js` alone under-reports and can read as zero. Count both:
+
+```bash
+npm run build && node -e "
+const fs=require('fs'),zlib=require('zlib'),path=require('path');
+const walk=(d)=>fs.readdirSync(d,{withFileTypes:true}).flatMap((e)=>
+  e.isDirectory()?walk(path.join(d,e.name)):[path.join(d,e.name)]);
+let total=0;
+for (const f of walk('dist')) {
+  if (f.endsWith('.js')) total += zlib.gzipSync(fs.readFileSync(f)).length;
+  if (f.endsWith('.html'))
+    for (const m of fs.readFileSync(f,'utf8')
+      .matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g))
+      total += zlib.gzipSync(m[1]).length;
+}
+console.log(total);
+"
+```
+
+Expected: under 6144 bytes. If it exceeds that, the usual cause is a dictionary being
+bundled into a client script — pass the handful of needed strings from the server as a
+`data-` attribute instead, the way `LeadForm.astro` does (Task 8).
 
 - [ ] **Step 7: Commit**
 

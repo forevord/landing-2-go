@@ -1,0 +1,40 @@
+---
+import { absoluteUrl, route, type Locale, type RouteKey } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  routeKey: RouteKey;
+  title: string;
+  description: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImageAlt?: string;
+  noindex?: boolean;
+}
+
+const { locale, routeKey, title, description, ogTitle, ogDescription, ogImageAlt, noindex } =
+  Astro.props;
+
+const canonical = absoluteUrl(route(routeKey, locale), Astro.site);
+const plHref = absoluteUrl(route(routeKey, 'pl'), Astro.site);
+const enHref = absoluteUrl(route(routeKey, 'en'), Astro.site);
+const ogImage = absoluteUrl('/images/og-default.jpg', Astro.site);
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex" />}
+
+<link rel="alternate" hreflang="pl" href={plHref} />
+<link rel="alternate" hreflang="en" href={enHref} />
+<link rel="alternate" hreflang="x-default" href={plHref} />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={ogTitle ?? title} />
+<meta property="og:description" content={ogDescription ?? description} />
+<meta property="og:image" content={ogImage} />
+{ogImageAlt && <meta property="og:image:alt" content={ogImageAlt} />}
+<meta property="og:locale" content={locale === 'pl' ? 'pl_PL' : 'en_GB'} />
+<meta name="twitter:card" content="summary_large_image" />

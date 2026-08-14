@@ -1,0 +1,50 @@
+---
+import { Image } from 'astro:assets';
+import BeforeAfter from './BeforeAfter.astro';
+import { getDictionary, type Locale } from '../i18n';
+import heroPhoto from '../assets/photos/hero.jpg';
+import pavingPhoto from '../assets/photos/paving.jpg';
+import earthworksPhoto from '../assets/photos/earthworks.jpg';
+import work1Photo from '../assets/photos/work-1.jpg';
+import work2Photo from '../assets/photos/work-2.jpg';
+import work3Photo from '../assets/photos/work-3.jpg';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+const IMAGES = [heroPhoto, pavingPhoto, earthworksPhoto, work1Photo, work2Photo, work3Photo];
+---
+
+<section id="realizacje" class="bg-bg py-24 lg:py-32">
+  <div class="mx-auto max-w-page px-6 lg:px-10">
+    <h2 class="t-h2 text-ink">{t.gallery.title}</h2>
+    <p class="t-lead mt-4 max-w-[60ch] text-muted">{t.gallery.lead}</p>
+
+    <ul
+      class="mt-16 grid snap-x snap-mandatory grid-flow-col auto-cols-[85%] gap-4 overflow-x-auto pb-4 sm:auto-cols-[45%] lg:grid-flow-row lg:auto-cols-auto lg:grid-cols-3 lg:gap-6 lg:overflow-visible"
+    >
+      {
+        t.gallery.items.map((item, index) => (
+          <li class={`snap-start ${index === 0 ? 'lg:col-span-2' : ''}`}>
+            <div class="relative media aspect-video">
+              <Image
+                src={IMAGES[index]}
+                alt={item.alt}
+                widths={index === 0 ? [640, 960, 1280] : [400, 640]}
+                sizes={index === 0 ? '(min-width: 1024px) 66vw, 85vw' : '(min-width: 1024px) 33vw, 45vw'}
+                loading="lazy"
+                quality={72}
+              />
+            </div>
+            <p class="t-label mt-3 text-graphite">{item.caption}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <BeforeAfter locale={locale} />
+  </div>
+</section>

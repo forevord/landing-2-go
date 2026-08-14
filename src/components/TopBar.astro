@@ -1,0 +1,67 @@
+---
+import Icon from './Icon.astro';
+import { getDictionary, otherLocale, route, type Locale, type RouteKey } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  routeKey: RouteKey;
+  phone: string;
+  /** `overlay` floats the bar on a dark hero; `solid` is for pages without one. */
+  variant?: 'overlay' | 'solid';
+}
+
+const { locale, routeKey, phone, variant = 'solid' } = Astro.props;
+const isOverlay = variant === 'overlay';
+const headerClass = isOverlay
+  ? 'relative z-40 text-ink'
+  : 'sticky top-0 z-40 bg-ink text-surface';
+const t = getDictionary(locale);
+const other = otherLocale(locale);
+const otherHref = route(routeKey, other);
+const telHref = `tel:${phone.replace(/\s/g, '')}`;
+
+// The dictionary carries a {{TELEFON}} token; substituting the real number keeps
+// the accessible name containing the visible text, as WCAG 2.5.3 requires.
+const phoneAria = t.topbar.phoneAria.replace('{{TELEFON}}', phone);
+---
+
+{/* Transparent over the hero rather than a solid bar: the dark photograph and
+    the header read as one field, which is what stops the page looking like a
+    template with a navbar bolted on. */}
+<header class={headerClass}>
+  <div class="mx-auto flex h-20 max-w-page items-center gap-6 px-6 lg:px-10">
+    <a href={route('home', locale)} class="text-lg font-medium">
+      {t.topbar.brand}
+    </a>
+
+    <span class="hidden items-center gap-1.5 text-sm text-ink/75 md:flex">
+      <Icon name="map-pin" class="h-4 w-4" />
+      {t.topbar.location}
+    </span>
+
+    <div class="ml-auto flex items-center gap-1 sm:gap-4">
+      <a
+        href={telHref}
+        class="flex min-h-11 items-center gap-2 px-2 text-sm tracking-tight"
+        aria-label={phoneAria}
+      >
+        <Icon name="phone" class="h-4 w-4" />
+        <span class="hidden lg:inline">{phone}</span>
+      </a>
+
+      <a
+        href={otherHref}
+        hreflang={other}
+        class="t-label flex min-h-11 items-center px-2 text-ink/75"
+        aria-label={t.topbar.langSwitchTo}
+      >
+        {other.toUpperCase()}
+      </a>
+
+      <a href="#formularz" class="btn btn-ghost hidden h-11 min-h-11 sm:inline-flex">
+        <span>{t.topbar.cta}</span>
+      </a>
+    </div>
+  </div>
+  <hr class="mx-6 border-0 border-t border-ink/15 lg:mx-10" />
+</header>
