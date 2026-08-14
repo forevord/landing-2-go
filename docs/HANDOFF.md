@@ -12,7 +12,9 @@ The site is functionally complete and visually mid-redesign.
 
 **Working and verified:** bilingual Polish/English static build (six pages), lead form with client and server validation posting to a Cloudflare Pages Function that fans out to Web3Forms and Telegram, honeypot spam trap, scroll reveals, language hint, before/after slider, sitemap, robots, JSON-LD, and a CI guard that fails if Polish copy appears outside `src/i18n/`.
 
-**Lighthouse:** 100 / 100 / 100 / 100 on desktop. On mobile, accessibility, best practices and SEO are 100 and performance measures 98 (LCP 2.4s, CLS 0, TBT 0ms). The hero photograph is the LCP element and the dark workshop shot that replaced the brick wall is the reason for the last point: sparks are the worst case a codec can be handed, and even at quality 30 with `sizes` pinned to 800px it is 36kB against the wall's 11kB. Reverting to a flatter hero image is the lever if that point ever matters against `dist/` served over plain HTTP on this machine. The same run on the commit before the section rebuild gives the identical 99 / 2.1s, so the rebuild costs nothing — the earlier 100 / 1.7s figure came from a different serving setup and is not reproducible here. Compare against a freshly measured baseline, not against the number in this file.
+**Lighthouse:** 100 / 100 / 100 / 100 on desktop. On mobile, accessibility, best practices and SEO are 100 and performance measures 98 (LCP 2.4s, CLS 0, TBT 0ms). The hero photograph is the LCP element and the dark workshop shot that replaced the brick wall is the reason for the last point: sparks are the worst case a codec can be handed, and even at quality 30 with `sizes` pinned to 800px it is 36kB against the wall's 11kB. Reverting to a flatter hero image is the lever if that point ever matters.
+
+All of it is measured against `dist/` served over plain HTTP on this machine. The section rebuild itself cost nothing — the commit before it measures identically — and the 100 / 1.7s in earlier notes came from a different serving setup and does not reproduce here. Compare against a freshly measured baseline, never against the number in this file.
 
 **Test suite:** 21 pass, 1 fails on purpose (`carry no invented demo data`). That failure is the pre-launch gate; see below.
 
@@ -67,7 +69,7 @@ The remaining sections have now been recomposed on it too:
 Then, at the client's direction:
 
 - **The orange is gone.** The reference has no chromatic colour at all, so there was nothing to swap it for; the filled primary action is obsidian, darkening to graphite on hover. On the graphite bands it inverts to `.btn-paper`, because a black pill there sits at 2.59:1 against its own background — legible inside, but the shape itself falls below the 3:1 floor for a control. Red survives only on form errors, where the alternative costs more than the rule.
-- **The hero photograph is the band's background again**, ghosted to 20% under the gunmetal. It is not a decorative choice that can be dialled back freely — see the third contrast rule below.
+- **The hero photograph is the band's background again**, and the band itself is now graphite with reversed paper-white type. Neither the veil nor the type colour is a free dial — see the third contrast rule below.
 - **The white mats around the service photographs are gone.** They sit on the canvas at 8px, like the gallery cards.
 - **The hero form is the reference's input**: an 8px box behind an aluminium hairline that deepens to obsidian in use, declared once in `.lead-form` rather than as a class string repeated on nine fields. The card lost its shadow, which the reference bans.
 
