@@ -76,6 +76,17 @@ brightest pixel under each text bounding box at 360, 390, 414, 768, 1024, 1280, 
 failures. Worst case as measured: **6.97:1** against a 4.5:1 floor. Re-run it after any
 change to the photograph, the band colour or the scrim stops.
 
+**Lighthouse after the pass** (`dist/` over plain HTTP, headless Chromium, two runs):
+desktop 100 / 100 / 100 / 100, LCP 0.6s, TBT 0ms; mobile 98 / 100 / 100 / 100, LCP 2.4s,
+TBT 0ms, CLS 0. The English page measures the same as the Polish one.
+
+One trap found while measuring. The hero image briefly carried `decoding="sync"`, on the
+theory that the LCP element should not wait for an async decode. It cost 3 points and
+110ms of blocking time: style and layout went from ~150ms to 849ms and the document
+produced a 413ms long task, because a synchronous decode of a full-bleed photograph runs
+on the main thread. `loading="eager"` with `fetchpriority="high"` is the whole of what the
+LCP element needs; do not add `decoding` to it.
+
 **Verification at the end of the pass:** `astro check` 0 errors, build 6 pages, `check:copy`
 clean, vitest 25 passed with the one intentional demo-data failure.
 
