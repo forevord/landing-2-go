@@ -9,9 +9,11 @@ const { locale } = Astro.props;
 const t = getDictionary(locale);
 ---
 
-{/* The reference's two-column block: the caption names the band on the left,
+{
+  /* The reference's two-column block: the caption names the band on the left,
     the figures sit beside it. The boxed four-cell grid this replaced was the
-    one place on the page that drew a border around content. */}
+    one place on the page that drew a border around content. */
+}
 <section class="section border-b border-border" aria-labelledby="trust-title">
   <div class="mx-auto max-w-page px-6 lg:px-10">
     <div class="split">
