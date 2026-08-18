@@ -59,7 +59,7 @@
   },
   "pain": {
     "title": "Sound familiar?",
-    "lead": "The three things we hear most often from customers before they come to us.",
+    "lead": "We will not vanish with your deposit. We will not move the date. The gate will not rust.",
     "items": [
       {
         "quote": "The crew vanished after taking the deposit.",
@@ -80,7 +80,7 @@
   },
   "services": {
     "title": "What we do",
-    "lead": "Three areas that are most often ordered together — which is exactly why one crew handles all of them.",
+    "lead": "Gates, paving and earthworks — one crew, one date.",
     "promises": [
       {
         "label": "Survey and quote",
@@ -100,6 +100,7 @@
         "id": "bramy",
         "title": "Gates and fencing",
         "desc": "Sliding, swing and industrial gates, wickets and fencing. Automation, remotes and video intercom.",
+        "price": "from 6,500 PLN",
         "list": [
           "Sliding gates",
           "Swing gates",
@@ -115,6 +116,7 @@
         "id": "brukarstwo",
         "title": "Block paving",
         "desc": "Driveways, terraces, car parks and paths. Concrete block, granite setts and large-format slabs.",
+        "price": "from 180 PLN/m²",
         "list": [
           "Driveways and entrances",
           "Terraces",
@@ -130,6 +132,7 @@
         "id": "pod-klucz",
         "title": "Turnkey projects",
         "desc": "Earthworks, ground levelling, relocation of poles and utility connections, drainage. Our own excavators.",
+        "price": "individual quote",
         "list": [
           "Earthworks",
           "Ground levelling",
@@ -145,7 +148,7 @@
   },
   "why": {
     "title": "Why us",
-    "lead": "Four reasons customers choose us over the cheaper quote from the classifieds.",
+    "lead": "Four things a cheaper crew from the classifieds will not give you.",
     "items": [
       {
         "title": "It will not rust. Ever.",
@@ -202,7 +205,7 @@
   },
   "gallery": {
     "title": "Our work",
-    "lead": "Photographs from projects we have handed over across Pomerania.",
+    "lead": "See what it looks like on handover day.",
     "beforeAfter": {
       "title": "A driveway, before and after",
       "beforeLabel": "Before",

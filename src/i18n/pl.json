@@ -59,7 +59,7 @@
   },
   "pain": {
     "title": "Znasz to?",
-    "lead": "Trzy rzeczy, które najczęściej słyszymy od klientów, zanim do nas trafią.",
+    "lead": "Nie znikniemy z zaliczką. Nie przesuniemy terminu. Brama nie zardzewieje.",
     "items": [
       {
         "quote": "Ekipa zniknęła po zaliczce.",
@@ -80,7 +80,7 @@
   },
   "services": {
     "title": "Co robimy",
-    "lead": "Trzy obszary, które najczęściej zamawiane są razem — i dlatego wykonujemy je jedną ekipą.",
+    "lead": "Brama, kostka i roboty ziemne — jedna ekipa, jeden termin.",
     "promises": [
       {
         "label": "Pomiar i wycena",
@@ -100,6 +100,7 @@
         "id": "bramy",
         "title": "Bramy i ogrodzenia",
         "desc": "Bramy przesuwne, skrzydłowe i przemysłowe, furtki, ogrodzenia. Automatyka, piloty, wideodomofon.",
+        "price": "od 6 500 zł",
         "list": [
           "Bramy przesuwne",
           "Bramy skrzydłowe",
@@ -115,6 +116,7 @@
         "id": "brukarstwo",
         "title": "Brukarstwo",
         "desc": "Podjazdy, tarasy, parkingi i ścieżki. Kostka betonowa, granitowa i płyty wielkoformatowe.",
+        "price": "od 180 zł/m²",
         "list": [
           "Podjazdy i wjazdy",
           "Tarasy",
@@ -130,6 +132,7 @@
         "id": "pod-klucz",
         "title": "Realizacje pod klucz",
         "desc": "Roboty ziemne, niwelacja terenu, przeniesienie słupów i przyłączy, odwodnienie. Własne koparki.",
+        "price": "wycena indywidualna",
         "list": [
           "Roboty ziemne",
           "Niwelacja terenu",
@@ -145,7 +148,7 @@
   },
   "why": {
     "title": "Dlaczego my",
-    "lead": "Cztery powody, dla których klienci wybierają nas zamiast tańszej oferty z ogłoszenia.",
+    "lead": "Cztery rzeczy, których nie dostaniesz od tańszej ekipy z ogłoszenia.",
     "items": [
       {
         "title": "Nie rdzewieje. Nigdy.",
@@ -202,7 +205,7 @@
   },
   "gallery": {
     "title": "Realizacje",
-    "lead": "Zdjęcia z obiektów, które oddaliśmy na Pomorzu.",
+    "lead": "Zobacz, jak to wygląda po odbiorze.",
     "beforeAfter": {
       "title": "Podjazd przed i po",
       "beforeLabel": "Przed",
