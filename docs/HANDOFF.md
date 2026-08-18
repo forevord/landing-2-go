@@ -206,6 +206,9 @@ Two specific problems recorded in `CREDITS.md`:
 
 ## Open item 5 — Cloudflare deployment
 
+**The step-by-step runbook is [`docs/DEPLOY.md`](DEPLOY.md)** — project creation, the three
+secrets, the live lead-path check, Git deploys, domain, analytics and the pre-launch list.
+
 Deferred at the client's request until the site was finished locally. `wrangler.toml` exists and `npm run preview` runs the Function locally.
 
 Still to do, in the Cloudflare dashboard:
