@@ -1,5 +1,16 @@
 import { isServiceValue } from './services';
 
+/** Where the visit came from. Carried with the lead, never validated. */
+export interface Attribution {
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+  utmTerm?: string;
+  utmContent?: string;
+  gclid?: string;
+  pageUrl?: string;
+}
+
 export interface LeadInput {
   name?: string;
   phone: string;
@@ -10,15 +21,11 @@ export interface LeadInput {
   gdpr: boolean;
   hp?: string;
   source: 'hero' | 'full';
+  attribution?: Attribution;
 }
 
 export type ErrorCode =
-  | 'required'
-  | 'nameShort'
-  | 'phoneInvalid'
-  | 'emailInvalid'
-  | 'serviceRequired'
-  | 'gdprRequired';
+  'required' | 'nameShort' | 'phoneInvalid' | 'emailInvalid' | 'serviceRequired' | 'gdprRequired';
 
 export type FieldErrors = Partial<
   Record<'name' | 'phone' | 'email' | 'service' | 'city' | 'gdpr', ErrorCode>

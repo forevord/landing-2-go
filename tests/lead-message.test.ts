@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildTelegramMessage, escapeHtml } from '../functions/api/lead';
+import { buildTelegramMessage, describeAttribution, escapeHtml } from '../functions/api/lead';
 import type { LeadInput } from '../src/lib/validate';
 
 const heroLead: LeadInput = {
@@ -44,6 +44,34 @@ describe('buildTelegramMessage', () => {
   it('falls back to the generic marker for an unknown service value', () => {
     const message = buildTelegramMessage({ ...heroLead, service: 'unknown-service' });
     expect(message).toContain('📩');
+  });
+});
+
+describe('attribution', () => {
+  it('puts the campaign path and the gclid in the message', () => {
+    const message = buildTelegramMessage({
+      ...heroLead,
+      attribution: {
+        utmSource: 'google',
+        utmMedium: 'cpc',
+        utmCampaign: 'bramy-gdansk',
+        gclid: 'Cj0KCQ',
+        pageUrl: 'https://stalbruk.pl/?gclid=Cj0KCQ',
+      },
+    });
+    expect(message).toContain('google / cpc / bramy-gdansk');
+    expect(message).toContain('gclid: Cj0KCQ');
+  });
+
+  it('falls back to the landing URL when only that is known', () => {
+    expect(describeAttribution({ pageUrl: 'https://stalbruk.pl/en/' })).toBe(
+      'https://stalbruk.pl/en/',
+    );
+  });
+
+  it('says nothing at all when the visit carried no campaign', () => {
+    expect(describeAttribution(undefined)).toBe('');
+    expect(buildTelegramMessage(heroLead)).not.toContain('Źródło');
   });
 });
 

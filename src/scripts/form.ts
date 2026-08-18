@@ -19,10 +19,23 @@ function readForm(form: HTMLFormElement): LeadInput & { thanks: string } {
     hp: str('hp'),
     source: str('source') === 'full' ? 'full' : 'hero',
     thanks: str('thanks'),
+    attribution: {
+      utmSource: str('utm_source') || undefined,
+      utmMedium: str('utm_medium') || undefined,
+      utmCampaign: str('utm_campaign') || undefined,
+      utmTerm: str('utm_term') || undefined,
+      utmContent: str('utm_content') || undefined,
+      gclid: str('gclid') || undefined,
+      pageUrl: str('page_url') || undefined,
+    },
   };
 }
 
-function paintErrors(form: HTMLFormElement, errors: FieldErrors, messages: Record<string, string>): void {
+function paintErrors(
+  form: HTMLFormElement,
+  errors: FieldErrors,
+  messages: Record<string, string>,
+): void {
   form.querySelectorAll<HTMLElement>('[data-error-for]').forEach((node) => {
     const field = node.dataset.errorFor as keyof FieldErrors;
     const code = errors[field];
