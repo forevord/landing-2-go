@@ -1,0 +1,23 @@
+---
+import LeadForm from './LeadForm.astro';
+import type { Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+{
+  /* Mobile only. The hero card cannot fit above the fold on a phone, so the
+    first form a phone visitor meets used to be the one at 11 000px. This puts
+    a two-field version directly under the services block, where the visitor
+    has just learned what the company does and what it costs. On lg it is not
+    rendered at all — the hero card is already on screen there. */
+}
+<section id="szybka-wycena" class="section bg-sand lg:hidden">
+  <div class="mx-auto max-w-[520px] px-6">
+    <LeadForm locale={locale} variant="compact" id="quick-form" />
+  </div>
+</section>

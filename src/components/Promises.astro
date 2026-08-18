@@ -1,0 +1,31 @@
+---
+import { getDictionary, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+---
+
+{
+  /* Free measurement, lead time and warranty: the three facts a buyer weighs
+    before anything else. They used to sit inside the services block, six
+    screens down, set at 15px in a hairline box. Directly under the hero they
+    are the first thing the page says after the offer itself. */
+}
+<section class="promises border-b border-border" aria-label={t.services.title}>
+  <div class="mx-auto max-w-page px-6 lg:px-10">
+    <dl class="grid gap-y-8 sm:grid-cols-3 sm:gap-y-0">
+      {
+        t.services.promises.map((promise) => (
+          <div class="promises__cell">
+            <dt class="promises__label">{promise.label}</dt>
+            <dd class="promises__value">{promise.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>

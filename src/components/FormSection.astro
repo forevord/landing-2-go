@@ -1,0 +1,61 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import Icon from './Icon.astro';
+import LeadForm from './LeadForm.astro';
+import { getDictionary, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  phone: string;
+}
+
+const { locale, phone } = Astro.props;
+const t = getDictionary(locale);
+const telHref = `tel:${phone.replace(/\s/g, '')}`;
+---
+
+{
+  /* Six fields stacked in one 640px column ran to 1286px — the second longest
+    section on the page, and nothing beside it but white. The arguments that
+    close the sale were six screens up by then. Two columns put them back
+    alongside the fields, and the section costs half the height. */
+}
+<section id="formularz" class="section">
+  <div class="mx-auto max-w-page px-6 lg:px-10">
+    <SectionHeading title={t.form.title} sub={t.form.lead} />
+
+    <div class="mt-12 grid gap-12 lg:grid-cols-[1fr_520px] lg:gap-16">
+      <div class="min-w-0">
+        <ul class="grid gap-5">
+          {
+            t.services.promises.map((promise) => (
+              <li class="flex gap-3">
+                <Icon name="check" class="mt-1 h-5 w-5 shrink-0 text-accent" />
+                <span class="min-w-0">
+                  <span class="block font-medium text-ink">{promise.value}</span>
+                  <span class="block text-sm text-muted">{promise.label}</span>
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+
+        {
+          /* Half of this trade's enquiries arrive as a call, so the number is an
+            equal action here rather than a line in the footer. */
+        }
+        <div class="mt-10 border-t border-border pt-6">
+          <p class="t-label text-muted">{t.contacts.phoneLabel}</p>
+          <a href={telHref} class="mt-1 inline-flex items-center gap-3 text-2xl font-bold text-ink">
+            <Icon name="phone" class="h-5 w-5 text-accent" />
+            {phone}
+          </a>
+        </div>
+      </div>
+
+      <div class="min-w-0">
+        <LeadForm locale={locale} variant="full" id="full-form" />
+      </div>
+    </div>
+  </div>
+</section>
