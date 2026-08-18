@@ -42,11 +42,11 @@ const SERVICE_PARAM: Record<string, string> = {
   <div class="mx-auto max-w-page px-6 lg:px-10">
     <SectionHeading kicker={t.services.title} title={t.services.lead} />
 
-    <div class="mt-14 grid gap-x-6 gap-y-12 md:grid-cols-3">
+    <div class="mt-12 grid gap-x-6 gap-y-8 sm:gap-y-12 md:grid-cols-3">
       {
         t.services.items.map((item, index) => (
           <article class="flex flex-col" data-reveal style={`transition-delay:${index * 50}ms`}>
-            <div class="media aspect-[4/3]">
+            <div class="media aspect-[16/10] sm:aspect-[4/3]">
               <Image
                 src={IMAGES[item.id]}
                 alt={item.imageAlt}

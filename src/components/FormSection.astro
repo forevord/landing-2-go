@@ -26,7 +26,7 @@ const telHref = `tel:${phone.replace(/\s/g, '')}`;
 
     <div class="mt-12 grid gap-12 lg:grid-cols-[1fr_520px] lg:gap-16">
       <div class="min-w-0">
-        <ul class="grid gap-5">
+        <ul class="hidden gap-5 lg:grid">
           {
             t.services.promises.map((promise) => (
               <li class="flex gap-3">
@@ -44,7 +44,7 @@ const telHref = `tel:${phone.replace(/\s/g, '')}`;
           /* Half of this trade's enquiries arrive as a call, so the number is an
             equal action here rather than a line in the footer. */
         }
-        <div class="mt-10 border-t border-border pt-6">
+        <div class="border-t border-border pt-6 lg:mt-10">
           <p class="t-label text-muted">{t.contacts.phoneLabel}</p>
           <a href={telHref} class="mt-1 inline-flex items-center gap-3 text-2xl font-bold text-ink">
             <Icon name="phone" class="h-5 w-5 text-accent" />

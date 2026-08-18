@@ -34,11 +34,11 @@ const REASON_ICONS: readonly ReasonIcon[] = ['droplets', 'zap', 'users', 'receip
   <div class="mx-auto max-w-page px-6 lg:px-10">
     <SectionHeading kicker={t.pain.title} title={t.pain.lead} />
 
-    <ul class="mt-12 grid gap-5 md:grid-cols-3">
+    <ul class="mt-10 grid gap-4 sm:mt-12 sm:gap-5 md:grid-cols-3">
       {
         t.pain.items.map((item, index) => (
           <li
-            class="flex flex-col rounded-card border border-border bg-surface p-6 sm:p-7"
+            class="flex flex-col rounded-card border border-border bg-surface p-5 sm:p-7"
             data-reveal
             style={`transition-delay:${index * 60}ms`}
           >
@@ -59,7 +59,7 @@ const REASON_ICONS: readonly ReasonIcon[] = ['droplets', 'zap', 'users', 'receip
       }
     </ul>
 
-    <div class="mt-20">
+    <div class="mt-16 sm:mt-20">
       <SectionHeading kicker={t.why.title} title={t.why.lead} />
     </div>
 
@@ -67,7 +67,7 @@ const REASON_ICONS: readonly ReasonIcon[] = ['droplets', 'zap', 'users', 'receip
       /* Two by two, not four across: at 1440 four columns leave the body copy
         three or four words to a line. */
     }
-    <ul class="mt-12 grid gap-x-12 gap-y-10 sm:grid-cols-2">
+    <ul class="mt-10 grid gap-x-12 gap-y-8 sm:mt-12 sm:gap-y-10 sm:grid-cols-2">
       {
         t.why.items.map((item, index) => (
           <li class="flex gap-5" data-reveal style={`transition-delay:${index * 60}ms`}>

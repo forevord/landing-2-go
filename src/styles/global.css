@@ -569,6 +569,54 @@ body {
     color: rgb(255 255 255 / 0.82);
   }
 
+  /* ---------- Snap row ----------
+     Four process steps stacked on a phone cost 1472px, and a visitor reads at
+     most the first two before scrolling past the rest. Side by side they cost a
+     third of that and the fourth is one swipe away; the card peeking at the
+     right edge is what says so. The row is focusable, so it can be scrolled
+     from a keyboard as well as a thumb. Above md it goes back to being a band.
+     Only the scroll container moves — no layout runs while swiping. */
+
+  .snap-row {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1.5rem;
+    margin-inline: -1.5rem;
+    padding-inline: 1.5rem;
+    scrollbar-width: none;
+  }
+
+  .snap-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .snap-row > li {
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+    border: 1px solid rgb(255 255 255 / 0.2);
+    border-radius: var(--radius-card);
+    padding: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .snap-row {
+      display: grid;
+      gap: 0;
+      overflow: visible;
+      margin-inline: 0;
+      padding-inline: 0;
+    }
+
+    .snap-row > li {
+      flex: none;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+    }
+  }
+
   /* ---------- Chips ----------
      Scope, set as the words a buyer searches for. The hairline table this
      replaced read as a specification sheet, which is exactly what made the
