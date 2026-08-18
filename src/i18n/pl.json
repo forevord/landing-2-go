@@ -29,8 +29,8 @@
   },
   "hero": {
     "eyebrow": "Gdańsk i Pomorze",
-    "h1": "Bramy aluminiowe i kostka brukowa — jedna ekipa, jeden termin",
-    "lead": "Projektujemy, produkujemy i montujemy bramy spawane laserowo. Układamy kostkę brukową i wykonujemy roboty ziemne własnym sprzętem — bez czekania na podwykonawców.",
+    "h1": "Bramy aluminiowe i kostka brukowa pod klucz",
+    "lead": "Jedna ekipa, jeden termin: spawanie laserowe, brukarstwo i roboty ziemne własnym sprzętem.",
     "cta": "Odbierz bezpłatną wycenę",
     "ctaSecondary": "Zobacz realizacje",
     "microcopy": "Odpowiadamy w ciągu 24 godzin. Pomiar i wycena bez zobowiązań.",
@@ -202,6 +202,32 @@
       }
     ],
     "cta": "Zacznij od bezpłatnej wyceny"
+  },
+  "safety": {
+    "title": "Bezpieczna umowa",
+    "lead": "Cztery rzeczy ustalone na piśmie, zanim na działkę wjedzie pierwsza koparka.",
+    "items": [
+      {
+        "title": "Umowa z terminem",
+        "desc": "Zakres, harmonogram i data montażu zapisane w umowie. Każdą zmianę zakresu ustalamy z Tobą przed wykonaniem, nie po.",
+        "icon": "file-signature"
+      },
+      {
+        "title": "Płatność w etapach",
+        "desc": "Zaliczka na materiał, część po dostawie, reszta po odbiorze. Nie pobieramy przedpłaty za całość.",
+        "icon": "receipt"
+      },
+      {
+        "title": "Gwarancja na piśmie",
+        "desc": "5 lat na konstrukcję i spoiny, 2 lata gwarancji producenta na automatykę. Dokumenty przekazujemy przy odbiorze.",
+        "icon": "shield-check"
+      },
+      {
+        "title": "Firma z rejestrem",
+        "desc": "Pełne dane spółki, NIP i adres siedziby znajdziesz w stopce. Umowę podpisujemy przed rozpoczęciem prac.",
+        "icon": "check"
+      }
+    ]
   },
   "gallery": {
     "title": "Realizacje",

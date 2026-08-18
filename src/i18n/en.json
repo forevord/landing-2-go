@@ -29,8 +29,8 @@
   },
   "hero": {
     "eyebrow": "Gdańsk and Pomerania",
-    "h1": "Aluminium gates and block paving — one crew, one deadline",
-    "lead": "We design, manufacture and install laser-welded gates. We lay block paving and handle earthworks with our own machinery — so you are never waiting on a subcontractor.",
+    "h1": "Aluminium gates and block paving, turnkey",
+    "lead": "One crew, one date: laser-welded gates, paving and earthworks with our own machines.",
     "cta": "Get a free quote",
     "ctaSecondary": "See our work",
     "microcopy": "We reply within 24 hours. Survey and quote at no cost, no obligation.",
@@ -202,6 +202,32 @@
       }
     ],
     "cta": "Start with a free quote"
+  },
+  "safety": {
+    "title": "A contract you can hold us to",
+    "lead": "Four things agreed in writing before the first excavator reaches your plot.",
+    "items": [
+      {
+        "title": "A contract with a date",
+        "desc": "Scope, schedule and installation date written into the contract. Any change of scope is agreed with you before the work, not after.",
+        "icon": "file-signature"
+      },
+      {
+        "title": "Payment in stages",
+        "desc": "A deposit for materials, part on delivery, the rest on handover. We never take the full amount up front.",
+        "icon": "receipt"
+      },
+      {
+        "title": "Warranty in writing",
+        "desc": "5 years on the structure and the welds, 2 years of manufacturer warranty on the automation. Documents handed over on completion.",
+        "icon": "shield-check"
+      },
+      {
+        "title": "A registered company",
+        "desc": "Full company details, tax number and registered address are in the footer. The contract is signed before work begins.",
+        "icon": "check"
+      }
+    ]
   },
   "gallery": {
     "title": "Our work",
