@@ -6,6 +6,81 @@
 
 ---
 
+## 2026-08-18 — conversion and design pass
+
+The client's verdict on the Custo-derived design was that the page read as a product
+card rather than a landing page. A marketing audit and a design audit were run against
+the built page (both are with the client, in Russian). Two sprints of the resulting plan
+are in the tree; the audits' remaining items are listed at the foot of this file.
+
+**Direction chosen by the client:** "Baltic contractor" — paper white and sand `#f1efec`,
+one dark anchor, accent petrol `#14424c`, Inter at 400/600/700, documentary photography.
+The gunmetal canvas and the all-achromatic rule are gone; see `CLAUDE.md`.
+
+**What changed**
+
+- *The first screen.* The photograph runs at full strength behind `.hero-scrim` instead of
+  a flat 20% veil, so there is a gate on the page again. Two actions — the quote pill and
+  the telephone — plus a four-figure proof line. The 19vw wordmark is gone. The band fell
+  from 1009px to 834px, and the whole page from 10 505px to 9 722px.
+- *Every quote button resolves to the nearest rendered form* (`src/scripts/quote-cta.ts`).
+  They all used to point at `#formularz` at the foot of the page, including the two beside
+  the hero form. The href stays as the no-JS fallback.
+- *The sticky mobile bar* stays out of the way until the first screen is behind the visitor
+  and hides again whenever a form is on screen. It used to cover the foot of the hero card
+  it was pointing at.
+- *`TrustBar` was folded into the hero* and the services block's promise strip became
+  `Promises.astro`, a 115px ledge under the hero — the free measurement, the lead time and
+  the warranty are now the first thing the page says after the offer.
+- *`Pain` and `WhyUs` became `Arguments.astro`* on sand. They argued the same three points
+  in two bands a screen apart with the services block wedged between them.
+- *Service cards* lost the card border and the hairline spec table: 4:3 photograph, price,
+  scope as chips, an arrow link each, and one filled action for the whole block.
+- *The form section is two columns* (`FormSection.astro`): arguments and the telephone on
+  the left, the card on the right with paired fields and the page's only shadow. 1286px → 1069px.
+- *`QuickQuote.astro`* puts a two-field form under the services block on mobile only. The
+  first form a phone visitor met used to be at 12 000px; it is now at 3 763px.
+- *Campaign attribution* (`src/scripts/tracking.ts`): `utm_*`, `gclid` and the landing URL
+  are captured first-touch into `sessionStorage`, carried as hidden fields, and reach both
+  the email and the Telegram message. Without `gclid` there are no offline conversions in
+  Google Ads and no readable A/B results. Nothing is written to a cookie, so the consent
+  position is unchanged.
+- *Header* is 64px with the number set at 17px/600 rather than 14px grey.
+
+- *Section headings* moved into `SectionHeading.astro`: a full-width petrol band with the
+  kicker above the heading, inverted to a white wash on the graphite sections. The label in
+  a 280px rail plus a narrow heading measure was naming the section rather than selling it,
+  and `text-wrap: balance` on `.t-h2` was pulling every heading into a five-line block about
+  430px wide — both are gone. The two argument headings were rewritten from descriptions
+  ("three things we hear most often") into promises ("we will not vanish with your deposit…").
+
+- *Contacts* opens on the same heading band as every other section, the telephone is the
+  largest object in it, and the map facade says what it is instead of showing a black
+  rectangle with a button floating in it. Watch the `<dl>` here: every `dt`/`dd` pair has to
+  be a *direct* child group, and a second level of div nesting fails WCAG 1.3.1 (axe:
+  `dlitem`). White at 75% over the facade's own wash measures 4.34:1 and fails; plain white
+  on it is 6.54:1.
+- *Footer* wordmark dropped from 57px to 24px — it was larger than the logo in the header —
+  and the band lost the ~180px of empty space under it. 571px → 480px.
+- *Copy.* Four section headings were rewritten from descriptions into promises: the two
+  argument bands, the services band ("Brama, kostka i roboty ziemne — jedna ekipa, jeden
+  termin.") and the gallery ("Zobacz, jak to wygląda po odbiorze."). PL and EN together.
+
+**Unused after this pass and safe to delete:** `src/components/Pain.astro`,
+`src/components/WhyUs.astro`, `src/components/TrustBar.astro`.
+
+**The hero contrast probe.** The scrim replaced the opacity veil, so the old measurements do
+not apply. The procedure: hide the hero's text layer, screenshot the band, and take the
+brightest pixel under each text bounding box at 360, 390, 414, 768, 1024, 1280, 1440 and
+1780px. Exclude anything inside `.lead-form` — the card is paper white and gives false
+failures. Worst case as measured: **6.97:1** against a 4.5:1 floor. Re-run it after any
+change to the photograph, the band colour or the scrim stops.
+
+**Verification at the end of the pass:** `astro check` 0 errors, build 6 pages, `check:copy`
+clean, vitest 25 passed with the one intentional demo-data failure.
+
+---
+
 ## Where the project stands
 
 The site is functionally complete and visually mid-redesign.
@@ -82,7 +157,7 @@ Axe cannot catch any of this — contrast over a photograph is not something it 
 
 ## Open item 3 — demo data must be replaced before launch
 
-`src/i18n/{pl,en}.json` carry invented values: trust figures (12 years, 380 projects, 5-year warranty), phone `+48 601 234 567`, email, price from 6 500 PLN, lead time, company name and address. The NIP is deliberately impossible (`000-000-00-00`) so it cannot collide with a real company.
+`src/i18n/{pl,en}.json` carry invented values: trust figures (12 years, 380 projects, 5-year warranty), phone `+48 601 234 567`, email, lead time, company name and address, and the three service prices added on 2026-08-18 (`services.items[].price`: 6 500 zł, 180 zł/m², individual quote — the first matches the figure the FAQ already quoted). The NIP is deliberately impossible (`000-000-00-00`) so it cannot collide with a real company.
 
 `_meta.demo: true` marks this, and `tests/i18n.test.ts` fails while it is true. Replace the values, set the flag to `false`, and the suite goes green. Do not clear the flag while the values are still invented.
 
