@@ -12,9 +12,7 @@ interface Props {
 
 const { locale, routeKey, phone, variant = 'solid' } = Astro.props;
 const isOverlay = variant === 'overlay';
-const headerClass = isOverlay
-  ? 'sticky top-0 z-40'
-  : 'sticky top-0 z-40 bg-ink text-surface';
+const headerClass = isOverlay ? 'sticky top-0 z-40' : 'sticky top-0 z-40 bg-ink text-surface';
 const t = getDictionary(locale);
 const other = otherLocale(locale);
 const otherHref = route(routeKey, other);
@@ -25,15 +23,17 @@ const telHref = `tel:${phone.replace(/\s/g, '')}`;
 const phoneAria = t.topbar.phoneAria.replace('{{TELEFON}}', phone);
 ---
 
-{/* Transparent over the hero rather than a solid bar, so the veiled photograph
+{
+  /* Transparent over the hero rather than a solid bar, so the veiled photograph
     and the header read as one field, then paper white once the page moves —
     the reference's own scroll behaviour. Nothing here is dimmed: over the veil,
     75% black measures 4.06:1, and on the solid variant it was black on a black
-    bar and could not be read at all. */}
-{isOverlay && <div data-topbar-sentinel aria-hidden="true" class="h-px w-full"></div>}
+    bar and could not be read at all. */
+}
+{isOverlay && <div data-topbar-sentinel aria-hidden="true" class="h-px w-full" />}
 <header class={headerClass} data-topbar={isOverlay ? '' : undefined}>
-  <div class="mx-auto flex h-20 max-w-page items-center gap-6 px-6 lg:px-10">
-    <a href={route('home', locale)} class="text-lg font-medium">
+  <div class="mx-auto flex h-16 max-w-page items-center gap-6 px-6 lg:px-10">
+    <a href={route('home', locale)} class="text-xl font-bold tracking-tight">
       {t.topbar.brand}
     </a>
 
@@ -45,11 +45,11 @@ const phoneAria = t.topbar.phoneAria.replace('{{TELEFON}}', phone);
     <div class="ml-auto flex items-center gap-1 sm:gap-4">
       <a
         href={telHref}
-        class="flex min-h-11 items-center gap-2 px-2 text-sm tracking-tight"
+        class="flex min-h-11 items-center gap-2 px-2 text-[17px] font-semibold tracking-tight"
         aria-label={phoneAria}
       >
-        <Icon name="phone" class="h-4 w-4" />
-        <span class="hidden lg:inline">{phone}</span>
+        <Icon name="phone" class="h-[18px] w-[18px]" />
+        <span class="hidden md:inline">{phone}</span>
       </a>
 
       <a
@@ -61,7 +61,7 @@ const phoneAria = t.topbar.phoneAria.replace('{{TELEFON}}', phone);
         {other.toUpperCase()}
       </a>
 
-      <a href="#formularz" class="btn btn-soft hidden h-11 min-h-11 sm:inline-flex">
+      <a href="#formularz" data-cta-quote class="btn btn-soft hidden h-11 min-h-11 sm:inline-flex">
         <span>{t.topbar.cta}</span>
       </a>
     </div>

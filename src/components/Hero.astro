@@ -1,91 +1,104 @@
 ---
 import { Image } from 'astro:assets';
-import heroPhoto from '../assets/photos/work-1.jpg';
+import heroPhoto from '../assets/photos/hero.jpg';
 import LeadForm from './LeadForm.astro';
+import Icon from './Icon.astro';
 import { getDictionary, type Locale } from '../i18n';
 
 interface Props {
   locale: Locale;
+  phone: string;
 }
 
-const { locale } = Astro.props;
+const { locale, phone } = Astro.props;
 const t = getDictionary(locale);
+const telHref = `tel:${phone.replace(/\s/g, '')}`;
 ---
 
-{/* The gunmetal canvas with reversed paper-white type, exactly as the reference
-    sets it. Note what it costs: white on #9ea29f is 2.58:1, under both the
-    4.5:1 floor for body text and the 3:1 floor for large text, so this band
-    fails WCAG AA by the reference's own design. Obsidian on the same canvas is
-    8.12:1, and paper white on graphite #4b514d is 8.12:1 — either of those
-    keeps the look legal. Client's call, made twice and recorded here. */}
+{
+  /* The band is graphite with reversed paper-white type. What changed against
+    the previous version is how the photograph is held: a veil at 20% opacity
+    turned the picture into grey noise and cost the first screen its only
+    evidence, so the photograph now runs at full strength behind a directional
+    scrim (`.hero-scrim`). The scrim, not the opacity, is what buys the
+    contrast — see the measured floors in global.css. */
+}
 <section
-  class="relative -mt-20 flex min-h-[680px] flex-col justify-center overflow-hidden bg-graphite pt-28 text-white lg:min-h-[820px] lg:pt-32"
+  class="relative -mt-16 flex min-h-[520px] flex-col justify-center overflow-hidden bg-graphite pt-20 pb-10 text-white lg:min-h-[640px] lg:pt-24 lg:pb-16"
 >
-  {/* A dark workshop rather than the white brick wall: on a graphite band a
-      light photograph fights reversed type, and this one reads as material,
-      which is what the reference asks its imagery to do. Fully desaturated —
-      the sparks are orange, and the palette is achromatic by design.
-
-      20% is the ceiling, and it is set by the brightest pixel the picture
-      contains rather than by its mood: white at 20% over graphite is 4.76:1,
-      at 25% it is 4.21:1 and the 19px lead fails. The dark photograph measured
-      24% against the old one's 26%, so the swap buys tone, not headroom. */}
-  {/* This image is the LCP element, and sparks are the worst case a codec can
-      be handed — fine bright detail everywhere. At the settings the flat brick
-      wall it replaced used, it came to 124kB against that wall at 11kB, and
-      cost 0.3s of LCP.
-
-      None of the detail survives 20% opacity and full desaturation, so `sizes`
-      is a flat 800px rather than the layout width: it stops a 2x phone from
-      pulling a 1200w source for a backdrop nobody can resolve. Do not copy this
-      onto a photograph that is actually looked at. */}
-  <div class="absolute inset-0 overflow-hidden">
+  <div class="absolute inset-0">
     <Image
       src={heroPhoto}
       alt=""
-      widths={[480, 800, 1200]}
-      sizes="800px"
+      widths={[640, 1024, 1600]}
+      sizes="100vw"
       loading="eager"
       fetchpriority="high"
       decoding="sync"
-      quality={30}
-      class="h-full w-full object-cover opacity-20 grayscale contrast-105"
+      quality={58}
+      class="h-full w-full object-cover grayscale-[0.7] contrast-105"
     />
+    <div class="hero-scrim absolute inset-0"></div>
   </div>
 
-  <div class="relative mx-auto w-full max-w-page px-6 lg:px-10">
-    <div class="grid items-start gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-      {/* min-w-0 on both columns: a grid item defaults to min-width:auto and
-          refuses to shrink under its content's minimum, which pushed the whole
-          band 6px past the viewport at 320. */}
-      <div class="min-w-0 lg:pt-6">
-        <p class="t-label max-w-[42ch]">{t.hero.eyebrow}</p>
-        <h1 class="t-display mt-6 max-w-[18ch]">{t.hero.h1}</h1>
-        <p class="t-lead mt-7 max-w-[46ch]">{t.hero.lead}</p>
+  {
+    /* The sticky mobile bar watches this: it stays out of the way until the
+      visitor has moved past the first screen. */
+  }
+  <div data-sticky-sentinel aria-hidden="true" class="absolute top-[480px] left-0 h-px w-px"></div>
 
-        <div class="mt-9 flex flex-wrap items-center gap-4">
-          {/* On wide screens the form is already beside this text, so a second
-              primary button would only compete with it. */}
-          <a href="#formularz" class="btn btn-paper lg:hidden">{t.hero.cta}</a>
-          {/* The reference pairs one pill with an arrow link, never two pills. */}
-          <a href="#realizacje" class="link-arrow">{t.hero.ctaSecondary}</a>
+  <div class="relative mx-auto w-full max-w-page px-6 lg:px-10">
+    <div class="grid items-start gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+      {
+        /* min-w-0 on both columns: a grid item defaults to min-width:auto and
+          refuses to shrink under its content's minimum, which pushed the whole
+          band 6px past the viewport at 320. */
+      }
+      <div class="min-w-0 lg:pt-2">
+        <p class="t-label max-w-[42ch]">{t.hero.eyebrow}</p>
+        <h1 class="t-display mt-5 max-w-[22ch]">{t.hero.h1}</h1>
+        <p class="t-lead mt-5 max-w-[46ch]">{t.hero.lead}</p>
+
+        {
+          /* Two actions, not one. The quote pill resolves to whichever form is
+            nearest (see scripts/quote-cta.ts); the telephone is the second
+            action because in this trade roughly half the enquiries arrive as a
+            call, and burying the number in the header loses them. */
+        }
+        <div class="mt-7 flex flex-wrap items-center gap-3">
+          <a href="#formularz" data-cta-quote class="btn btn-paper">{t.hero.cta}</a>
+          <a href={telHref} class="btn btn-ghost text-white">
+            <Icon name="phone" class="h-4 w-4" />
+            <span>{phone}</span>
+          </a>
         </div>
+
+        {
+          /* The proof line the first screen had none of. These are the same four
+            figures the standalone trust band used to carry a screen further
+            down; carrying them twice would be padding, so that band is gone. */
+        }
+        <h2 class="sr-only">{t.trust.srTitle}</h2>
+        <ul class="hero-proof mt-8 max-w-[46ch] lg:max-w-none">
+          {
+            t.trust.items.map((item) => (
+              <li>
+                <span class="t-num block">{item.value}</span>
+                <span class="mt-1 block text-sm text-white/80">{item.label}</span>
+              </li>
+            ))
+          }
+        </ul>
       </div>
 
-      <div class="min-w-0">
+      {
+        /* Below lg the card cannot fit above the fold with the headline, and the
+          sticky bar clips its foot — so the pill above carries the mobile path
+          to the full form instead. */
+      }
+      <div class="hidden min-w-0 lg:block">
         <LeadForm locale={locale} variant="compact" id="hero-form" />
       </div>
     </div>
   </div>
-
-  {/* The reference's display wordmark: the brand set at architectural size
-      along the foot of the canvas, bleeding past the content column. It is
-      decorative — the name is already the first link in the header — so it is
-      hidden from assistive technology rather than read out a third time. */}
-  <p
-    aria-hidden="true"
-    class="pointer-events-none mt-16 -mb-[2.2vw] w-full text-center leading-[0.78] font-medium tracking-tight select-none text-[19vw] lg:mt-24"
-  >
-    {t.topbar.brand}
-  </p>
 </section>

@@ -1,4 +1,5 @@
 ---
+import SectionHeading from './SectionHeading.astro';
 import { Image } from 'astro:assets';
 import BeforeAfter from './BeforeAfter.astro';
 import { getDictionary, type Locale } from '../i18n';
@@ -20,15 +21,14 @@ const IMAGES = [heroPhoto, pavingPhoto, earthworksPhoto, work1Photo, work2Photo,
 
 <section id="realizacje" class="section">
   <div class="mx-auto max-w-page px-6 lg:px-10">
-    <div class="split">
-      <p class="t-label text-ink">{t.gallery.title}</p>
-      <h2 class="t-h2 max-w-[26ch] text-ink">{t.gallery.lead}</h2>
-    </div>
+    <SectionHeading kicker={t.gallery.title} title={t.gallery.lead} />
 
-    {/* The reference's product image card grid: three up on desktop, one on
+    {
+      /* The reference's product image card grid: three up on desktop, one on
         mobile. The horizontal snap-scroller this replaced hid four of the six
-        photographs behind a gesture. */}
-    <ul class="mt-20 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        photographs behind a gesture. */
+    }
+    <ul class="mt-12 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-3">
       {
         t.gallery.items.map((item, index) => (
           <li>
