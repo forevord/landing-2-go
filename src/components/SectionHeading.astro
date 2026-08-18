@@ -1,0 +1,29 @@
+---
+interface Props {
+  /** Small kicker above the heading. Omitted where the section has no label. */
+  kicker?: string;
+  title: string;
+  /** Optional supporting line; it sits beside the heading on wide screens. */
+  sub?: string;
+  /** `dark` is for the graphite bands, where petrol on graphite is 1.6:1. */
+  tone?: 'accent' | 'dark';
+  id?: string;
+}
+
+const { kicker, title, sub, tone = 'accent', id } = Astro.props;
+---
+
+{
+  /* The section heading used to be the reference's journal block: a 15px label
+    in a 280px rail and a heading squeezed into a narrow measure, with a third
+    of the row left empty. It named the section instead of selling it.
+
+    Now every section opens on a band the full width of the content column. The
+    width is the point: at a 40ch measure the same sentence lands in two lines
+    instead of five, so the band is louder and shorter at once. */
+}
+<div class:list={['sec-head', tone === 'dark' ? 'sec-head--dark' : 'sec-head--accent']}>
+  {kicker && <p class="sec-head__kicker">{kicker}</p>}
+  <h2 class="sec-head__title" id={id}>{title}</h2>
+  {sub && <p class="sec-head__sub">{sub}</p>}
+</div>
