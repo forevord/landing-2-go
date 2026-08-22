@@ -1,8 +1,10 @@
 # Handoff — StalBruk landing page
 
 **Date:** 2026-08-14
-**Branch:** `feat/landing-mvp` (pushed, `6b49be4`)
-**Other branches:** `redesign-wip` (`3c6bd3f`, the imported Custo reference), `main` (docs only)
+**Branch:** `main` is the trunk and the default branch; feature work branches off it.
+Historical note: this file was first written on `feat/landing-mvp` at `6b49be4`, before that
+branch was merged and retired.
+**Other branches:** `redesign-wip` (`3c6bd3f`, the imported Custo reference)
 
 ---
 
