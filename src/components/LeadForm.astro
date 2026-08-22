@@ -19,11 +19,23 @@ const clientMessages = {
   errors: f.errors,
   submitting: f.submitting,
 };
+
+// The campaign fields the form carries invisibly. Filled by scripts/tracking.ts
+// on load; empty when the visitor arrived without any of them.
+const TRACKING_FIELDS = [
+  'utm_source',
+  'utm_medium',
+  'utm_campaign',
+  'utm_term',
+  'utm_content',
+  'gclid',
+  'page_url',
+] as const;
 ---
 
 <form
   id={id}
-  class="lead-form grid gap-4 rounded-card border border-border bg-surface p-6 text-primary sm:p-8"
+  class="lead-form relative grid gap-4 rounded-card border border-border bg-surface p-6 text-primary sm:p-8"
   data-variant={variant}
   data-messages={JSON.stringify(clientMessages)}
   novalidate
@@ -32,56 +44,66 @@ const clientMessages = {
   {isFull && <p class="text-sm text-muted">{f.lead}</p>}
 
   {
-    isFull && (
-      <label class="grid gap-2">
-        <span class="t-label text-ink">{f.fields.name.label}</span>
-        <input
-          type="text"
-          name="name"
-          autocomplete="given-name"
-          placeholder={f.fields.name.placeholder}
-         
-          required
-          aria-describedby={`${id}-name-error`}
-        />
-        <span class="error text-sm text-error" id={`${id}-name-error`} data-error-for="name" aria-live="polite" />
-      </label>
-    )
+    /* Name and telephone share a row, as do service and town: six fields in a
+      single column made the section the second longest on the page. */
   }
+  <div class:list={['grid gap-4', isFull && 'sm:grid-cols-2']}>
+    {
+      isFull && (
+        <label class="grid gap-2">
+          <span class="t-label text-ink">{f.fields.name.label}</span>
+          <input
+            type="text"
+            name="name"
+            autocomplete="given-name"
+            placeholder={f.fields.name.placeholder}
+            required
+            aria-describedby={`${id}-name-error`}
+          />
+          <span
+            class="error text-sm text-error"
+            id={`${id}-name-error`}
+            data-error-for="name"
+            aria-live="polite"
+          />
+        </label>
+      )
+    }
 
-  <label class="grid gap-2">
-    <span class="t-label text-ink">{f.fields.phone.label}</span>
-    <input
-      type="tel"
-      name="phone"
-      inputmode="tel"
-      autocomplete="tel"
-      placeholder={f.fields.phone.placeholder}
-     
-      required
-      aria-describedby={`${id}-phone-hint ${id}-phone-error`}
-    />
-    <span class="text-sm text-muted" id={`${id}-phone-hint`}>{f.fields.phone.hint}</span>
-    <span class="error text-sm text-error" id={`${id}-phone-error`} data-error-for="phone" aria-live="polite"></span>
-  </label>
+    <label class="grid gap-2">
+      <span class="t-label text-ink">{f.fields.phone.label}</span>
+      <input
+        type="tel"
+        name="phone"
+        inputmode="tel"
+        autocomplete="tel"
+        placeholder={f.fields.phone.placeholder}
+        required
+        aria-describedby={`${id}-phone-hint ${id}-phone-error`}
+      />
+      <span class="text-sm text-muted" id={`${id}-phone-hint`}>{f.fields.phone.hint}</span>
+      <span
+        class="error text-sm text-error"
+        id={`${id}-phone-error`}
+        data-error-for="phone"
+        aria-live="polite"></span>
+    </label>
 
-  <label class="grid gap-2">
-    <span class="t-label text-ink">{f.fields.service.label}</span>
-    <select
-      name="service"
-     
-      required
-      aria-describedby={`${id}-service-error`}
-    >
-      <option value="">{f.fields.service.placeholder}</option>
-      {f.serviceOptions.map((o) => <option value={o.value}>{o.label}</option>)}
-    </select>
-    <span class="error text-sm text-error" id={`${id}-service-error`} data-error-for="service" aria-live="polite"></span>
-  </label>
+    <label class="grid gap-2">
+      <span class="t-label text-ink">{f.fields.service.label}</span>
+      <select name="service" required aria-describedby={`${id}-service-error`}>
+        <option value="">{f.fields.service.placeholder}</option>
+        {f.serviceOptions.map((o) => <option value={o.value}>{o.label}</option>)}
+      </select>
+      <span
+        class="error text-sm text-error"
+        id={`${id}-service-error`}
+        data-error-for="service"
+        aria-live="polite"></span>
+    </label>
 
-  {
-    isFull && (
-      <>
+    {
+      isFull && (
         <label class="grid gap-2">
           <span class="t-label text-ink">{f.fields.city.label}</span>
           <input
@@ -89,13 +111,23 @@ const clientMessages = {
             name="city"
             autocomplete="address-level2"
             placeholder={f.fields.city.placeholder}
-           
             required
             aria-describedby={`${id}-city-error`}
           />
-          <span class="error text-sm text-error" id={`${id}-city-error`} data-error-for="city" aria-live="polite" />
+          <span
+            class="error text-sm text-error"
+            id={`${id}-city-error`}
+            data-error-for="city"
+            aria-live="polite"
+          />
         </label>
+      )
+    }
+  </div>
 
+  {
+    isFull && (
+      <>
         <label class="grid gap-2">
           <span class="t-label text-ink">{`${f.fields.email.label} (${f.fields.email.optional})`}</span>
           <input
@@ -103,35 +135,48 @@ const clientMessages = {
             name="email"
             autocomplete="email"
             placeholder={f.fields.email.placeholder}
-           
             aria-describedby={`${id}-email-error`}
           />
-          <span class="error text-sm text-error" id={`${id}-email-error`} data-error-for="email" aria-live="polite" />
+          <span
+            class="error text-sm text-error"
+            id={`${id}-email-error`}
+            data-error-for="email"
+            aria-live="polite"
+          />
         </label>
 
         <label class="grid gap-2">
           <span class="t-label text-ink">{`${f.fields.message.label} (${f.fields.message.optional})`}</span>
-          <textarea
-            name="message"
-            rows="4"
-            placeholder={f.fields.message.placeholder}
-          />
+          <textarea name="message" rows="3" placeholder={f.fields.message.placeholder} />
         </label>
       </>
     )
   }
 
   <label class="flex items-start gap-3 text-sm">
-    <input type="checkbox" name="gdpr" class="mt-1 h-5 w-5" required aria-describedby={`${id}-gdpr-error`} />
+    <input
+      type="checkbox"
+      name="gdpr"
+      class="mt-1 h-5 w-5"
+      required
+      aria-describedby={`${id}-gdpr-error`}
+    />
     <span>
       {f.fields.gdpr.label}{' '}
       <a href={privacyHref} class="underline">{f.fields.gdpr.linkText}</a>
     </span>
   </label>
-  <span class="error text-sm text-error" id={`${id}-gdpr-error`} data-error-for="gdpr" aria-live="polite"></span>
+  <span
+    class="error text-sm text-error"
+    id={`${id}-gdpr-error`}
+    data-error-for="gdpr"
+    aria-live="polite"></span>
 
   {/* Honeypot: hidden from humans, irresistible to bots. */}
-  <div class="pointer-events-none absolute left-[-9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+  <div
+    class="pointer-events-none absolute left-[-9999px] h-0 w-0 overflow-hidden"
+    aria-hidden="true"
+  >
     <label>
       Leave this field empty
       <input type="text" name="hp" tabindex="-1" autocomplete="off" />
@@ -140,6 +185,7 @@ const clientMessages = {
 
   <input type="hidden" name="source" value={isFull ? 'full' : 'hero'} />
   <input type="hidden" name="thanks" value={route('thanks', locale)} />
+  {TRACKING_FIELDS.map((field) => <input type="hidden" name={field} value="" data-tracking />)}
 
   <button type="submit" class="btn btn-primary w-full" data-submit>
     <span data-submit-label>{isFull ? f.submit : f.submitCompact}</span>
@@ -147,14 +193,11 @@ const clientMessages = {
 
   <p class="text-sm text-muted">{isFull ? f.microcopy : t.hero.microcopy}</p>
 
-  <p
-    class="hidden rounded-control bg-error/10 p-3 text-sm text-error"
-    data-form-error
-    role="alert"
-  >
+  <p class="hidden rounded-control bg-error/10 p-3 text-sm text-error" data-form-error role="alert">
   </p>
 </form>
 
 <script>
+  import '../scripts/tracking';
   import '../scripts/form';
 </script>

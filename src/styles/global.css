@@ -6,25 +6,41 @@
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
-  unicode-range: U+0000-00FF, U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
-    U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  unicode-range:
+    U+0000-00FF, U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113,
+    U+2C60-2C7F, U+A720-A7FF;
 }
 
-/* Palette and scale follow redesign/DESIGN.md (the Custo reference), with one
-   correction. The reference reverses Paper White onto the gunmetal canvas,
-   which measures 2.58:1 and fails even the 3:1 large-text floor. Obsidian on
-   gunmetal is 8.12:1 — and the reference itself calls Obsidian the primary
-   ink — so the canvas keeps its colour and the type goes black.
+/* Palette and scale started from redesign/DESIGN.md (the Custo reference) and
+   have since departed from it in two places, at the client's direction.
 
-   Token names are unchanged from the previous system on purpose: the twelve
-   components already reference them, and renaming would be churn for no
-   visible gain. */
+   1. The gunmetal canvas #9ea29f is gone. It was the reference's second
+      surface, but it forbids white type (2.59:1), reads as an unfilled
+      placeholder rather than a material, and gave the page nothing the paper
+      surface did not. Its replacement is sand #f1efec: black on it measures
+      18.3:1, the muted grey 5.25:1.
+
+   2. The system is no longer wholly achromatic. A page whose only emphasis is
+      one black pill has no way to say what is important, and the pill loses
+      its force the eighth time it appears. The accent is a deep petrol
+      #14424c — cold, metallic, adjacent to the aluminium the company works in,
+      and none of the "cheap contractor" that the orange the client rejected
+      carried. White on it is 10.98:1, and it is 9.56:1 on sand.
+
+      The one place it cannot go is a dark band: petrol on obsidian is 1.91:1
+      and on graphite 1.6:1. There the emphasis stays white.
+
+   Token names are otherwise unchanged: the twelve components already reference
+   them, and renaming would be churn for no visible gain. */
 @theme {
   --color-ink: #000000; /* obsidian: primary ink and dark surfaces */
   --color-graphite: #4b514d; /* anodised graphite; white on it 8.12:1 */
-  --color-gunmetal: #9ea29f; /* the canvas — BLACK text only, 8.12:1 */
+  --color-sand: #f1efec; /* second surface — black on it 18.3:1 */
+  --color-accent: #14424c; /* petrol; white on it 10.98:1, on sand 9.56:1 */
+  --color-accent-hover: #0e323a; /* white on it 13.67:1 */
+  --color-accent-soft: #e7eeef; /* accent at rest: chips, quiet fills */
   --color-primary: #000000;
-  --color-muted: #5f6462; /* 5.05:1 on paper — never place on gunmetal */
+  --color-muted: #5f6462; /* 5.05:1 on paper, 5.25:1 on sand */
   --color-surface: #ffffff;
   --color-border: #d8d8d8; /* aluminium hairline */
   /* The reference has no chromatic colour at all — no accent exists to borrow.
@@ -62,6 +78,10 @@
 
 html {
   scroll-behavior: smooth;
+  /* The sticky header and the sticky mobile bar both overlap anchored targets;
+     without these an anchored form lands underneath one of them. */
+  scroll-padding-top: 96px;
+  scroll-padding-bottom: 96px;
 }
 
 body {
@@ -92,7 +112,7 @@ body {
      reference's own spacing scale. */
 
   .section {
-    padding-block: 76px;
+    padding-block: 56px;
   }
 
   /* The reference's Two-Column Text Block: a 280px caption rail on the left,
@@ -122,26 +142,42 @@ body {
   .t-display {
     font-size: clamp(2.375rem, 4.4vw, 3.5625rem); /* 38 → 57px */
     line-height: 1.02;
-    font-weight: 500;
+    font-weight: 600;
     text-wrap: balance;
   }
 
+  /* No `text-wrap: balance` here. Balancing hunts for equal line lengths, and
+     on a 70-character heading it finds them by pulling the whole block in to
+     about 430px — which is why every section heading was setting as a narrow
+     four-line poem with a third of the row left empty. The measure is set by
+     max-width at the call site instead. */
   .t-h2 {
     font-size: clamp(1.75rem, 3vw, 2.375rem); /* 28 → 38px */
     line-height: 1.15;
-    font-weight: 500;
-    text-wrap: balance;
+    font-weight: 600;
   }
 
   .t-h3 {
     font-size: clamp(1.375rem, 2.2vw, 1.875rem); /* 22 → 30px */
     line-height: 1.25;
-    font-weight: 500;
+    font-weight: 600;
+  }
+
+  /* Figures — trust bar, step numbers, prices. The reference sets everything at
+     one weight, which left a headline, a card title and the number 380 reading
+     as the same object. Numerals carry the extra weight instead, and tabular
+     figures stop a row of them from dancing as the values change. */
+  .t-num {
+    font-size: clamp(1.375rem, 2.6vw, 2.25rem); /* 22 → 36px */
+    line-height: 1.05;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
   }
 
   .t-lead {
-    font-size: 1.1875rem;
-    line-height: 1.42;
+    font-size: clamp(1.0625rem, 1.4vw, 1.1875rem); /* 17 → 19px */
+    line-height: 1.45;
   }
 
   /* Small kicker marking the start of a section, before the big heading
@@ -150,7 +186,7 @@ body {
     font-size: 0.9375rem;
     line-height: 1.43;
     letter-spacing: 0.02em;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   /* ---------- Media ----------
@@ -215,6 +251,14 @@ body {
   .btn-ghost {
     border: 1px solid currentColor;
     background: transparent;
+  }
+
+  /* The secondary action on a light surface. Petrol rather than obsidian, so
+     the filled black pill keeps sole ownership of the primary action. */
+  .btn-outline {
+    border: 1px solid var(--color-accent);
+    background: transparent;
+    color: var(--color-accent);
   }
 
   /* The reference's own header pill, which its written spec describes as
@@ -291,6 +335,13 @@ body {
      the focus ring stays, because the reference dropping it is a choice a
      keyboard user pays for. */
 
+  /* Fields sit at the top of their track: the telephone field carries a hint
+     line and the name beside it does not, and without this the two inputs in a
+     paired row land at different heights. */
+  .lead-form label.grid {
+    align-content: start;
+  }
+
   .lead-form :where(input:not([type='checkbox']), select, textarea) {
     /* A textarea carries an intrinsic width from its `cols` default, and a grid
        track sized to max-content will honour it. Once these fields gained
@@ -311,11 +362,309 @@ body {
   }
 
   .lead-form :where(input, select, textarea):focus {
-    border-color: var(--color-ink);
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgb(20 66 76 / 0.16);
+  }
+
+  /* The reference bans shadows, and on a product gallery that is right. Here
+     the form is the one thing on the page that has to read as a surface you
+     act on rather than another paragraph, so it is the single exception. */
+  .lead-form[data-variant='full'] {
+    box-shadow: 0 16px 40px rgb(0 0 0 / 0.1);
+  }
+
+  .lead-form[data-variant='compact'] {
+    box-shadow: 0 24px 60px rgb(0 0 0 / 0.28);
   }
 
   .lead-form ::placeholder {
     color: var(--color-muted);
+  }
+
+  /* ---------- Hero ----------
+     The photograph runs at full strength and a directional scrim buys the
+     contrast, rather than a flat 20% veil that erased the picture along with
+     the problem.
+
+     The floors, computed against a pure white pixel — the worst case the
+     photograph can contain — composited over the scrim's own colour:
+       0.90 → 11.9:1   0.78 → 8.7:1   0.66 → 5.7:1   0.45 → 2.6:1
+     The text column ends at roughly 50% of the band, where the ramp is still
+     at 0.66, so nothing under type drops below 5.7:1 even over white. Past
+     that the ramp opens up because only the form card sits there, and the card
+     brings its own paper background. Below lg the type spans the full width,
+     so the ramp runs vertically and never lifts above 0.72 (7.0:1).
+
+     Changing any stop means re-running the pixel probe, not trusting
+     Lighthouse: contrast over a photograph is not something it evaluates. */
+  .hero-scrim {
+    background: linear-gradient(
+      180deg,
+      rgb(20 25 24 / 0.85) 0%,
+      rgb(20 25 24 / 0.72) 55%,
+      rgb(20 25 24 / 0.8) 100%
+    );
+  }
+
+  @media (min-width: 1024px) {
+    .hero-scrim {
+      background: linear-gradient(
+        100deg,
+        rgb(20 25 24 / 0.9) 0%,
+        rgb(20 25 24 / 0.78) 42%,
+        rgb(20 25 24 / 0.45) 72%,
+        rgb(20 25 24 / 0.28) 100%
+      );
+    }
+  }
+
+  .hero-proof {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.875rem 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgb(255 255 255 / 0.3);
+  }
+
+  @media (min-width: 640px) {
+    .hero-proof {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .hero-proof > li + li {
+      padding-left: 1.5rem;
+      border-left: 1px solid rgb(255 255 255 / 0.3);
+    }
+  }
+
+  /* ---------- Promise band ----------
+     A short ledge under the hero rather than a full 110px band: three facts,
+     hairline above and below, nothing else. */
+
+  .promises {
+    padding-block: 32px;
+  }
+
+  .promises__cell + .promises__cell {
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  @media (min-width: 640px) {
+    .promises__cell {
+      padding-inline: 1.5rem;
+    }
+
+    .promises__cell:first-child {
+      padding-left: 0;
+    }
+
+    .promises__cell + .promises__cell {
+      padding-top: 0;
+      border-top: 0;
+      border-left: 1px solid var(--color-border);
+    }
+  }
+
+  .promises__label {
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .promises__value {
+    margin-top: 0.375rem;
+    font-size: 1.25rem;
+    line-height: 1.3;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  /* ---------- Section heading ----------
+     A full-width band rather than a label in a rail. Petrol on paper is
+     10.98:1 and on sand 9.56:1; white on petrol is 10.98:1 and the kicker tint
+     5.82:1. On the graphite bands petrol would sit at 1.6:1 against its own
+     background, so there the band is a white wash with a hairline instead, and
+     the kicker goes plain white (6.54:1). */
+
+  .sec-head {
+    border-radius: 12px;
+    padding: 26px 24px;
+  }
+
+  @media (min-width: 640px) {
+    .sec-head {
+      padding: 30px 36px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .sec-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+      column-gap: 48px;
+      padding: 28px 40px;
+    }
+
+    /* The kicker rides above the heading in the first column; a supporting line
+       takes the second, which keeps the band two lines tall instead of four. */
+    .sec-head__kicker,
+    .sec-head__title {
+      grid-column: 1;
+    }
+
+    .sec-head__sub {
+      grid-column: 2;
+      max-width: 34ch;
+      margin-top: 0;
+      text-align: right;
+    }
+  }
+
+  .sec-head--accent {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  .sec-head--dark {
+    background: rgb(255 255 255 / 0.08);
+    border: 1px solid rgb(255 255 255 / 0.2);
+    color: #fff;
+  }
+
+  .sec-head__kicker {
+    font-size: 0.78125rem;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #9fc3ca;
+  }
+
+  .sec-head--dark .sec-head__kicker {
+    color: #fff;
+  }
+
+  .sec-head__title {
+    /* Wide on purpose. The band is 1200px, so a 40ch measure left the right
+       half empty and pushed the sentence into three lines; at 56ch the same
+       sentence lands in two and the band is 50px shorter. */
+    max-width: 56ch;
+    margin-top: 0.625rem;
+    font-size: clamp(1.5rem, 2.5vw, 2.125rem); /* 24 → 34px */
+    line-height: 1.18;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    text-wrap: pretty;
+  }
+
+  .sec-head__sub {
+    margin-top: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: rgb(255 255 255 / 0.82);
+  }
+
+  /* ---------- Snap row ----------
+     Four process steps stacked on a phone cost 1472px, and a visitor reads at
+     most the first two before scrolling past the rest. Side by side they cost a
+     third of that and the fourth is one swipe away; the card peeking at the
+     right edge is what says so. The row is focusable, so it can be scrolled
+     from a keyboard as well as a thumb. Above md it goes back to being a band.
+     Only the scroll container moves — no layout runs while swiping. */
+
+  .snap-row {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1.5rem;
+    margin-inline: -1.5rem;
+    padding-inline: 1.5rem;
+    scrollbar-width: none;
+  }
+
+  .snap-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .snap-row > li {
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+    border: 1px solid rgb(255 255 255 / 0.2);
+    border-radius: var(--radius-card);
+    padding: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .snap-row {
+      display: grid;
+      gap: 0;
+      overflow: visible;
+      margin-inline: 0;
+      padding-inline: 0;
+    }
+
+    .snap-row > li {
+      flex: none;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+    }
+  }
+
+  /* ---------- Chips ----------
+     Scope, set as the words a buyer searches for. The hairline table this
+     replaced read as a specification sheet, which is exactly what made the
+     services block look like a product listing. */
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 6px;
+    background: var(--color-sand);
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8125rem;
+    line-height: 1.3;
+    color: var(--color-ink);
+  }
+
+  .chip-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .price {
+    font-size: 0.9375rem;
+    line-height: 1.4;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-accent);
+  }
+
+  /* ---------- Sticky mobile bar ----------
+     Off screen until the first screen is behind the visitor, and off screen
+     again whenever a form is in view. Transform only, so nothing lays out. */
+
+  .sticky-cta {
+    transform: translateY(110%);
+    visibility: hidden;
+    transition:
+      transform var(--dur-enter) var(--ease-out),
+      visibility 0s linear var(--dur-enter);
+  }
+
+  .sticky-cta[data-visible] {
+    transform: none;
+    visibility: visible;
+    transition:
+      transform var(--dur-enter) var(--ease-out),
+      visibility 0s;
   }
 }
 
@@ -325,7 +674,7 @@ body {
   }
 
   .btn-paper:hover {
-    background: var(--color-gunmetal);
+    background: var(--color-sand);
   }
 
   .link-arrow:hover::after {

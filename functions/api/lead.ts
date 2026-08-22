@@ -1,4 +1,4 @@
-import { isSpam, validateLead, type LeadInput } from '../../src/lib/validate';
+import { isSpam, validateLead, type Attribution, type LeadInput } from '../../src/lib/validate';
 
 interface Env {
   WEB3FORMS_ACCESS_KEY: string;
@@ -22,6 +22,25 @@ export function escapeHtml(value: string): string {
   return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
+/** A one-line campaign summary: "google / cpc / bramy-gdansk · gclid: Cj0K…".
+    Empty when the visitor arrived without any campaign parameters, in which
+    case neither the message nor the email carries a source line at all. */
+export function describeAttribution(attribution?: Attribution): string {
+  if (!attribution) return '';
+
+  const path = [attribution.utmSource, attribution.utmMedium, attribution.utmCampaign]
+    .filter(Boolean)
+    .join(' / ');
+
+  const parts: string[] = [];
+  if (path) parts.push(path);
+  if (attribution.utmTerm) parts.push(`term: ${attribution.utmTerm}`);
+  if (attribution.gclid) parts.push(`gclid: ${attribution.gclid}`);
+  if (!parts.length && attribution.pageUrl) parts.push(attribution.pageUrl);
+
+  return parts.join(' · ');
+}
+
 export function buildTelegramMessage(lead: LeadInput): string {
   const marker = SERVICE_MARKERS[lead.service] ?? '📩';
   const lines = [
@@ -34,6 +53,10 @@ export function buildTelegramMessage(lead: LeadInput): string {
   if (lead.city) lines.push(`<b>Miejscowość:</b> ${escapeHtml(lead.city)}`);
   if (lead.email) lines.push(`<b>E-mail:</b> ${escapeHtml(lead.email)}`);
   if (lead.message) lines.push('', escapeHtml(lead.message));
+
+  const origin = describeAttribution(lead.attribution);
+  if (origin) lines.push('', `<b>Źródło:</b> ${escapeHtml(origin)}`);
+
   return lines.join('\n');
 }
 
@@ -52,6 +75,8 @@ async function sendEmail(lead: LeadInput, env: Env): Promise<void> {
       'E-mail': lead.email ?? '—',
       Wiadomość: lead.message ?? '—',
       Źródło: lead.source,
+      Kampania: describeAttribution(lead.attribution) || '—',
+      Strona: lead.attribution?.pageUrl ?? '—',
     }),
   });
   if (!response.ok) throw new Error(`web3forms ${response.status}`);

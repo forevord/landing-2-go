@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import SectionHeading from './SectionHeading.astro';
 import { getDictionary, type Locale } from '../i18n';
 
 interface Props {
@@ -16,25 +17,38 @@ const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
 const mapsEmbed = `https://www.google.com/maps?q=${mapsQuery}&output=embed`;
 ---
 
-<section id="kontakt" class="bg-graphite text-white">
-  <div class="mx-auto grid max-w-page lg:grid-cols-2">
-    <div class="section px-6 lg:px-10">
-      <p class="t-label">{t.contacts.title}</p>
-      <h2 class="t-h2 mt-4 max-w-[20ch]">{t.contacts.lead}</h2>
+{
+  /* The band used to be a two-column grid with the heading buried in the left
+    half and a black rectangle in the right, which read as a broken image rather
+    than as a map waiting to be asked for. Now it opens on the same heading band
+    every other section uses, and the facade states plainly what it is.
 
-      <dl class="mt-10 grid gap-6 border-t border-white/20 pt-8">
-        <div>
+    The number is the largest object here: in this trade the visitor who scrolls
+    this far is usually looking for something to dial. */
+}
+<section id="kontakt" class="section bg-graphite text-white">
+  <div class="mx-auto max-w-page px-6 lg:px-10">
+    <SectionHeading kicker={t.contacts.title} title={t.contacts.lead} tone="dark" />
+
+    <div class="mt-12 grid gap-10 lg:grid-cols-2 lg:gap-16">
+      <dl class="grid content-start gap-7 sm:grid-cols-2">
+        <div class="sm:col-span-2">
           <dt class="t-label text-white/75">{t.contacts.phoneLabel}</dt>
           <dd>
-            <a href={telHref} class="mt-2 flex min-h-11 items-center gap-2 text-lg font-medium">
-              <Icon name="phone" class="h-5 w-5 text-white/75" />
+            <a
+              href={telHref}
+              class="mt-1 flex min-h-11 items-center gap-3 text-3xl font-bold tracking-tight"
+            >
+              <Icon name="phone" class="h-6 w-6 text-white/75" />
               {phone}
             </a>
           </dd>
         </div>
-        <div>
+        <div class="border-t border-white/20 pt-7 sm:col-span-2">
           <dt class="t-label text-white/75">{t.contacts.emailLabel}</dt>
-          <dd><a href={`mailto:${email}`} class="mt-2 inline-block text-lg underline">{email}</a></dd>
+          <dd>
+            <a href={`mailto:${email}`} class="mt-2 inline-block underline">{email}</a>
+          </dd>
         </div>
         <div>
           <dt class="t-label text-white/75">{t.contacts.hoursLabel}</dt>
@@ -45,34 +59,36 @@ const mapsEmbed = `https://www.google.com/maps?q=${mapsQuery}&output=embed`;
           <dd class="mt-2">{t.contacts.area}</dd>
         </div>
       </dl>
-    </div>
 
-    {/* The map column carries the band padding itself: on narrow screens it
-        follows the details block directly, so only the bottom edge applies. */}
-    <div class="px-6 pb-20 lg:px-10 lg:pt-[110px] lg:pb-[110px]">
-      {/* Facade pattern: the heavy embed loads only on request, so no third-party
-          cookies are set and the map never competes with LCP. */}
-      <div
-        class="relative aspect-[4/3] overflow-hidden rounded-card bg-ink"
-        data-map
-        data-embed={mapsEmbed}
-      >
-        <img
-          src="/images/placeholders/service-earthworks.svg"
-          alt={t.contacts.mapAlt}
-          width="1200"
-          height="900"
-          loading="lazy"
-          class="h-full w-full object-cover opacity-40"
-        />
-        <button type="button" class="btn btn-paper absolute inset-0 m-auto h-12 w-48" data-map-load>
-          {t.contacts.mapLoad}
-        </button>
+      <div>
+        {
+          /* Facade pattern: the heavy embed loads only on request, so no
+            third-party cookies are set and the map never competes with LCP. */
+        }
+        <div
+          class="relative flex aspect-[16/10] items-center justify-center overflow-hidden rounded-card border border-white/20 bg-white/10"
+          data-map
+          data-embed={mapsEmbed}
+          data-title={t.contacts.mapAlt}
+        >
+          <div class="flex flex-col items-center gap-4 px-6 text-center">
+            <Icon name="map-pin" class="h-8 w-8 text-white/75" />
+            <p class="text-sm text-white">{t.contacts.area}</p>
+            <button type="button" class="btn btn-paper h-11 min-h-11 px-6" data-map-load>
+              {t.contacts.mapLoad}
+            </button>
+          </div>
+        </div>
+        <p class="mt-3 text-xs text-white/75">{t.contacts.mapNote}</p>
+        <a
+          href={mapsUrl}
+          rel="noopener"
+          target="_blank"
+          class="mt-2 inline-block text-sm underline"
+        >
+          {t.contacts.mapCta}
+        </a>
       </div>
-      <p class="mt-3 text-xs text-white/75">{t.contacts.mapNote}</p>
-      <a href={mapsUrl} rel="noopener" target="_blank" class="mt-2 inline-block text-sm underline">
-        {t.contacts.mapCta}
-      </a>
     </div>
   </div>
 </section>
@@ -85,7 +101,7 @@ const mapsEmbed = `https://www.google.com/maps?q=${mapsQuery}&output=embed`;
       const iframe = document.createElement('iframe');
       iframe.src = container.dataset.embed ?? '';
       iframe.loading = 'lazy';
-      iframe.title = container.querySelector('img')?.alt ?? 'map';
+      iframe.title = container.dataset.title ?? 'map';
       iframe.className = 'absolute inset-0 h-full w-full border-0';
       container.replaceChildren(iframe);
     });
