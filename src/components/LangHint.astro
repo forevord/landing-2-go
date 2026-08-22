@@ -12,12 +12,12 @@ const target = route(routeKey, otherLocale(locale));
 ---
 
 <div
-  class="hidden items-center justify-center gap-4 bg-ink px-4 py-2.5 text-sm text-white"
+  class="hidden h-8 items-center justify-center gap-3 bg-ink px-4 text-sm text-white"
   data-lang-hint
   data-page-locale={locale}
 >
-  <span>{t.langHint.message}</span>
-  <a class="underline" href={target}>{t.langHint.cta}</a>
+  <span class="truncate">{t.langHint.message}</span>
+  <a class="shrink-0 underline" href={target}>{t.langHint.cta}</a>
   <button type="button" class="ml-auto px-2 underline" data-lang-hint-dismiss>
     <span class="sr-only">{t.langHint.dismiss}</span>
     <span aria-hidden="true">&times;</span>

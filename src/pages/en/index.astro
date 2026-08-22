@@ -2,15 +2,16 @@
 import Base from '../../layouts/Base.astro';
 import TopBar from '../../components/TopBar.astro';
 import Hero from '../../components/Hero.astro';
-import TrustBar from '../../components/TrustBar.astro';
-import Pain from '../../components/Pain.astro';
+import Promises from '../../components/Promises.astro';
+import QuickQuote from '../../components/QuickQuote.astro';
 import Services from '../../components/Services.astro';
-import WhyUs from '../../components/WhyUs.astro';
+import Arguments from '../../components/Arguments.astro';
 import Process from '../../components/Process.astro';
 import Gallery from '../../components/Gallery.astro';
 import Testimonials from '../../components/Testimonials.astro';
+import Safety from '../../components/Safety.astro';
 import Faq from '../../components/Faq.astro';
-import LeadForm from '../../components/LeadForm.astro';
+import FormSection from '../../components/FormSection.astro';
 import Contacts from '../../components/Contacts.astro';
 import Footer from '../../components/Footer.astro';
 import StickyCta from '../../components/StickyCta.astro';
@@ -34,19 +35,17 @@ const email = 'biuro@stalbruk.pl';
 >
   <TopBar locale={locale} routeKey="home" phone={phone} variant="overlay" />
   <main id="main" tabindex="-1" class="pb-24 md:pb-0">
-    <Hero locale={locale} />
-    <TrustBar locale={locale} />
-    <Pain locale={locale} />
+    <Hero locale={locale} phone={phone} />
+    <Promises locale={locale} />
     <Services locale={locale} />
-    <WhyUs locale={locale} />
-    <Process locale={locale} />
+    <QuickQuote locale={locale} />
     <Gallery locale={locale} />
     <Testimonials locale={locale} />
+    <Arguments locale={locale} />
+    <Process locale={locale} />
     <Faq locale={locale} />
-
-    <section id="formularz" class="section mx-auto max-w-[640px] px-6">
-      <LeadForm locale={locale} variant="full" id="full-form" />
-    </section>
+    <Safety locale={locale} />
+    <FormSection locale={locale} phone={phone} />
 
     <Contacts locale={locale} phone={phone} email={email} />
   </main>

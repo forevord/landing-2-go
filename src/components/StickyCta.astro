@@ -12,12 +12,56 @@ const t = getDictionary(locale);
 const telHref = `tel:${phone.replace(/\s/g, '')}`;
 ---
 
+{
+  /* Hidden until the visitor has left the first screen, and hidden again
+    whenever a form is actually on screen: otherwise it duplicates a call to
+    action that is already visible and, in the hero, covers the foot of the
+    card it is pointing at. */
+}
 <div
-  class="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 border-t border-border bg-surface p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] shadow-raised md:hidden"
+  data-sticky-cta
+  class="sticky-cta fixed inset-x-0 bottom-0 z-40 grid grid-cols-[2fr_3fr] gap-2 border-t border-border bg-surface p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] shadow-raised md:hidden"
 >
   <a href={telHref} class="btn border border-border text-ink">
     <Icon name="phone" class="mr-2 h-4 w-4" />
     {t.stickyBar.call}
   </a>
-  <a href="#formularz" class="btn btn-primary">{t.stickyBar.quote}</a>
+  <a href="#formularz" data-cta-quote class="btn btn-primary">{t.stickyBar.quote}</a>
 </div>
+
+<script>
+  const bar = document.querySelector<HTMLElement>('[data-sticky-cta]');
+
+  if (bar) {
+    const sentinel = document.querySelector('[data-sticky-sentinel]');
+    const forms = document.querySelectorAll('.lead-form');
+
+    // No sentinel means no hero on this page: show the bar unconditionally.
+    let pastFirstScreen = !sentinel;
+    let formOnScreen = false;
+
+    const paint = () => bar.toggleAttribute('data-visible', pastFirstScreen && !formOnScreen);
+
+    if (sentinel) {
+      new IntersectionObserver(([entry]) => {
+        pastFirstScreen = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+        paint();
+      }).observe(sentinel);
+    }
+
+    if (forms.length) {
+      const seen = new Set<Element>();
+      const formObserver = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) seen.add(entry.target);
+          else seen.delete(entry.target);
+        }
+        formOnScreen = seen.size > 0;
+        paint();
+      });
+      forms.forEach((form) => formObserver.observe(form));
+    }
+
+    paint();
+  }
+</script>

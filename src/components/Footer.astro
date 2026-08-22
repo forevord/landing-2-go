@@ -10,14 +10,16 @@ const t = getDictionary(locale);
 const year = new Date().getFullYear();
 ---
 
-{/* The reference's footer is paper white with a hairline top rule. It also ends
+{
+  /* The reference's footer is paper white with a hairline top rule. It also ends
     the page on a light band, so the graphite contacts section above it reads as
-    a block rather than as the start of an unbroken dark tail. */}
-<footer class="border-t border-border pt-20 pb-24 text-muted md:pb-16">
+    a block rather than as the start of an unbroken dark tail. */
+}
+<footer class="border-t border-border pt-16 pb-24 text-muted md:pb-12">
   <div class="mx-auto max-w-page px-6 lg:px-10">
-    <p class="t-display text-ink">{t.topbar.brand}</p>
+    <p class="text-2xl font-bold tracking-tight text-ink">{t.topbar.brand}</p>
 
-    <div class="mt-12 grid gap-10 border-t border-border pt-10 md:grid-cols-2">
+    <div class="mt-8 grid gap-10 border-t border-border pt-8 md:grid-cols-2">
       <div>
         <p class="max-w-[40ch]">{t.footer.tagline}</p>
         <p class="mt-4 text-sm">{t.footer.company}</p>
@@ -42,8 +44,9 @@ const year = new Date().getFullYear();
       </nav>
     </div>
 
-    <div class="mt-10 border-t border-border pt-6 text-xs">
-      © {year} {t.topbar.brand}. {t.footer.rights}
+    <div class="mt-8 border-t border-border pt-6 text-xs">
+      © {year}
+      {t.topbar.brand}. {t.footer.rights}
     </div>
   </div>
 </footer>

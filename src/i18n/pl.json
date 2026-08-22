@@ -29,8 +29,8 @@
   },
   "hero": {
     "eyebrow": "Gdańsk i Pomorze",
-    "h1": "Bramy aluminiowe i kostka brukowa — jedna ekipa, jeden termin",
-    "lead": "Projektujemy, produkujemy i montujemy bramy spawane laserowo. Układamy kostkę brukową i wykonujemy roboty ziemne własnym sprzętem — bez czekania na podwykonawców.",
+    "h1": "Bramy aluminiowe i kostka brukowa pod klucz",
+    "lead": "Jedna ekipa, jeden termin: spawanie laserowe, brukarstwo i roboty ziemne własnym sprzętem.",
     "cta": "Odbierz bezpłatną wycenę",
     "ctaSecondary": "Zobacz realizacje",
     "microcopy": "Odpowiadamy w ciągu 24 godzin. Pomiar i wycena bez zobowiązań.",
@@ -59,7 +59,7 @@
   },
   "pain": {
     "title": "Znasz to?",
-    "lead": "Trzy rzeczy, które najczęściej słyszymy od klientów, zanim do nas trafią.",
+    "lead": "Nie znikniemy z zaliczką. Nie przesuniemy terminu. Brama nie zardzewieje.",
     "items": [
       {
         "quote": "Ekipa zniknęła po zaliczce.",
@@ -80,7 +80,7 @@
   },
   "services": {
     "title": "Co robimy",
-    "lead": "Trzy obszary, które najczęściej zamawiane są razem — i dlatego wykonujemy je jedną ekipą.",
+    "lead": "Brama, kostka i roboty ziemne — jedna ekipa, jeden termin.",
     "promises": [
       {
         "label": "Pomiar i wycena",
@@ -100,6 +100,7 @@
         "id": "bramy",
         "title": "Bramy i ogrodzenia",
         "desc": "Bramy przesuwne, skrzydłowe i przemysłowe, furtki, ogrodzenia. Automatyka, piloty, wideodomofon.",
+        "price": "od 6 500 zł",
         "list": [
           "Bramy przesuwne",
           "Bramy skrzydłowe",
@@ -115,6 +116,7 @@
         "id": "brukarstwo",
         "title": "Brukarstwo",
         "desc": "Podjazdy, tarasy, parkingi i ścieżki. Kostka betonowa, granitowa i płyty wielkoformatowe.",
+        "price": "od 180 zł/m²",
         "list": [
           "Podjazdy i wjazdy",
           "Tarasy",
@@ -130,6 +132,7 @@
         "id": "pod-klucz",
         "title": "Realizacje pod klucz",
         "desc": "Roboty ziemne, niwelacja terenu, przeniesienie słupów i przyłączy, odwodnienie. Własne koparki.",
+        "price": "wycena indywidualna",
         "list": [
           "Roboty ziemne",
           "Niwelacja terenu",
@@ -145,7 +148,7 @@
   },
   "why": {
     "title": "Dlaczego my",
-    "lead": "Cztery powody, dla których klienci wybierają nas zamiast tańszej oferty z ogłoszenia.",
+    "lead": "Cztery rzeczy, których nie dostaniesz od tańszej ekipy z ogłoszenia.",
     "items": [
       {
         "title": "Nie rdzewieje. Nigdy.",
@@ -200,9 +203,35 @@
     ],
     "cta": "Zacznij od bezpłatnej wyceny"
   },
+  "safety": {
+    "title": "Bezpieczna umowa",
+    "lead": "Cztery rzeczy ustalone na piśmie, zanim na działkę wjedzie pierwsza koparka.",
+    "items": [
+      {
+        "title": "Umowa z terminem",
+        "desc": "Zakres, harmonogram i data montażu zapisane w umowie. Każdą zmianę zakresu ustalamy z Tobą przed wykonaniem, nie po.",
+        "icon": "file-signature"
+      },
+      {
+        "title": "Płatność w etapach",
+        "desc": "Zaliczka na materiał, część po dostawie, reszta po odbiorze. Nie pobieramy przedpłaty za całość.",
+        "icon": "receipt"
+      },
+      {
+        "title": "Gwarancja na piśmie",
+        "desc": "5 lat na konstrukcję i spoiny, 2 lata gwarancji producenta na automatykę. Dokumenty przekazujemy przy odbiorze.",
+        "icon": "shield-check"
+      },
+      {
+        "title": "Firma z rejestrem",
+        "desc": "Pełne dane spółki, NIP i adres siedziby znajdziesz w stopce. Umowę podpisujemy przed rozpoczęciem prac.",
+        "icon": "check"
+      }
+    ]
+  },
   "gallery": {
     "title": "Realizacje",
-    "lead": "Zdjęcia z obiektów, które oddaliśmy na Pomorzu.",
+    "lead": "Zobacz, jak to wygląda po odbiorze.",
     "beforeAfter": {
       "title": "Podjazd przed i po",
       "beforeLabel": "Przed",

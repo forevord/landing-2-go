@@ -1,0 +1,86 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import Icon from './Icon.astro';
+import { getDictionary, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+
+// The dictionary names an icon for every objection and every reason; these keep
+// the mapping honest if a name is ever misspelt there.
+type IconName = 'file-signature' | 'calendar-check' | 'shield-check';
+type ReasonIcon = 'droplets' | 'zap' | 'users' | 'receipt';
+const REASON_ICONS: readonly ReasonIcon[] = ['droplets', 'zap', 'users', 'receipt'];
+---
+
+{
+  /* One band where there were two. The objections block and the reasons block
+    said the same three things — no subcontractors, it does not rust, the
+    estimate is itemised — in two places a full screen apart, with the services
+    block wedged between them.
+
+    Both used to be plain columns of text: a grey italic line for the
+    complaint, a smaller grey line for the answer, and nothing else on the
+    screen. Type alone cannot carry a section this long. The complaint now sits
+    on a paper card as the visitor's own words, struck through, and the answer
+    below the rule carries the icon and the accent — so the eye reads
+    problem → answer before it reads a single sentence. */
+}
+<section class="section bg-sand">
+  <div class="mx-auto max-w-page px-6 lg:px-10">
+    <SectionHeading kicker={t.pain.title} title={t.pain.lead} />
+
+    <ul class="mt-10 grid gap-4 sm:mt-12 sm:gap-5 md:grid-cols-3">
+      {
+        t.pain.items.map((item, index) => (
+          <li
+            class="flex flex-col rounded-card border border-border bg-surface p-5 sm:p-7"
+            data-reveal
+            style={`transition-delay:${index * 60}ms`}
+          >
+            <span class="flex h-8 w-8 items-center justify-center rounded-full bg-sand text-muted">
+              <Icon name="x" class="h-4 w-4" />
+            </span>
+
+            <p class="mt-4 mb-6 text-xl leading-snug font-medium text-ink md:min-h-[2.4em]">
+              „{item.quote}”
+            </p>
+
+            <div class="flex gap-3 border-t border-border pt-5">
+              <Icon name={item.icon as IconName} class="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+              <p class="min-w-0 text-muted">{item.answer}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="mt-16 sm:mt-20">
+      <SectionHeading kicker={t.why.title} title={t.why.lead} />
+    </div>
+
+    {
+      /* Two by two, not four across: at 1440 four columns leave the body copy
+        three or four words to a line. */
+    }
+    <ul class="mt-10 grid gap-x-12 gap-y-8 sm:mt-12 sm:gap-y-10 sm:grid-cols-2">
+      {
+        t.why.items.map((item, index) => (
+          <li class="flex gap-5" data-reveal style={`transition-delay:${index * 60}ms`}>
+            <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent">
+              <Icon name={REASON_ICONS[index] ?? 'check'} class="h-6 w-6" />
+            </span>
+            <div class="min-w-0">
+              <h3 class="text-xl leading-snug font-semibold text-ink">{item.title}</h3>
+              <p class="mt-2 text-muted">{item.desc}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

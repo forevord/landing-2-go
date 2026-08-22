@@ -6,6 +6,111 @@
 
 ---
 
+## 2026-08-18 — conversion and design pass
+
+The client's verdict on the Custo-derived design was that the page read as a product
+card rather than a landing page. A marketing audit and a design audit were run against
+the built page (both are with the client, in Russian). Two sprints of the resulting plan
+are in the tree; the audits' remaining items are listed at the foot of this file.
+
+**Direction chosen by the client:** "Baltic contractor" — paper white and sand `#f1efec`,
+one dark anchor, accent petrol `#14424c`, Inter at 400/600/700, documentary photography.
+The gunmetal canvas and the all-achromatic rule are gone; see `CLAUDE.md`.
+
+**What changed**
+
+- _The first screen._ The photograph runs at full strength behind `.hero-scrim` instead of
+  a flat 20% veil, so there is a gate on the page again. Two actions — the quote pill and
+  the telephone — plus a four-figure proof line. The 19vw wordmark is gone. The band fell
+  from 1009px to 834px, and the whole page from 10 505px to 9 722px.
+- _Every quote button resolves to the nearest rendered form_ (`src/scripts/quote-cta.ts`).
+  They all used to point at `#formularz` at the foot of the page, including the two beside
+  the hero form. The href stays as the no-JS fallback.
+- _The sticky mobile bar_ stays out of the way until the first screen is behind the visitor
+  and hides again whenever a form is on screen. It used to cover the foot of the hero card
+  it was pointing at.
+- _`TrustBar` was folded into the hero_ and the services block's promise strip became
+  `Promises.astro`, a 115px ledge under the hero — the free measurement, the lead time and
+  the warranty are now the first thing the page says after the offer.
+- _`Pain` and `WhyUs` became `Arguments.astro`_ on sand. They argued the same three points
+  in two bands a screen apart with the services block wedged between them.
+- _Service cards_ lost the card border and the hairline spec table: 4:3 photograph, price,
+  scope as chips, an arrow link each, and one filled action for the whole block.
+- _The form section is two columns_ (`FormSection.astro`): arguments and the telephone on
+  the left, the card on the right with paired fields and the page's only shadow. 1286px → 1069px.
+- _`QuickQuote.astro`_ puts a two-field form under the services block on mobile only. The
+  first form a phone visitor met used to be at 12 000px; it is now at 3 763px.
+- _Campaign attribution_ (`src/scripts/tracking.ts`): `utm_*`, `gclid` and the landing URL
+  are captured first-touch into `sessionStorage`, carried as hidden fields, and reach both
+  the email and the Telegram message. Without `gclid` there are no offline conversions in
+  Google Ads and no readable A/B results. Nothing is written to a cookie, so the consent
+  position is unchanged.
+- _Header_ is 64px with the number set at 17px/600 rather than 14px grey.
+
+- _Section headings_ moved into `SectionHeading.astro`: a full-width petrol band with the
+  kicker above the heading, inverted to a white wash on the graphite sections. The label in
+  a 280px rail plus a narrow heading measure was naming the section rather than selling it,
+  and `text-wrap: balance` on `.t-h2` was pulling every heading into a five-line block about
+  430px wide — both are gone. The two argument headings were rewritten from descriptions
+  ("three things we hear most often") into promises ("we will not vanish with your deposit…").
+
+- _Contacts_ opens on the same heading band as every other section, the telephone is the
+  largest object in it, and the map facade says what it is instead of showing a black
+  rectangle with a button floating in it. Watch the `<dl>` here: every `dt`/`dd` pair has to
+  be a _direct_ child group, and a second level of div nesting fails WCAG 1.3.1 (axe:
+  `dlitem`). White at 75% over the facade's own wash measures 4.34:1 and fails; plain white
+  on it is 6.54:1.
+- _Footer_ wordmark dropped from 57px to 24px — it was larger than the logo in the header —
+  and the band lost the ~180px of empty space under it. 571px → 480px.
+- _Copy._ Four section headings were rewritten from descriptions into promises: the two
+  argument bands, the services band ("Brama, kostka i roboty ziemne — jedna ekipa, jeden
+  termin.") and the gallery ("Zobacz, jak to wygląda po odbiorze."). PL and EN together.
+
+**Unused after this pass and safe to delete:** `src/components/Pain.astro`,
+`src/components/WhyUs.astro`, `src/components/TrustBar.astro`.
+
+**The hero contrast probe.** The scrim replaced the opacity veil, so the old measurements do
+not apply. The procedure: hide the hero's text layer, screenshot the band, and take the
+brightest pixel under each text bounding box at 360, 390, 414, 768, 1024, 1280, 1440 and
+1780px. Exclude anything inside `.lead-form` — the card is paper white and gives false
+failures. Worst case as measured: **6.97:1** against a 4.5:1 floor. Re-run it after any
+change to the photograph, the band colour or the scrim stops.
+
+### Later the same day
+
+- _`Safety.astro`_ — "Bezpieczna umowa" above the form: contract with a date, payment in
+  stages, warranty in writing, registered company. Nothing in it is new information; the
+  four facts were scattered across a card, two collapsed FAQ rows and the footer. The
+  strongest objection in this trade is not price, it is "they will take the deposit and
+  disappear", and it now has an answer standing where the visitor decides.
+- _The phone page lost a third of its height_ — 15 072px → 13 685px. The four process steps
+  became a horizontal snap row (1472px → 703px; the row is `tabindex="0"` so it scrolls from
+  a keyboard too), the service photographs use a 16:10 crop below `sm`, the form section
+  hides its three bullets on mobile because `Safety` says the same thing one section above,
+  and the argument bands lost a step of vertical rhythm.
+- _The first screen's copy was cut in half_ — the headline from 61 characters to 43, the lead
+  from 162 to 90. The band is 721px on desktop (from 834) and 756px on mobile (from 868), so
+  the proof line and the promise ledge now sit above the fold at 1440×900.
+- _The hero image gained 480w and 800w variants_ so a phone fetches ~23kB instead of ~55kB.
+
+**Lighthouse after the pass** (`dist/` over plain HTTP, headless Chromium, two runs):
+desktop 100 / 100 / 100 / 100, LCP 0.7s, TBT 0ms; mobile 97–98 / 100 / 100 / 100, LCP
+2.4–2.5s, TBT 0ms, CLS 0. The English page measures the same as the Polish one. Mobile
+performance moves a point between runs on this machine — treat 97 and 98 as the same
+number, and always compare against a freshly measured baseline rather than these figures.
+
+One trap found while measuring. The hero image briefly carried `decoding="sync"`, on the
+theory that the LCP element should not wait for an async decode. It cost 3 points and
+110ms of blocking time: style and layout went from ~150ms to 849ms and the document
+produced a 413ms long task, because a synchronous decode of a full-bleed photograph runs
+on the main thread. `loading="eager"` with `fetchpriority="high"` is the whole of what the
+LCP element needs; do not add `decoding` to it.
+
+**Verification at the end of the pass:** `astro check` 0 errors, build 6 pages, `check:copy`
+clean, vitest 25 passed with the one intentional demo-data failure.
+
+---
+
 ## Where the project stands
 
 The site is functionally complete and visually mid-redesign.
@@ -44,6 +149,7 @@ Two rounds of measurement now say otherwise.
 So the page is not the cause. What remains is the viewing environment — most likely the pane's own zoom level, which changes the CSS-pixel viewport without changing the visible pane width and makes a wide pane render the narrow layout (or the reverse).
 
 **Before changing any layout code, get:**
+
 - the exact viewport width where it breaks, and the browser
 - whether it reproduces in a standalone Chrome/Safari window as well as the editor preview
 - a screenshot with devtools open showing the viewport size
@@ -74,6 +180,7 @@ Then, at the client's direction:
 - **The hero form is the reference's input**: an 8px box behind an aluminium hairline that deepens to obsidian in use, declared once in `.lead-form` rather than as a class string repeated on nine fields. The card lost its shadow, which the reference bans.
 
 **Three contrast rules that override the reference and are not negotiable:**
+
 - White text on gunmetal is 2.58:1 and fails. Gunmetal takes black type only. Black at 75% opacity on it is 5.59:1 and is fine; at 60% it is 3.98:1 and is not.
 - Graphite `#4b514d` on black is 2.09:1. Do not use it for text on the dark sections.
 - **The hero band is graphite, its type is paper white, and the photograph behind it is held at 20%.** The three are one rule. The client asked for the reference's reversed type; on the gunmetal canvas that is 2.58:1 and fails both the 4.5:1 and the 3:1 floors, so the band moved to graphite, where white is 8.12:1. 20% is then the ceiling on the photograph: white at 20% over graphite is 4.76:1, at 25% it is 4.21:1 and the 19px lead fails. Measured across eight widths, worst case 4.76:1, nothing below the floor. `TopBar`'s overlay variant counts as hero and inherits all of it.
@@ -82,7 +189,7 @@ Axe cannot catch any of this — contrast over a photograph is not something it 
 
 ## Open item 3 — demo data must be replaced before launch
 
-`src/i18n/{pl,en}.json` carry invented values: trust figures (12 years, 380 projects, 5-year warranty), phone `+48 601 234 567`, email, price from 6 500 PLN, lead time, company name and address. The NIP is deliberately impossible (`000-000-00-00`) so it cannot collide with a real company.
+`src/i18n/{pl,en}.json` carry invented values: trust figures (12 years, 380 projects, 5-year warranty), phone `+48 601 234 567`, email, lead time, company name and address, and the three service prices added on 2026-08-18 (`services.items[].price`: 6 500 zł, 180 zł/m², individual quote — the first matches the figure the FAQ already quoted). The NIP is deliberately impossible (`000-000-00-00`) so it cannot collide with a real company.
 
 `_meta.demo: true` marks this, and `tests/i18n.test.ts` fails while it is true. Replace the values, set the flag to `false`, and the suite goes green. Do not clear the flag while the values are still invented.
 
@@ -99,9 +206,13 @@ Two specific problems recorded in `CREDITS.md`:
 
 ## Open item 5 — Cloudflare deployment
 
+**The step-by-step runbook is [`docs/DEPLOY.md`](DEPLOY.md)** — project creation, the three
+secrets, the live lead-path check, Git deploys, domain, analytics and the pre-launch list.
+
 Deferred at the client's request until the site was finished locally. `wrangler.toml` exists and `npm run preview` runs the Function locally.
 
 Still to do, in the Cloudflare dashboard:
+
 1. Connect the GitHub repository to a Pages project. Build command `npm run build`, output directory `dist`.
 2. Add `WEB3FORMS_ACCESS_KEY`, `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` as **secrets**, for Production and Preview.
 3. Add `PUBLIC_CF_BEACON_TOKEN` once Web Analytics is enabled. The beacon is omitted entirely when the variable is unset, so nothing breaks before then.

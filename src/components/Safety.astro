@@ -1,0 +1,45 @@
+---
+import Icon from './Icon.astro';
+import SectionHeading from './SectionHeading.astro';
+import { getDictionary, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+
+type IconName = 'file-signature' | 'receipt' | 'shield-check' | 'check';
+---
+
+{
+  /* The strongest objection in this trade is not price, it is "they will take
+    the deposit and disappear" — the first card in the argument band is that
+    sentence in a customer's own words. Every answer to it already existed on
+    the page, scattered: the contract in a card, the payment stages in a
+    collapsed FAQ row, the warranty in another, the company details in the
+    footer. Nothing here is new information; it is the same four facts standing
+    together, directly above the form, where the visitor decides. */
+}
+<section class="section bg-sand">
+  <div class="mx-auto max-w-page px-6 lg:px-10">
+    <SectionHeading kicker={t.safety.title} title={t.safety.lead} />
+
+    <ul class="mt-10 grid gap-x-12 gap-y-8 sm:mt-12 sm:gap-y-10 sm:grid-cols-2">
+      {
+        t.safety.items.map((item, index) => (
+          <li class="flex gap-5" data-reveal style={`transition-delay:${index * 60}ms`}>
+            <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent">
+              <Icon name={item.icon as IconName} class="h-6 w-6" />
+            </span>
+            <div class="min-w-0">
+              <h3 class="text-xl leading-snug font-semibold text-ink">{item.title}</h3>
+              <p class="mt-2 text-muted">{item.desc}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

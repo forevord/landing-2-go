@@ -1,4 +1,5 @@
 ---
+import SectionHeading from './SectionHeading.astro';
 import { Image } from 'astro:assets';
 import { getDictionary, type Locale } from '../i18n';
 import gatePhoto from '../assets/photos/hero.jpg';
@@ -26,48 +27,26 @@ const SERVICE_PARAM: Record<string, string> = {
 };
 ---
 
-{/* Composed against what the field actually does. Four Pomeranian gate and
-    fencing sites were rendered and read: all four surface the whole offer as a
-    flat grid a visitor can compare at a glance, and all four give every entry
-    its own button. None uses an alternating zigzag of large rows, which is what
-    this section was — it made a buyer scroll past each service in turn instead
-    of weighing them against each other. None uses a tick-marked feature list
-    either; scope is set in the buyer's own vocabulary.
+{
+  /* The card used to be a product specification: a 16:9 photograph, a grey
+    paragraph, six list rows divided by hairlines and a black button pinned to
+    the foot. Three of those buttons side by side is three competing primary
+    actions and no main one, and the hairline table is the single detail that
+    made a contractor's offer read as a catalogue entry.
 
-    Where the whole field falls down is facts: not one of the four publishes a
-    price, a lead time or a warranty beside the offer. Every one says "free
-    quote" and makes you telephone. Those facts already existed here, buried in
-    the FAQ accordion at the foot of the page. The strip below moves them to
-    where the decision is actually made. */}
+    So: a taller 4:3 crop with the object larger in frame, scope as chips
+    rather than rows, a price where the eye lands after the title, an arrow
+    link per card, and one filled action for the whole block. */
+}
 <section id="uslugi" class="section">
   <div class="mx-auto max-w-page px-6 lg:px-10">
-    <div class="split">
-      <p class="t-label text-ink">{t.services.title}</p>
-      <h2 class="t-h2 max-w-[26ch] text-ink">{t.services.lead}</h2>
-    </div>
+    <SectionHeading kicker={t.services.title} title={t.services.lead} />
 
-    <dl class="mt-14 grid gap-px overflow-hidden rounded-card border border-border bg-border sm:grid-cols-3">
-      {
-        t.services.promises.map((promise) => (
-          <div class="bg-surface px-6 py-5">
-            <dt class="t-label text-muted">{promise.label}</dt>
-            <dd class="mt-1 font-medium text-ink">{promise.value}</dd>
-          </div>
-        ))
-      }
-    </dl>
-
-    <div class="mt-6 grid gap-6 md:grid-cols-3">
+    <div class="mt-12 grid gap-x-6 gap-y-8 sm:gap-y-12 md:grid-cols-3">
       {
         t.services.items.map((item, index) => (
-          <article
-            class="flex flex-col overflow-hidden rounded-card border border-border"
-            data-reveal
-            style={`transition-delay:${index * 50}ms`}
-          >
-            {/* The photograph fills the head of the card rather than floating
-                inside a white mat, so the card reads as one object. */}
-            <div class="relative media aspect-[3/2] rounded-none">
+          <article class="flex flex-col" data-reveal style={`transition-delay:${index * 50}ms`}>
+            <div class="media aspect-[16/10] sm:aspect-[4/3]">
               <Image
                 src={IMAGES[item.id]}
                 alt={item.imageAlt}
@@ -78,33 +57,31 @@ const SERVICE_PARAM: Record<string, string> = {
               />
             </div>
 
-            <div class="flex flex-1 flex-col p-6">
-              <h3 class="t-h3 text-ink">{item.title}</h3>
-              <p class="mt-3 text-muted">{item.desc}</p>
+            <h3 class="t-h3 mt-5 text-ink">{item.title}</h3>
+            <p class="price mt-2">{item.price}</p>
+            <p class="mt-3 text-muted">{item.desc}</p>
 
-              {/* Scope set as the words a buyer searches for, on hairlines.
-                  No site in the field uses tick marks. The bottom margin here
-                  rather than on the button: the button is pinned to the foot of
-                  the card with mt-auto, because the three descriptions differ
-                  by a line and the actions would otherwise sit at three
-                  different heights across the row. */}
-              <ul class="mt-6 mb-6 grid border-t border-border text-sm">
-                {item.list.map((entry) => (
-                  <li class="border-b border-border py-2.5 text-ink">{entry}</li>
-                ))}
-              </ul>
+            <ul class="chip-list mt-5">
+              {item.list.map((entry) => (
+                <li class="chip">{entry}</li>
+              ))}
+            </ul>
 
-              <a
-                href="#formularz"
-                data-service={SERVICE_PARAM[item.id]}
-                class="btn btn-primary mt-auto w-full"
-              >
-                {item.cta}
-              </a>
-            </div>
+            <a
+              href="#formularz"
+              data-service={SERVICE_PARAM[item.id]}
+              data-cta-quote
+              class="link-arrow mt-auto self-start pt-6"
+            >
+              {item.cta}
+            </a>
           </article>
         ))
       }
+    </div>
+
+    <div class="mt-14 flex justify-center">
+      <a href="#formularz" data-cta-quote class="btn btn-primary">{t.hero.cta}</a>
     </div>
   </div>
 </section>
@@ -115,8 +92,12 @@ const SERVICE_PARAM: Record<string, string> = {
   // the visitor simply picks the service themselves.
   document.querySelectorAll<HTMLAnchorElement>('a[data-service]').forEach((link) => {
     link.addEventListener('click', () => {
-      const select = document.querySelector<HTMLSelectElement>('#full-form select[name="service"]');
-      if (select) select.value = link.dataset.service ?? '';
+      const value = link.dataset.service ?? '';
+      document
+        .querySelectorAll<HTMLSelectElement>('.lead-form select[name="service"]')
+        .forEach((select) => {
+          select.value = value;
+        });
     });
   });
 </script>
