@@ -18,7 +18,7 @@ Direct upload. No dashboard, no Git connection, a live URL in about a minute.
 cd path/to/landing-2-go
 npm run build
 npx wrangler login
-npx wrangler pages project create stalbruk --production-branch=feat/landing-mvp
+npx wrangler pages project create stalbruk --production-branch=main
 npx wrangler pages deploy
 ```
 
@@ -71,7 +71,7 @@ Workers & Pages → `stalbruk` → Settings → Builds & deployments → Connect
 | Setting           | Value                                                      |
 | ----------------- | ---------------------------------------------------------- |
 | Repository        | `forevord/landing-2-go`                                    |
-| Production branch | `feat/landing-mvp`, or whichever becomes the trunk         |
+| Production branch | `main`                                                     |
 | Framework preset  | None                                                       |
 | Build command     | `npm run build`                                            |
 | Output directory  | `dist`                                                     |
