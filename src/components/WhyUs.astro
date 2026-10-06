@@ -1,0 +1,28 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import { getDictionary, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+---
+
+<section class="band bg-surface">
+  <div class="wrap">
+    <SectionHeading kicker={t.why.kicker} title={t.why.title} />
+
+    <ul class="four-up">
+      {
+        t.why.items.map((item, index) => (
+          <li class="why-item" data-reveal style={`transition-delay:${index * 50}ms`}>
+            <h3>{item.title}</h3>
+            <p>{item.desc}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

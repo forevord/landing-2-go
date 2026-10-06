@@ -38,7 +38,15 @@ document.querySelectorAll<HTMLAnchorElement>('a[data-cta-quote]').forEach((link)
     if (!form) return; // Everything is behind us: fall through to #formularz.
 
     event.preventDefault();
-    form.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
-    form.querySelector<HTMLInputElement>('input[name="phone"]')?.focus({ preventScroll: true });
+    // Align the top of the form, not its centre: the form is taller than a
+    // phone screen, and centring it left the first field above the viewport.
+    form.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    // Land in the first field the visitor fills in, skipping the hidden
+    // tracking inputs and the honeypot (tabindex -1).
+    form
+      .querySelector<HTMLElement>(
+        'input:not([type="hidden"]):not([tabindex="-1"]), select, textarea',
+      )
+      ?.focus({ preventScroll: true });
   });
 });

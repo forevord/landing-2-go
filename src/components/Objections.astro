@@ -1,0 +1,35 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import { getDictionary, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+---
+
+{
+  /* The complaint in the visitor's own words on the left, the answer on the
+    right — problem, then answer, one hairline row each. */
+}
+<section class="band bg-paper-dim">
+  <div class="wrap">
+    <SectionHeading kicker={t.pain.kicker} title={t.pain.title} />
+
+    <ul class="obj-list">
+      {
+        t.pain.items.map((item) => (
+          <li class="obj" data-reveal>
+            <p class="obj__quote">„{item.quote}”</p>
+            <p class="obj__answer">
+              <span class="obj__tag">{t.pain.tag}</span>
+              {item.answer}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

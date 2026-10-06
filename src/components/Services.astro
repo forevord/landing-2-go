@@ -1,10 +1,6 @@
 ---
 import SectionHeading from './SectionHeading.astro';
-import { Image } from 'astro:assets';
 import { getDictionary, type Locale } from '../i18n';
-import gatePhoto from '../assets/photos/hero.jpg';
-import pavingPhoto from '../assets/photos/paving.jpg';
-import earthworksPhoto from '../assets/photos/earthworks.jpg';
 
 interface Props {
   locale: Locale;
@@ -13,83 +9,49 @@ interface Props {
 const { locale } = Astro.props;
 const t = getDictionary(locale);
 
-const IMAGES: Record<string, ImageMetadata> = {
-  bramy: gatePhoto,
-  brukarstwo: pavingPhoto,
-  'pod-klucz': earthworksPhoto,
-};
-
-// Pre-selects the matching option in the full form.
+// Pre-selects the matching option in the form.
 const SERVICE_PARAM: Record<string, string> = {
   bramy: 'brama-przesuwna',
-  brukarstwo: 'brukarstwo',
-  'pod-klucz': 'pod-klucz',
+  balustrady: 'balustrada',
+  zadaszenia: 'zadaszenie',
 };
 ---
 
-{
-  /* The card used to be a product specification: a 16:9 photograph, a grey
-    paragraph, six list rows divided by hairlines and a black button pinned to
-    the foot. Three of those buttons side by side is three competing primary
-    actions and no main one, and the hairline table is the single detail that
-    made a contractor's offer read as a catalogue entry.
+<section id="uslugi" class="band bg-surface">
+  <div class="wrap">
+    <SectionHeading kicker={t.services.kicker} title={t.services.title} lead={t.services.lead} />
 
-    So: a taller 4:3 crop with the object larger in frame, scope as chips
-    rather than rows, a price where the eye lands after the title, an arrow
-    link per card, and one filled action for the whole block. */
-}
-<section id="uslugi" class="section">
-  <div class="mx-auto max-w-page px-6 lg:px-10">
-    <SectionHeading kicker={t.services.title} title={t.services.lead} />
-
-    <div class="mt-12 grid gap-x-6 gap-y-8 sm:gap-y-12 md:grid-cols-3">
+    <ul class="service-list" tabindex="0" aria-label={t.services.title}>
       {
-        t.services.items.map((item, index) => (
-          <article class="flex flex-col" data-reveal style={`transition-delay:${index * 50}ms`}>
-            <div class="media aspect-[16/10] sm:aspect-[4/3]">
-              <Image
-                src={IMAGES[item.id]}
-                alt={item.imageAlt}
-                widths={[400, 640, 800]}
-                sizes="(min-width: 768px) 33vw, 100vw"
-                loading="lazy"
-                quality={72}
-              />
-            </div>
-
-            <h3 class="t-h3 mt-5 text-ink">{item.title}</h3>
-            <p class="price mt-2">{item.price}</p>
-            <p class="mt-3 text-muted">{item.desc}</p>
-
-            <ul class="chip-list mt-5">
+        t.services.items.map((item) => (
+          <li class="service">
+            <p class="price">{item.price}</p>
+            <h3>{item.title}</h3>
+            <p class="service__desc">{item.desc}</p>
+            <ul class="mb-4">
               {item.list.map((entry) => (
-                <li class="chip">{entry}</li>
+                <li>{entry}</li>
               ))}
             </ul>
-
             <a
               href="#formularz"
               data-service={SERVICE_PARAM[item.id]}
               data-cta-quote
-              class="link-arrow mt-auto self-start pt-6"
+              class="link-arrow mt-auto self-start"
             >
               {item.cta}
             </a>
-          </article>
+          </li>
         ))
       }
-    </div>
-
-    <div class="mt-14 flex justify-center">
-      <a href="#formularz" data-cta-quote class="btn btn-primary">{t.hero.cta}</a>
-    </div>
+    </ul>
   </div>
 </section>
 
 <script>
-  // Clicking a service card pre-selects that service in the full form.
-  // The href already points at #formularz, so this still works without JS —
-  // the visitor simply picks the service themselves.
+  // Clicking a service card pre-selects that service in the form. The href
+  // already points at #formularz, so this still works without JS — the visitor
+  // simply picks the service themselves.
   document.querySelectorAll<HTMLAnchorElement>('a[data-service]').forEach((link) => {
     link.addEventListener('click', () => {
       const value = link.dataset.service ?? '';

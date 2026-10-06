@@ -3,7 +3,7 @@ import { validateLead, type LeadInput } from '../src/lib/validate';
 
 const compactValid: LeadInput = {
   phone: '+48 600 123 456',
-  service: 'brukarstwo',
+  service: 'ogrodzenie',
   gdpr: true,
   source: 'hero',
 };
@@ -13,7 +13,7 @@ const fullValid: LeadInput = {
   name: 'Jan',
   city: 'Gdańsk',
   email: 'jan@example.com',
-  message: 'Podjazd 40 m2',
+  message: 'Ogrodzenie 40 mb',
   source: 'full',
 };
 

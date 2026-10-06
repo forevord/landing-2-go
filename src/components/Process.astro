@@ -10,41 +10,23 @@ const { locale } = Astro.props;
 const t = getDictionary(locale);
 ---
 
-{
-  /* Graphite, not black: the reference's three surfaces are gunmetal, paper and
-    graphite, and the dark band is meant to echo the anodised finish in the
-    photographs. Every rule and muted tone below is a white alpha — graphite on
-    graphite would be invisible and graphite on black measures 2.09:1. */
-}
-<section id="proces" class="section bg-graphite text-white">
-  <div class="mx-auto max-w-page px-6 lg:px-10">
-    <SectionHeading kicker={t.process.title} title={t.process.lead} tone="dark" />
+<section id="proces" class="band bg-graphite text-paper">
+  <div class="wrap">
+    <SectionHeading kicker={t.process.kicker} title={t.process.title} tone="dark" />
 
-    <ol
-      class="snap-row mt-12 md:grid md:grid-cols-4 md:divide-x md:divide-white/20 md:border-t md:border-white/20"
-      tabindex="0"
-      aria-label={t.process.lead}
-    >
+    <ol class="four-up proc-list">
       {
         t.process.steps.map((step, index) => (
-          <li
-            class="relative md:px-8 md:py-8 md:first:pl-0"
-            data-reveal
-            style={`transition-delay:${index * 50}ms`}
-          >
-            <span class="t-display block text-white/50" aria-hidden="true">
+          <li class="proc" data-reveal style={`transition-delay:${index * 50}ms`}>
+            <p class="proc__num" aria-hidden="true">
               {step.num}
-            </span>
-            <h3 class="t-h3 mt-4">{step.title}</h3>
-            <p class="mt-2 text-white/75">{step.desc}</p>
-            <span class="mt-4 inline-block rounded-control border border-white/30 px-2 py-1 text-xs text-white/75">
-              {step.badge}
-            </span>
+            </p>
+            <h3>{step.title}</h3>
+            <p>{step.desc}</p>
+            <p class="proc__time">{step.badge}</p>
           </li>
         ))
       }
     </ol>
-
-    <a href="#formularz" class="btn btn-paper mt-12">{t.process.cta}</a>
   </div>
 </section>

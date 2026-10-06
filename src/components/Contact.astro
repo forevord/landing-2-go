@@ -1,0 +1,49 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import LeadForm from './LeadForm.astro';
+import { getDictionary, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  phone: string;
+  email: string;
+}
+
+const { locale, phone, email } = Astro.props;
+const t = getDictionary(locale);
+const telHref = `tel:${phone.replace(/\s/g, '')}`;
+---
+
+<section id="formularz" class="band bg-graphite text-paper">
+  <div class="wrap">
+    <SectionHeading
+      kicker={t.contacts.kicker}
+      title={t.form.title}
+      lead={t.form.lead}
+      tone="dark"
+    />
+
+    <div class="contact-grid">
+      <dl id="kontakt" class="contact-info">
+        <div>
+          <dt>{t.contacts.phoneLabel}</dt>
+          <dd><a href={telHref}>{phone}</a></dd>
+        </div>
+        <div>
+          <dt>{t.contacts.emailLabel}</dt>
+          <dd><a href={`mailto:${email}`}>{email}</a></dd>
+        </div>
+        <div>
+          <dt>{t.contacts.hoursLabel}</dt>
+          <dd>{t.contacts.hours}</dd>
+        </div>
+        <div>
+          <dt>{t.contacts.areaLabel}</dt>
+          <dd>{t.contacts.area}</dd>
+        </div>
+      </dl>
+
+      <LeadForm locale={locale} id="full-form" />
+    </div>
+  </div>
+</section>

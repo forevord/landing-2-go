@@ -1,14 +1,8 @@
 ---
 import SectionHeading from './SectionHeading.astro';
-import { Image } from 'astro:assets';
+import ProjectGallery from './ProjectGallery.astro';
 import BeforeAfter from './BeforeAfter.astro';
 import { getDictionary, type Locale } from '../i18n';
-import heroPhoto from '../assets/photos/hero.jpg';
-import pavingPhoto from '../assets/photos/paving.jpg';
-import earthworksPhoto from '../assets/photos/earthworks.jpg';
-import work1Photo from '../assets/photos/work-1.jpg';
-import work2Photo from '../assets/photos/work-2.jpg';
-import work3Photo from '../assets/photos/work-3.jpg';
 
 interface Props {
   locale: Locale;
@@ -16,38 +10,14 @@ interface Props {
 
 const { locale } = Astro.props;
 const t = getDictionary(locale);
-const IMAGES = [heroPhoto, pavingPhoto, earthworksPhoto, work1Photo, work2Photo, work3Photo];
 ---
 
-<section id="realizacje" class="section">
-  <div class="mx-auto max-w-page px-6 lg:px-10">
-    <SectionHeading kicker={t.gallery.title} title={t.gallery.lead} />
-
-    {
-      /* The reference's product image card grid: three up on desktop, one on
-        mobile. The horizontal snap-scroller this replaced hid four of the six
-        photographs behind a gesture. */
-    }
-    <ul class="mt-12 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-3">
-      {
-        t.gallery.items.map((item, index) => (
-          <li>
-            <div class="relative media aspect-[3/2]">
-              <Image
-                src={IMAGES[index]}
-                alt={item.alt}
-                widths={[400, 640, 800]}
-                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                loading="lazy"
-                quality={72}
-              />
-            </div>
-            <p class="t-label mt-3 text-muted">{item.caption}</p>
-          </li>
-        ))
-      }
-    </ul>
-
-    <BeforeAfter locale={locale} />
+<section id="realizacje" class="band bg-paper-dim">
+  <div class="wrap">
+    <SectionHeading kicker={t.gallery.kicker} title={t.gallery.title} />
+    <ProjectGallery locale={locale} />
+    <div class="mt-16">
+      <BeforeAfter locale={locale} />
+    </div>
   </div>
 </section>

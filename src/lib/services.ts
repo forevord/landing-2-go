@@ -1,12 +1,11 @@
 export const SERVICE_VALUES = [
   'brama-przesuwna',
   'brama-skrzydlowa',
-  'brama-przemyslowa',
-  'automatyka',
   'furtka',
   'ogrodzenie',
-  'brukarstwo',
-  'pod-klucz',
+  'automatyka',
+  'balustrada',
+  'zadaszenie',
   'nie-wiem',
 ] as const;
 

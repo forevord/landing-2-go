@@ -1,7 +1,16 @@
 ---
+// Self-hosted rather than from Google Fonts: no third-party request, and so no
+// visitor IP handed to Google before consent.
+import '@fontsource-variable/archivo/wght.css';
+// Latin and Latin Extended only: Polish needs the second, nothing needs more.
+import '@fontsource/ibm-plex-sans/latin-400.css';
+import '@fontsource/ibm-plex-sans/latin-ext-400.css';
+import '@fontsource/ibm-plex-sans/latin-500.css';
+import '@fontsource/ibm-plex-sans/latin-ext-500.css';
+import '@fontsource/ibm-plex-sans/latin-600.css';
+import '@fontsource/ibm-plex-sans/latin-ext-600.css';
 import '../styles/global.css';
 import Seo from '../components/Seo.astro';
-import LangHint from '../components/LangHint.astro';
 import { getDictionary, type Locale, type RouteKey } from '../i18n';
 
 interface Props {
@@ -41,13 +50,6 @@ const beaconToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="preload"
-      href="/fonts/inter-variable.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
     <Seo locale={locale} routeKey={routeKey} {...seo} />
     <script type="application/ld+json" set:html={JSON.stringify(businessSchema)} is:inline />
     <script is:inline>
@@ -57,21 +59,15 @@ const beaconToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
     </script>
   </head>
   <body>
-    {
-      /* The skip link must be the first focusable element on the page, so it
-        precedes the language hint rather than following it. */
-    }
     <a
       href="#main"
-      class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:m-4 focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-white"
+      class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:m-4 focus:bg-ink focus:px-4 focus:py-2 focus:text-white"
     >
       {t.a11y.skipToContent}
     </a>
-    <LangHint locale={locale} routeKey={routeKey} />
     <slot />
     <script>
       import '../scripts/reveal';
-      import '../scripts/lang-hint';
       import '../scripts/quote-cta';
     </script>
     {

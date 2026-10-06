@@ -9,12 +9,11 @@ interface Env {
 const SERVICE_MARKERS: Record<string, string> = {
   'brama-przesuwna': '🚧',
   'brama-skrzydlowa': '🚧',
-  'brama-przemyslowa': '🏭',
-  automatyka: '⚙️',
   furtka: '🚪',
   ogrodzenie: '🧱',
-  brukarstwo: '🧱',
-  'pod-klucz': '🚜',
+  automatyka: '⚙️',
+  balustrada: '🪟',
+  zadaszenie: '🏠',
   'nie-wiem': '❓',
 };
 
@@ -67,7 +66,7 @@ async function sendEmail(lead: LeadInput, env: Env): Promise<void> {
     body: JSON.stringify({
       access_key: env.WEB3FORMS_ACCESS_KEY,
       subject: `Nowe zgłoszenie: ${lead.service}`,
-      from_name: 'StalBruk — formularz',
+      from_name: 'ALU3 — formularz',
       Usługa: lead.service,
       Telefon: lead.phone,
       Imię: lead.name ?? '—',

@@ -8,6 +8,60 @@ branch was merged and retired.
 
 ---
 
+## 2026-09-18 — gallery grouped by project
+
+"Realizacje" now shows whole jobs, not a flat grid. The newest job leads as a wide feature: a cover,
+what was installed, and a strip of its other shots. The rest follow as two-up cards. Every photo
+opens a shared lightbox (`Lightbox.astro`, `src/scripts/lightbox.ts`) scoped to its own project. The
+lightbox is a native `<dialog>` with a scroll-snap track, ←/→ keys and Esc. Each link's `href` is
+the full-size image, so without JavaScript a click still opens the photo. The gallery deliberately
+stays on the landing page. Once there are about six projects, add a `/realizacje` page (and a page
+per project, for local SEO) and show only the newest four here. The data model already supports
+this.
+
+Language hint bar removed; the header switch carries a globe icon.
+
+**How to add a project**
+
+1. Create `src/assets/projects/<slug>/` and put the photos in it as `01.jpg`, `02.jpg`, and so on.
+   Filename order is display order, and `01` is the cover.
+2. Add an entry with `"id": "<slug>"` to `gallery.projects` in **both** `src/i18n/pl.json` and
+   `en.json`: `title`, `summary`, `scope[]`, and `photoAlts[]` with exactly one alt per photo, in
+   file order. The position in the array is the position on the page, so put the newest job first
+   and keep `inne` last.
+3. `npm run build` fails with "Gallery projects are out of sync" if a folder has no entry, an entry
+   has no folder, or the alt count is wrong. `tests/projects.test.ts` checks the same thing.
+
+## 2026-09-18 — ALU3 change request
+
+The page was rebuilt to `change-requests/alu3_mockup_v13-1.html`. The brand is now
+**ALU3** ("a brand of StalBruk Sp. z o.o."), and the offer is aluminium gates and fences,
+glass railings and glass canopies. Block paving and earthworks are gone.
+
+- _Structure:_ header → hero with a stats strip → services (snap row) → full-bleed
+  gallery → objections → why us → process → FAQ → safe contract → contact with the
+  form → footer. `Objections.astro`, `WhyUs.astro` and `Contact.astro` are new.
+  `Arguments`, `Promises`, `QuickQuote`, `FormSection` and `Contacts` have been deleted,
+  along with the map facade, the hero form and the mobile quick form.
+- _Kept:_ the lead form with every field it had before (name, phone, service, town,
+  optional email and message, GDPR consent, honeypot, UTM/gclid tracking),
+  `/api/lead` → Web3Forms + Telegram, the thank-you redirect, service pre-selection from
+  the service cards, the sticky mobile bar, the PL/EN locales and the language hint.
+- _Before/after slider:_ `BeforeAfter.astro` ("Podjazd przed i po") was restored under the
+  gallery at the client's request, with the original driveway copy and the old stock
+  pair, and it is always rendered. **Before launch:** replace `before-driveway.jpg` and
+  `after-driveway.jpg` with a genuine pair from one site, shot from the same position.
+  The current pair is two unrelated photographs (see `CREDITS.md`).
+- _Service values_ (`src/lib/services.ts`) are now `brama-przesuwna`,
+  `brama-skrzydlowa`, `furtka`, `ogrodzenie`, `automatyka`, `balustrada`, `zadaszenie`
+  and `nie-wiem`. The Telegram markers follow them.
+- _Where this departs from the mockup, and why:_ accent text on dark bands uses a light
+  tint, because the mockup's value fails contrast; form fields keep visible labels; the
+  field underline is lighter so it clears 3:1. See `CLAUDE.md`.
+- _Unconfirmed values:_ the phone `+48 510 318 834`, the email `biuro@alu3.pl`, the
+  figures, the prices and the NIP are taken as the mockup shows them. `_meta.demo` stays
+  `true`.
+
 ## 2026-08-18 — conversion and design pass
 
 The client's verdict on the Custo-derived design was that the page read as a product
@@ -191,7 +245,7 @@ Axe cannot catch any of this — contrast over a photograph is not something it 
 
 ## Open item 3 — demo data must be replaced before launch
 
-`src/i18n/{pl,en}.json` carry invented values: trust figures (12 years, 380 projects, 5-year warranty), phone `+48 601 234 567`, email, lead time, company name and address, and the three service prices added on 2026-08-18 (`services.items[].price`: 6 500 zł, 180 zł/m², individual quote — the first matches the figure the FAQ already quoted). The NIP is deliberately impossible (`000-000-00-00`) so it cannot collide with a real company.
+`src/i18n/{pl,en}.json` carry values that have not been confirmed: the trust figures (12 years, 380 projects, 5-year warranty, 100% in-house production), the phone `+48 510 318 834`, the email `biuro@alu3.pl`, the company name and address, and the three service prices (from 12 000 zł, 6 000 zł and 2 500 zł). All of them come from the ALU3 mockup. The NIP is deliberately impossible (`000-000-00-00`), so it cannot collide with a real company.
 
 `_meta.demo: true` marks this, and `tests/i18n.test.ts` fails while it is true. Replace the values, set the flag to `false`, and the suite goes green. Do not clear the flag while the values are still invented.
 

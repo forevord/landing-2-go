@@ -1,27 +1,34 @@
 # Photo credits
 
-Stopgap stock photography for the StalBruk landing page redesign. Every image
-below is licensed for free commercial use with no attribution required
-(Unsplash License). Attribution is recorded anyway so a future maintainer can
-verify provenance before the real project-photo shoot replaces these files.
+Gallery and hero photographs live in `src/assets/projects/<slug>/`, one folder
+per job. They were supplied by the client, in two batches: the photos embedded
+in the ALU3 mockup (`change-requests/alu3_mockup_v13-1.html`), and
+`change-requests/assets/photos-1` and `photos-2`. Before launch, confirm with the
+client that these are their own completed projects and that they may be
+published.
 
-These are placeholders. The pre-launch checklist requires swapping every file
-here for a photograph of the company's own completed work in Gdańsk.
+| Folder                    | Files | Source                                                                                                  |
+| ------------------------- | ----- | ------------------------------------------------------------------------------------------------------- |
+| `brama-lamele-pionowe`    | 01–05 | 01, 04 from the mockup; 02, 03, 05 from `photos-1` (…316, …317, …314). 01 is also the hero.             |
+| `ogrodzenie-cegla-panele` | 01–04 | `photos-2` (…044, …043, …046, …045)                                                                     |
+| `inne`                    | 01–04 | from the mockup: vertical-slat fence (another house), horizontal-slat fence, profile detail, stair rail |
 
-| File | Source | Photographer | Licence |
-|---|---|---|---|
-| `hero.jpg` | [Unsplash](https://unsplash.com/photos/jHcwBHPQjs8) | Henning Kesselhut ([@hekeko](https://unsplash.com/@hekeko)) | Unsplash License |
-| `gates.jpg` | [Unsplash](https://unsplash.com/photos/gray-steel-gate-closed-with-padlock-_we0BQQewBo) | Masaaki Komori ([@gaspanik](https://unsplash.com/@gaspanik)) | Unsplash License |
-| `paving.jpg` | [Unsplash](https://unsplash.com/photos/K20YgLolkbg) | Aleksandr Kadykov | Unsplash License |
-| `earthworks.jpg` | [Unsplash](https://unsplash.com/photos/pX66y31DOIQ) | Billy Freeman ([@billyfreeman](https://unsplash.com/@billyfreeman)) | Unsplash License |
-| `work-1.jpg` | [Unsplash](https://unsplash.com/photos/welders-working-on-a-piece-of-metal-with-sparks-EvLFiUYJAvg) | Markus Spiske | Unsplash License |
-| `work-2.jpg` | [Unsplash](https://unsplash.com/photos/hA6nChzApqo) | Shane McKnight ([@mcknight_shane](https://unsplash.com/@mcknight_shane)) | Unsplash License |
-| `work-3.jpg` | [Unsplash](https://unsplash.com/photos/close-up-of-industrial-metal-pipes-and-machinery-8EJjrMP5d1I) | Ries Bosch | Unsplash License |
-| `texture.jpg` | [Unsplash](https://unsplash.com/photos/a-brushed-metal-surface-with-subtle-texture-k-jMzM6E9vg) | Logan Voss ([@loganvoss](https://unsplash.com/@loganvoss)) | Unsplash License |
+Skipped as duplicates: `photos-1/…313` (identical to the mockup's wicket shot),
+`…315` (identical to the mockup's sliding-gate shot) and `…312` (near-duplicate
+of `…313`).
+
+## Before/after slider (demo pair)
+
+The "Podjazd przed i po" slider under the gallery was restored at the client's
+request and is shown on the live page with the old stock pair until a genuine
+pair is supplied.
+
+| File                  | Source                                                                                                | Photographer                                             | Licence          |
+| --------------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | ---------------- |
 | `before-driveway.jpg` | [Unsplash](https://unsplash.com/photos/construction-site-with-piles-of-gravel-and-debris-wdYyYY9F0Ts) | Sergej ([@skstrannik](https://unsplash.com/@skstrannik)) | Unsplash License |
-| `after-driveway.jpg` | [Unsplash](https://unsplash.com/photos/a-cobblestone-road-with-a-brick-walkway-A5IILTdd-WI) | Philipp Torres | Unsplash License |
+| `after-driveway.jpg`  | [Unsplash](https://unsplash.com/photos/a-cobblestone-road-with-a-brick-walkway-A5IILTdd-WI)           | Philipp Torres                                           | Unsplash License |
 
-## WARNING: before/after slider pair is not a real pair
+### WARNING: before/after slider pair is not a real pair
 
 `before-driveway.jpg` and `after-driveway.jpg` are two **unrelated stock
 photographs from different locations**, sourced only to match the site's
@@ -37,14 +44,4 @@ fabricated evidence of work, no different from an invented testimonial.
 from the same fixed camera position at one real StalBruk site. Do not ship
 this demo pair to production.
 
-## Notes on fit
-
-- `earthworks.jpg` shows a crawler dozer moving earth on an overcast day, not
-  a wheeled excavator on a residential lot — it was the closest match found
-  under a compliant licence that kept the grey, desaturated look consistent
-  with the rest of the set. Reject on sight during the real shoot.
-- `gates.jpg` is a locked accordion security gate/shutter rather than a
-  driveway swing or sliding gate. Chosen for tonal consistency with `hero.jpg`
-  over a closer literal match with a clashing (sunny, green-lawn) aesthetic.
-- All eight images were checked against their Unsplash photo pages to confirm
-  standard Unsplash License (not Unsplash+/editorial) before download.
+The rest of the earlier Unsplash stopgap set has been removed.

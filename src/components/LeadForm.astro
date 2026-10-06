@@ -3,14 +3,12 @@ import { getDictionary, route, type Locale } from '../i18n';
 
 interface Props {
   locale: Locale;
-  variant: 'compact' | 'full';
   id: string;
 }
 
-const { locale, variant, id } = Astro.props;
+const { locale, id } = Astro.props;
 const t = getDictionary(locale);
 const f = t.form;
-const isFull = variant === 'full';
 const privacyHref = route('privacy', locale);
 
 // Only the strings the island needs at runtime. Passing them as data avoids
@@ -33,45 +31,38 @@ const TRACKING_FIELDS = [
 ] as const;
 ---
 
+{
+  /* Sits on the graphite contact band: underlined fields, no card and no
+    shadow, as the mockup draws it. Every field of the previous form is kept —
+    the endpoint and the Telegram message expect them. */
+}
 <form
   id={id}
-  class="lead-form relative grid gap-4 rounded-card border border-border bg-surface p-6 text-primary sm:p-8"
-  data-variant={variant}
+  class="lead-form relative grid gap-5"
+  data-variant="full"
   data-messages={JSON.stringify(clientMessages)}
   novalidate
 >
-  <p class="t-h3 text-ink">{isFull ? f.title : f.compactTitle}</p>
-  {isFull && <p class="text-sm text-muted">{f.lead}</p>}
+  <div class="grid gap-5 sm:grid-cols-2">
+    <label class="grid content-start">
+      <span class="field-label">{f.fields.name.label}</span>
+      <input
+        type="text"
+        name="name"
+        autocomplete="given-name"
+        placeholder={f.fields.name.placeholder}
+        required
+        aria-describedby={`${id}-name-error`}
+      />
+      <span
+        class="error mt-1.5 text-sm"
+        id={`${id}-name-error`}
+        data-error-for="name"
+        aria-live="polite"></span>
+    </label>
 
-  {
-    /* Name and telephone share a row, as do service and town: six fields in a
-      single column made the section the second longest on the page. */
-  }
-  <div class:list={['grid gap-4', isFull && 'sm:grid-cols-2']}>
-    {
-      isFull && (
-        <label class="grid gap-2">
-          <span class="t-label text-ink">{f.fields.name.label}</span>
-          <input
-            type="text"
-            name="name"
-            autocomplete="given-name"
-            placeholder={f.fields.name.placeholder}
-            required
-            aria-describedby={`${id}-name-error`}
-          />
-          <span
-            class="error text-sm text-error"
-            id={`${id}-name-error`}
-            data-error-for="name"
-            aria-live="polite"
-          />
-        </label>
-      )
-    }
-
-    <label class="grid gap-2">
-      <span class="t-label text-ink">{f.fields.phone.label}</span>
+    <label class="grid content-start">
+      <span class="field-label">{f.fields.phone.label}</span>
       <input
         type="tel"
         name="phone"
@@ -81,96 +72,88 @@ const TRACKING_FIELDS = [
         required
         aria-describedby={`${id}-phone-hint ${id}-phone-error`}
       />
-      <span class="text-sm text-muted" id={`${id}-phone-hint`}>{f.fields.phone.hint}</span>
+      <span class="mt-1.5 text-xs text-steel" id={`${id}-phone-hint`}>{f.fields.phone.hint}</span>
       <span
-        class="error text-sm text-error"
+        class="error mt-1.5 text-sm"
         id={`${id}-phone-error`}
         data-error-for="phone"
         aria-live="polite"></span>
     </label>
+  </div>
 
-    <label class="grid gap-2">
-      <span class="t-label text-ink">{f.fields.service.label}</span>
-      <select name="service" required aria-describedby={`${id}-service-error`}>
-        <option value="">{f.fields.service.placeholder}</option>
-        {f.serviceOptions.map((o) => <option value={o.value}>{o.label}</option>)}
-      </select>
+  <label class="grid content-start">
+    <span class="field-label">{f.fields.service.label}</span>
+    <select name="service" required aria-describedby={`${id}-service-error`}>
+      <option value="">{f.fields.service.placeholder}</option>
+      {f.serviceOptions.map((o) => <option value={o.value}>{o.label}</option>)}
+    </select>
+    <span
+      class="error mt-1.5 text-sm"
+      id={`${id}-service-error`}
+      data-error-for="service"
+      aria-live="polite"></span>
+  </label>
+
+  <div class="grid gap-5 sm:grid-cols-2">
+    <label class="grid content-start">
+      <span class="field-label">{f.fields.city.label}</span>
+      <input
+        type="text"
+        name="city"
+        autocomplete="address-level2"
+        placeholder={f.fields.city.placeholder}
+        required
+        aria-describedby={`${id}-city-error`}
+      />
       <span
-        class="error text-sm text-error"
-        id={`${id}-service-error`}
-        data-error-for="service"
+        class="error mt-1.5 text-sm"
+        id={`${id}-city-error`}
+        data-error-for="city"
         aria-live="polite"></span>
     </label>
 
-    {
-      isFull && (
-        <label class="grid gap-2">
-          <span class="t-label text-ink">{f.fields.city.label}</span>
-          <input
-            type="text"
-            name="city"
-            autocomplete="address-level2"
-            placeholder={f.fields.city.placeholder}
-            required
-            aria-describedby={`${id}-city-error`}
-          />
-          <span
-            class="error text-sm text-error"
-            id={`${id}-city-error`}
-            data-error-for="city"
-            aria-live="polite"
-          />
-        </label>
-      )
-    }
+    <label class="grid content-start">
+      <span class="field-label">{`${f.fields.email.label} (${f.fields.email.optional})`}</span>
+      <input
+        type="email"
+        name="email"
+        autocomplete="email"
+        placeholder={f.fields.email.placeholder}
+        aria-describedby={`${id}-email-error`}
+      />
+      <span
+        class="error mt-1.5 text-sm"
+        id={`${id}-email-error`}
+        data-error-for="email"
+        aria-live="polite"></span>
+    </label>
   </div>
 
-  {
-    isFull && (
-      <>
-        <label class="grid gap-2">
-          <span class="t-label text-ink">{`${f.fields.email.label} (${f.fields.email.optional})`}</span>
-          <input
-            type="email"
-            name="email"
-            autocomplete="email"
-            placeholder={f.fields.email.placeholder}
-            aria-describedby={`${id}-email-error`}
-          />
-          <span
-            class="error text-sm text-error"
-            id={`${id}-email-error`}
-            data-error-for="email"
-            aria-live="polite"
-          />
-        </label>
-
-        <label class="grid gap-2">
-          <span class="t-label text-ink">{`${f.fields.message.label} (${f.fields.message.optional})`}</span>
-          <textarea name="message" rows="3" placeholder={f.fields.message.placeholder} />
-        </label>
-      </>
-    )
-  }
-
-  <label class="flex items-start gap-3 text-sm">
-    <input
-      type="checkbox"
-      name="gdpr"
-      class="mt-1 h-5 w-5"
-      required
-      aria-describedby={`${id}-gdpr-error`}
-    />
-    <span>
-      {f.fields.gdpr.label}{' '}
-      <a href={privacyHref} class="underline">{f.fields.gdpr.linkText}</a>
-    </span>
+  <label class="grid content-start">
+    <span class="field-label">{`${f.fields.message.label} (${f.fields.message.optional})`}</span>
+    <textarea name="message" rows="3" placeholder={f.fields.message.placeholder}></textarea>
   </label>
-  <span
-    class="error text-sm text-error"
-    id={`${id}-gdpr-error`}
-    data-error-for="gdpr"
-    aria-live="polite"></span>
+
+  <div>
+    <label class="flex items-start gap-3 text-sm text-on-dark">
+      <input
+        type="checkbox"
+        name="gdpr"
+        class="mt-0.5 h-5 w-5 shrink-0"
+        required
+        aria-describedby={`${id}-gdpr-error`}
+      />
+      <span>
+        {f.fields.gdpr.label}{' '}
+        <a href={privacyHref} class="underline">{f.fields.gdpr.linkText}</a>
+      </span>
+    </label>
+    <span
+      class="error mt-1.5 block text-sm"
+      id={`${id}-gdpr-error`}
+      data-error-for="gdpr"
+      aria-live="polite"></span>
+  </div>
 
   {/* Honeypot: hidden from humans, irresistible to bots. */}
   <div
@@ -183,17 +166,22 @@ const TRACKING_FIELDS = [
     </label>
   </div>
 
-  <input type="hidden" name="source" value={isFull ? 'full' : 'hero'} />
+  <input type="hidden" name="source" value="full" />
   <input type="hidden" name="thanks" value={route('thanks', locale)} />
   {TRACKING_FIELDS.map((field) => <input type="hidden" name={field} value="" data-tracking />)}
 
-  <button type="submit" class="btn btn-primary w-full" data-submit>
-    <span data-submit-label>{isFull ? f.submit : f.submitCompact}</span>
-  </button>
+  <div>
+    <button type="submit" class="btn btn-primary" data-submit>
+      <span data-submit-label>{f.submit}</span>
+    </button>
+    <p class="mt-3 text-xs text-steel">{f.microcopy}</p>
+  </div>
 
-  <p class="text-sm text-muted">{isFull ? f.microcopy : t.hero.microcopy}</p>
-
-  <p class="hidden rounded-control bg-error/10 p-3 text-sm text-error" data-form-error role="alert">
+  <p
+    class="hidden border border-error-on-dark p-3 text-sm text-error-on-dark"
+    data-form-error
+    role="alert"
+  >
   </p>
 </form>
 

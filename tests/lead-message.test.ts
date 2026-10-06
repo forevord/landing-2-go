@@ -4,7 +4,7 @@ import type { LeadInput } from '../src/lib/validate';
 
 const heroLead: LeadInput = {
   phone: '600123456',
-  service: 'brukarstwo',
+  service: 'ogrodzenie',
   gdpr: true,
   source: 'hero',
 };
@@ -14,7 +14,7 @@ const fullLead: LeadInput = {
   name: 'Jan',
   city: 'Gdańsk',
   email: 'jan@example.com',
-  message: 'Podjazd 40 m2',
+  message: 'Ogrodzenie 40 mb',
   source: 'full',
 };
 
@@ -32,7 +32,7 @@ describe('buildTelegramMessage', () => {
     expect(message).toContain('Jan');
     expect(message).toContain('Gdańsk');
     expect(message).toContain('jan@example.com');
-    expect(message).toContain('Podjazd 40 m2');
+    expect(message).toContain('Ogrodzenie 40 mb');
   });
 
   it('escapes HTML in the message so Telegram parse mode cannot be broken out of', () => {

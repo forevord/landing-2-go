@@ -6,7 +6,7 @@ import { getDictionary, route } from '../i18n';
 
 const locale = 'pl' as const;
 const t = getDictionary(locale);
-const phone = '+48 601 234 567'; // Demo value; see _meta.demo in the dictionaries.
+const phone = '+48 510 318 834'; // Unconfirmed; see _meta.demo in the dictionaries.
 ---
 
 <Base
@@ -17,15 +17,15 @@ const phone = '+48 601 234 567'; // Demo value; see _meta.demo in the dictionari
   noindex
 >
   <TopBar locale={locale} routeKey="thanks" phone={phone} />
-  <main id="main" tabindex="-1" class="mx-auto max-w-[640px] px-4 py-24 text-center">
-    <h1 class="text-[clamp(2rem,5vw,3rem)] font-bold tracking-[-0.015em] text-ink">
+  <main id="main" tabindex="-1" class="mx-auto max-w-[640px] px-5 py-20 sm:py-24 text-center">
+    <h1 class="text-[clamp(2rem,5vw,2.6rem)] leading-tight font-bold">
       {t.thankyou.title}
     </h1>
-    <p class="mt-4 text-lg text-muted">{t.thankyou.lead}</p>
-    <p class="mt-2 text-muted">{t.thankyou.next}</p>
+    <p class="mt-4 text-lg text-body">{t.thankyou.lead}</p>
+    <p class="mt-2 text-body">{t.thankyou.next}</p>
     <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
       <a href={`tel:${phone.replace(/\s/g, '')}`} class="btn btn-primary">{t.thankyou.callNow}</a>
-      <a href={route('home', locale)} class="btn border border-border text-ink">
+      <a href={route('home', locale)} class="btn btn-outline">
         {t.thankyou.backHome}
       </a>
     </div>
